@@ -1,0 +1,11 @@
+# Generated documentation
+docs/latex/
+docs/html/
+
+# Makefiles and build data
+Makefile
+*.make
+out/
+
+# Project stuff
+*.sublime-workspace

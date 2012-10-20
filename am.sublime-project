@@ -1,0 +1,25 @@
+{
+	"folders":
+	[
+		{
+			"name": "Root",
+			"path": "./"
+		},
+		{
+			"name": "- Docs",
+			"path": "./docs"
+		},
+		{
+			"name": "- Source",
+			"path": "./am/"
+		},
+		{
+			"name": "- Tests",
+			"path": "./tests/"
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4
+	}
+}
