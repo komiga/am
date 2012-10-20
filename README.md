@@ -1,7 +1,39 @@
 
+## What is this?
+
+**All the Maths‽** (**AM**) is a general-purpose mathematics C++11 header library which supplies:
+
+* Vectors (yay!) and matrices (soon™) and all the fancy operations on them that you'd expect from a maths lib (also soon™)
+* *(A whole bunch of other stuff)*
+
+It's, uh, a work-in-progress.
+
+If you want a proper graphics maths lib that works with crappy compilers, please use the lovely [GLM](http://glm.g-truc.net/).
+
+## *All* the maths, you say?
+
+Hence the interrobang.
+
+## Why?
+
+Because I can.
+
+## Requirements
+
+A compiler with support for simpleton C++11 features, such as:
+
+* Aggregate initialization
+* Type traits (`<type_traits>` header)
+* `constexpr`
+* `static_assert()`
+
+Which essentially means you can't use it with MSVC. Deal with it.\*
+
+\* *Actually, it is probably fairly easy to make it work in MSVC — if you're feeling masochistic enough, by all means.*
+
 ## License
 
-**All the Maths‽** (**AM**) carries the MIT license.
+**AM** carries the MIT license, which is gracefully plastered below.
 
 ```
 Copyright (c) 2012 Tim Howard
