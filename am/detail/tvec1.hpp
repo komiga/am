@@ -11,6 +11,7 @@
 
 #include "../config.hpp"
 
+#include <cassert>
 #include <type_traits>
 
 namespace am {

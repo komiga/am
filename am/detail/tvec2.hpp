@@ -11,6 +11,7 @@
 
 #include "../config.hpp"
 
+#include <cassert>
 #include <type_traits>
 
 namespace am {
@@ -156,7 +157,7 @@ struct tvec2 {
 	*/
 	inline bool operator!=(type const& v) const {
 		return
-			this->x!=v.x &&
+			this->x!=v.x ||
 			this->y!=v.y;
 	}
 /// @}
