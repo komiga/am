@@ -10,19 +10,29 @@
 #define AM_DETAIL_TVEC1_HPP_
 
 #include "../config.hpp"
+#include "./type_traits.hpp"
 
 #include <cassert>
+#include <cmath>
 #include <type_traits>
 
 namespace am {
 namespace detail {
 
 // Forward declarations
+/** @cond INTERNAL */
 template<typename T> struct tvec1;
 template<typename T> struct tvec2;
 template<typename T> struct tvec3;
 template<typename T> struct tvec4;
 
+AM_DETAIL_TYPE_IS_VECTOR(tvec1);
+/** @endcond */
+
+/**
+	@addtogroup linear
+	@{
+*/
 /**
 	@addtogroup vector
 	@{
@@ -34,6 +44,7 @@ template<typename T> struct tvec4;
 
 /**
 	Generic 1-dimensional vector.
+	@tparam T An arithmetic type.
 */
 template<typename T>
 struct tvec1 {
@@ -52,6 +63,39 @@ struct tvec1 {
 	enum ctor_no_init {no_init};
 
 	value_type x; /**< X value. */
+
+/** @cond INTERNAL */
+	struct operations {
+	typedef type const& type_cref;
+	typedef value_type const& value_cref;
+
+	inline static value_type length(type_cref v) {
+		return std::abs(v.x);
+	}
+	inline static value_type distance(type_cref v, type_cref r) {
+		return std::abs(r.x - v.x);
+	}
+	inline static value_type dot(type_cref v, type_cref r) {
+		return v.x * r.x;
+	}
+	inline static type normalize(type_cref v) {
+		return v.x < value_type(0) ? type(-1) : type(1);
+	}
+	inline static type faceforward(type_cref n, type_cref i, type_cref ng) {
+		return dot(ng, i) < 0 ? type{n} : type{-n.x};
+	}
+	inline static type reflect(type_cref i, type_cref n) {
+		return i.x - value_type(2) * n.x * dot(n, i);
+	}
+	inline static type refract(type_cref i, type_cref n, value_cref eta) {
+		value_type const d=dot(n, i);
+		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
+		return k < value_type(0)
+			? type{value_type(0)}
+			: type{eta * i.x - (eta * d + std::sqrt(k)) * n.x};
+	}
+	};
+/** @endcond */ // INTERNAL
 
 /** @name Constructors */ /// @{
 	/**
@@ -106,22 +150,22 @@ struct tvec1 {
 
 /** @name Properties */ /// @{
 	/**
-		Get vector length.
+		Get number of components.
 		@returns @c 1.
 	*/
-	inline AM_CONSTEXPR size_type length() const { return size_type(1); }
+	inline AM_CONSTEXPR size_type size() const { return size_type(1); }
 	/**
 		Get value at index.
 		@returns The value at @a i.
 		@param i Index to retrieve.
 	*/
 	inline value_type& operator[](size_type const& i) {
-		assert(length()>i);
+		assert(size()>i);
 		return this->x;
 	}
 	/** @copydoc operator[](size_type const&) */
 	inline value_type const& operator[](size_type const& i) const {
-		assert(length()>i);
+		assert(size()>i);
 		return this->x;
 	}
 /// @}
@@ -416,7 +460,7 @@ struct tvec1 {
 /// @}
 };
 
-/** @name Increment and decrement operators */ /// @{
+/** @name vec1 increment and decrement operators */ /// @{
 	/**
 		Vector postfix increment.
 		@returns New vector with @c x+1.
@@ -439,7 +483,7 @@ struct tvec1 {
 	}
 /// @}
 
-/** @name Unary operators */ /// @{
+/** @name vec1 unary operators */ /// @{
 	/**
 		Vector unary plus.
 		@returns New vector with exact value of @a x.
@@ -472,7 +516,7 @@ struct tvec1 {
 	}
 /// @}
 
-/** @name Arithmetic operators */ /// @{
+/** @name vec1 arithmetic operators */ /// @{
 	/**
 		Vector right-hand value addition.
 		@returns New vector with @a x plus @a y.
@@ -640,7 +684,7 @@ struct tvec1 {
 	}
 /// @}
 
-/** @name Bitwise operators */ /// @{
+/** @name vec1 bitwise operators */ /// @{
 	/**
 		Vector right-hand value bitwise-AND.
 		@returns New vector with @a x AND @a y.
@@ -810,6 +854,7 @@ struct tvec1 {
 
 /** @} */ // end of doc-group vec1
 /** @} */ // end of doc-group vector
+/** @} */ // end of doc-group linear
 
 } // namespace detail
 } // namespace am

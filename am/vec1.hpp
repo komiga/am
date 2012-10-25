@@ -1,7 +1,6 @@
 /**
 @file vec1.hpp
 @brief 1-dimensional vector specializations.
-@defgroup vector Vector types
 @defgroup vec1 1-dimensional vector
 
 @author Tim Howard
@@ -14,9 +13,14 @@
 #include "./config.hpp"
 #include "./arithmetic_types.hpp"
 #include "./detail/tvec1.hpp"
+#include "./vector_operations.hpp"
 
 namespace am {
 
+/**
+	@addtogroup linear
+	@{
+*/
 /**
 	@addtogroup vector
 	@{
@@ -52,6 +56,7 @@ namespace am {
 
 /** @} */ // end of doc-group vec1
 /** @} */ // end of doc-group vector
+/** @} */ // end of doc-group linear
 
 } // namespace am
 

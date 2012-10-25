@@ -7,6 +7,7 @@
 #include <am/vec2.hpp>
 #include <am/vec3.hpp>
 #include <am/vec4.hpp>
+#include <am/mat2x2.hpp>
 
 int main(int argc, char const* argv[]) {
 	am::vec1 const  a1{1.0};
@@ -21,5 +22,7 @@ int main(int argc, char const* argv[]) {
 	am::vec4 const  a4{a3, 4.0};
 	am::ivec4 const b4{};
 	am::uvec4 const c4{};
+
+	am::mat2x2 const m2x2{};
 	return 0;
 }

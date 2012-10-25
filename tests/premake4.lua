@@ -59,6 +59,7 @@ end
 
 include "general"
 include "vec"
+include "mat"
 
 if _ACTION=="clean" then
 	local prjs=solution().projects

@@ -1,7 +1,6 @@
 /**
 @file vec2.hpp
 @brief 2-dimensional vector specializations.
-@defgroup vector Vector types
 @defgroup vec2 2-dimensional vector
 
 @author Tim Howard
@@ -14,9 +13,14 @@
 #include "./config.hpp"
 #include "./arithmetic_types.hpp"
 #include "./detail/tvec2.hpp"
+#include "./vector_operations.hpp"
 
 namespace am {
 
+/**
+	@addtogroup linear
+	@{
+*/
 /**
 	@addtogroup vector
 	@{
@@ -52,6 +56,7 @@ namespace am {
 
 /** @} */ // end of doc-group vec2
 /** @} */ // end of doc-group vector
+/** @} */ // end of doc-group linear
 
 } // namespace am
 

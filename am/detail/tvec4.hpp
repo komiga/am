@@ -10,6 +10,7 @@
 #define AM_DETAIL_TVEC4_HPP_
 
 #include "../config.hpp"
+#include "./type_traits.hpp"
 
 #include <cassert>
 #include <type_traits>
@@ -18,10 +19,18 @@ namespace am {
 namespace detail {
 
 // Forward declarations
+/** @cond INTERNAL */
 template<typename T> struct tvec2;
 template<typename T> struct tvec3;
 template<typename T> struct tvec4;
 
+AM_DETAIL_TYPE_IS_VECTOR(tvec4);
+/** @endcond */
+
+/**
+	@addtogroup linear
+	@{
+*/
 /**
 	@addtogroup vector
 	@{
@@ -33,6 +42,7 @@ template<typename T> struct tvec4;
 
 /**
 	Generic 4-dimensional vector.
+	@tparam T An arithmetic type.
 */
 template<typename T>
 struct tvec4 {
@@ -54,6 +64,39 @@ struct tvec4 {
 	value_type y; /**< Y value. */
 	value_type z; /**< Z value. */
 	value_type w; /**< W value. */
+
+/** @cond INTERNAL */
+	struct operations {
+	typedef type const& type_cref;
+	typedef value_type const& value_cref;
+
+	inline static value_type length(type_cref v) {
+		return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+	}
+	inline static value_type distance(type_cref v, type_cref r) {
+		return operations::length(r - v);
+	}
+	inline static value_type dot(type_cref v, type_cref r) {
+		return v.x * r.x + v.y * r.y + v.z * r.z + v.w * r.w;
+	}
+	inline static type normalize(type_cref v) {
+		return v * (value_type(1) / std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w));
+	}
+	inline static type faceforward(type_cref n, type_cref i, type_cref ng) {
+		return dot(ng, i) < 0 ? n : -n;
+	}
+	inline static type reflect(type_cref i, type_cref n) {
+		return i - value_type(2) * n * dot(n, i);
+	}
+	inline static type refract(type_cref i, type_cref n, value_cref eta) {
+		value_type const d=dot(n, i);
+		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
+		return k < value_type(0)
+			? type{value_type(0)}
+			: type{eta * i - (eta * d + std::sqrt(k)) * n};
+	}
+	};
+/** @endcond */ // INTERNAL
 
 /** @name Constructors */ /// @{
 	/**
@@ -144,27 +187,35 @@ struct tvec4 {
 		@param c4 W value.
 	*/
 	template<typename U, typename V, typename H>
-	inline explicit tvec4(tvec3<U> const& v, V const& c3, H const& c4) : x(T(v.x)), y(T(v.y)), z(T(c3)), w(T(c4)) {}
+	inline explicit tvec4(tvec2<U> const& v, V const& c3, H const& c4) : x(T(v.x)), y(T(v.y)), z(T(c3)), w(T(c4)) {}
+	/**
+		Construct to XY and ZW vectors.
+		@tparam U, V An arithmetic type.
+		@param v1 X and Y vector.
+		@param v2 Z and W vector.
+	*/
+	template<typename U, typename V>
+	inline explicit tvec4(tvec2<U> const& v1, tvec2<V> const& v2) : x(T(v1.x)), y(T(v1.y)), z(T(v2.x)), w(T(v2.y)) {}
 /// @}
 
 /** @name Properties */ /// @{
 	/**
-		Get vector length.
+		Get number of components.
 		@returns @c 4.
 	*/
-	inline AM_CONSTEXPR size_type length() const { return size_type(4); }
+	inline AM_CONSTEXPR size_type size() const { return size_type(4); }
 	/**
 		Get value at index.
 		@returns The value at @a i.
 		@param i Index to retrieve.
 	*/
 	inline value_type& operator[](size_type const& i) {
-		assert(length()>i);
+		assert(size()>i);
 		return (&x)[i];
 	}
 	/** @copydoc operator[](size_type const&) */
 	inline value_type const& operator[](size_type const& i) const {
-		assert(length()>i);
+		assert(size()>i);
 		return (&x)[i];
 	}
 /// @}
@@ -539,7 +590,7 @@ struct tvec4 {
 /// @}
 };
 
-/** @name Increment and decrement operators */ /// @{
+/** @name vec4 increment and decrement operators */ /// @{
 	/**
 		Vector postfix increment.
 		@returns New vector with @c x+1.
@@ -562,7 +613,7 @@ struct tvec4 {
 	}
 /// @}
 
-/** @name Unary operators */ /// @{
+/** @name vec4 unary operators */ /// @{
 	/**
 		Vector unary plus.
 		@returns New vector with exact value of @a x.
@@ -601,7 +652,7 @@ struct tvec4 {
 	}
 /// @}
 
-/** @name Arithmetic operators */ /// @{
+/** @name vec4 arithmetic operators */ /// @{
 	/**
 		Vector right-hand value addition (all components).
 		@returns New vector with @a x plus @a y.
@@ -814,7 +865,7 @@ struct tvec4 {
 	}
 /// @}
 
-/** @name Bitwise operators */ /// @{
+/** @name vec4 bitwise operators */ /// @{
 	/**
 		Vector right-hand value bitwise-AND (all components).
 		@returns New vector with @a x AND @a y.
@@ -1029,6 +1080,7 @@ struct tvec4 {
 
 /** @} */ // end of doc-group vec4
 /** @} */ // end of doc-group vector
+/** @} */ // end of doc-group linear
 
 } // namespace detail
 } // namespace am
