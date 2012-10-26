@@ -203,7 +203,7 @@ struct tvec4 {
 		Get number of components.
 		@returns @c 4.
 	*/
-	inline AM_CONSTEXPR size_type size() const { return size_type(4); }
+	inline static AM_CONSTEXPR size_type size() { return size_type(4); }
 	/**
 		Get value at index.
 		@returns The value at @a i.

@@ -99,6 +99,23 @@ public:
 			-m.cols[1].x / det,  m.cols[0].x / det};
 	}
 
+	inline static type postfix_increment(type_cref m) {
+		return type{
+			m.cols[0]++,
+			m.cols[1]++};
+	}
+	inline static type postfix_decrement(type_cref m) {
+		return type{
+			m.cols[0]--,
+			m.cols[1]--};
+	}
+
+	inline static type unary_negative(type_cref m) {
+		return type{
+			-m.cols[0],
+			-m.cols[1]};
+	}
+
 	inline static type scalar_add(type_cref m, value_cref s) {
 		return type{
 			m.cols[0] + s,
@@ -239,20 +256,20 @@ public:
 		col_type{x2, y2}}/** @endcond */ {}
 	/**
 		Construct to values.
-		@tparam U, V, H, L An arithmetic type.
+		@tparam X1,Y1, X2,Y2 An arithmetic type.
 		@param x1 X value of first column.
 		@param y1 Y value of first column.
 		@param x2 X value of second column.
 		@param y2 Y value of second column.
 	*/
-	template<typename U, typename V, typename H, typename L>
-	inline explicit tmat2x2(U const& x1, V const& y1,
-							H const& x2, L const& y2) /** @cond INTERNAL */: cols{
+	template<typename X1, typename Y1, typename X2, typename Y2>
+	inline explicit tmat2x2(X1 const& x1, Y1 const& y1,
+							X2 const& x2, Y2 const& y2) /** @cond INTERNAL */: cols{
 		col_type{T(x1), T(y1)},
 		col_type{T(x2), T(y2)}}/** @endcond */ {}
 
 	/**
-		Construct to vector columns.
+		Construct to column vectors.
 		@param c1 First column.
 		@param c2 Second column.
 	*/
@@ -261,13 +278,14 @@ public:
 		c1,
 		c2}/** @endcond */ {}
 	/**
-		Construct to vector columns.
+		Construct to column vectors.
+		@tparam C1, C2 An arithmetic type.
 		@param c1 First column.
 		@param c2 Second column.
 	*/
-	template<typename U, typename V>
-	inline explicit tmat2x2(tvec2<U> const& c1,
-							tvec2<V> const& c2) /** @cond INTERNAL */: cols{
+	template<typename C1, typename C2>
+	inline explicit tmat2x2(tvec2<C1> const& c1,
+							tvec2<C2> const& c2) /** @cond INTERNAL */: cols{
 		col_type{c1},
 		col_type{c2}}/** @endcond */ {}
 
@@ -280,7 +298,7 @@ public:
 		m.cols[1]}/** @endcond */ {}
 	/**
 		Construct to matrix.
-		@tparam U An arithmetic type.
+		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
 	template<typename U>
@@ -294,12 +312,17 @@ public:
 		Get number of columns.
 		@returns @c 2.
 	*/
-	inline AM_CONSTEXPR size_type size() const { return size_type(2); }
+	inline static AM_CONSTEXPR size_type size() { return size_type(2); }
 	/**
-		Get number of rows.
+		Get size of column vector.
 		@returns @c 2.
 	*/
-	inline AM_CONSTEXPR size_type row_size() const { return size_type(2); }
+	inline static AM_CONSTEXPR size_type col_size() { return col_type::size(); }
+	/**
+		Get size of row vector.
+		@returns @c 2.
+	*/
+	inline static AM_CONSTEXPR size_type row_size() { return row_type::size(); }
 	/**
 		Get column at index.
 		@returns The column at @a i.
@@ -364,7 +387,7 @@ public:
 	/**
 		Assign to matrix.
 		@returns @c *this after assignment.
-		@tparam U An arithmetic type.
+		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
 	template<typename U>
@@ -391,7 +414,7 @@ public:
 	/**
 		Add matrix.
 		@returns @c *this after operation.
-		@tparam U An arithmetic type.
+		@tparam U A floating-point type.
 		@param m Matrix to add.
 	*/
 	template<typename U>
@@ -415,7 +438,7 @@ public:
 	/**
 		Subtract matrix.
 		@returns @c *this after operation.
-		@tparam U An arithmetic type.
+		@tparam U A floating-point type.
 		@param m Matrix to subtract.
 	*/
 	template<typename U>
@@ -439,7 +462,7 @@ public:
 	/**
 		Multiply by matrix (proper product).
 		@returns @c *this after operation.
-		@tparam U An arithmetic type.
+		@tparam U A floating-point type.
 		@param m Matrix to multiply by.
 	*/
 	template<typename U>
@@ -461,7 +484,7 @@ public:
 	/**
 		Divide by matrix (proper quotient).
 		@returns @c *this after operation.
-		@tparam U An arithmetic type.
+		@tparam U A floating-point type.
 		@param m Matrix to divide by.
 	*/
 	template<typename U>
@@ -475,26 +498,22 @@ public:
 	/**
 		Matrix postfix increment.
 		@returns New matrix with @c m+1.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
 	template<typename T>
 	inline tmat2x2<T> operator++(tmat2x2<T> const& m, int) {
-		return tmat2x2<T>{
-			m[0]++,
-			m[1]++};
+		return tmat2x2<T>::operations::postfix_increment(m);
 	}
 	/**
 		Matrix postfix decrement.
 		@returns New matrix with @c m-1.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
 	template<typename T>
 	inline tmat2x2<T> operator--(tmat2x2<T> const& m, int) {
-		return tmat2x2<T>{
-			m[0]--,
-			m[1]--};
+		return tmat2x2<T>::operations::postfix_decrement(m);
 	}
 /// @}
 
@@ -502,26 +521,22 @@ public:
 	/**
 		Matrix unary plus.
 		@returns New matrix with exact value of @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
 	template<typename T>
 	inline tmat2x2<T> operator+(tmat2x2<T> const& m) {
-		return tmat2x2<T>{
-			m[0],
-			m[1]};
+		return tmat2x2<T>{m};
 	}
 	/**
 		Matrix unary minus.
 		@returns New matrix with @c -m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
 	template<typename T>
 	inline tmat2x2<T> operator-(tmat2x2<T> const& m) {
-		return tmat2x2<T>{
-			-m[0],
-			-m[1]};
+		return tmat2x2<T>::operations::unary_negative(m);
 	}
 /// @}
 
@@ -529,7 +544,7 @@ public:
 	/**
 		Matrix right-hand value addition (component-wise).
 		@returns New matrix with @a m plus @a s.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
@@ -540,7 +555,7 @@ public:
 	/**
 		Matrix left-hand value addition (component-wise).
 		@returns New matrix with @a s plus @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
@@ -551,7 +566,7 @@ public:
 	/**
 		Matrix addition.
 		@returns New matrix with @a m plus @a n.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
@@ -562,7 +577,7 @@ public:
 	/**
 		Matrix right-hand value subtraction (component-wise).
 		@returns New matrix with @a m minus @a s.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
@@ -573,7 +588,7 @@ public:
 	/**
 		Matrix left-hand value subtraction (component-wise).
 		@returns New matrix with @a s minus @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
@@ -584,7 +599,7 @@ public:
 	/**
 		Matrix subtraction.
 		@returns New matrix with @a m minus @a n.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
@@ -595,7 +610,7 @@ public:
 	/**
 		Matrix right-hand scalar multiplication (component-wise).
 		@returns New matrix with @a m times @a s.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param s Scalar (right-hand).
 	*/
@@ -606,7 +621,7 @@ public:
 	/**
 		Matrix left-hand scalar multiplication (component-wise).
 		@returns New matrix with @a s times @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param s Scalar (left-hand).
 		@param m Matrix (right-hand).
 	*/
@@ -617,7 +632,7 @@ public:
 	/**
 		Matrix right-hand (row) vector multiplication (proper product).
 		@returns New column vector with @a m times @a v.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param v Vector (right-hand).
 	*/
@@ -628,7 +643,7 @@ public:
 	/**
 		Matrix left-hand (column) vector multiplication (proper product).
 		@returns New row vector with @a v times @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param v Vector (left-hand).
 		@param m Matrix (right-hand).
 	*/
@@ -639,7 +654,7 @@ public:
 	/**
 		Matrix multiplication (proper product).
 		@returns New matrix with @a m times @a n.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
@@ -650,7 +665,7 @@ public:
 	/**
 		Matrix multiplication (proper product).
 		@returns New matrix with @a m times @a n.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
@@ -661,7 +676,7 @@ public:
 	/**
 		Matrix multiplication (proper product).
 		@returns New matrix with @a m times @a n.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
@@ -672,7 +687,7 @@ public:
 	/**
 		Matrix right-hand value division (component-wise).
 		@returns New matrix with @a m divided by @a s.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
@@ -683,7 +698,7 @@ public:
 	/**
 		Matrix left-hand value division (component-wise).
 		@returns New matrix with @a s divided by @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
@@ -694,7 +709,7 @@ public:
 	/**
 		Matrix right-hand vector division (proper quotient).
 		@returns New column vector with @a m divided by @a v.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param v Vector (right-hand).
 	*/
@@ -705,7 +720,7 @@ public:
 	/**
 		Matrix left-hand vector division (proper quotient).
 		@returns New row vector with @a v divided by @a m.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param v Vector (left-hand).
 		@param m Matrix (right-hand).
 	*/
@@ -716,7 +731,7 @@ public:
 	/**
 		Matrix division (proper quotient).
 		@returns New matrix with @a m divided by @a n.
-		@tparam T An arithmetic type.
+		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
