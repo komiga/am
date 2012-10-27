@@ -357,7 +357,7 @@ struct tvec4 {
 		this->x-=T(v.x);
 		this->y-=T(v.y);
 		this->z-=T(v.z);
-		this->w-=T(v.z);
+		this->w-=T(v.w);
 		return *this;
 	}
 	/**
