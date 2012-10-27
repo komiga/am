@@ -3,11 +3,8 @@
 
 #include <am/config.hpp>
 #include <am/arithmetic_types.hpp>
-#include <am/vec1.hpp>
-#include <am/vec2.hpp>
-#include <am/vec3.hpp>
-#include <am/vec4.hpp>
-#include <am/mat2x2.hpp>
+#include <am/vector.hpp>
+#include <am/matrix.hpp>
 
 int main(int argc, char const* argv[]) {
 	am::vec1 const  a1{1.0};
@@ -23,6 +20,16 @@ int main(int argc, char const* argv[]) {
 	am::ivec4 const b4{};
 	am::uvec4 const c4{};
 
-	am::mat2x2 const m2x2{};
+	am::mat2x2 const m22{};
+	am::mat2x3 const m23{};
+	am::mat2x4 const m24{};
+
+	am::mat3x2 const m32{};
+	am::mat3x3 const m33{};
+	am::mat3x4 const m34{};
+
+	am::mat4x2 const m42{};
+	am::mat4x3 const m43{};
+	am::mat4x4 const m44{};
 	return 0;
 }
