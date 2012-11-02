@@ -1,0 +1,11 @@
+
+/**
+
+@defgroup hash Hash algorithms
+@details
+
+@remark All hash functions taking a standard string will operate over the <em>bytes</em> of the raw string data.
+
+@note A majority of the hashing algorithms implemented are in the public domain or have their own licenses and/or copyrights (which is indicated in the appropriate files).
+
+*/

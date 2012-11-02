@@ -7,6 +7,7 @@
 <strong>All the Maths‽</strong> (<strong>AM</strong>) is a mathematics library which supplies:
 
 - @ref vector "Vectors" and @ref matrix "matrices"
+- @ref hash "Hashing algorithms"
 - A sense of foreboding
 - Other things…
 

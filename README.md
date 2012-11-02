@@ -4,6 +4,7 @@
 **All the Maths‽ (AM)** is a general-purpose mathematics C++11 header library which supplies:
 
 * Vectors (yay!) and matrices (also yay!) and all the fancy operations on them that you'd expect from a maths lib
+* Hashing algorithms
 * *(A whole bunch of other stuff)*
 
 It's, uh, a work-in-progress.
