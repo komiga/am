@@ -136,7 +136,7 @@
 // Properties
 #define TEST_MAT_PROP(mat, func, result) {\
 		auto const x=mat;\
-		auto const y=am::func(x);\
+		auto const y=am::linear::func(x);\
 		assert(y==(result));\
 	}
 

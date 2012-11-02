@@ -125,7 +125,7 @@ namespace am {
 
 /**
 	Vector types to declare.
-	When including vector headers (e.g., <vec2.hpp>), the specializations declared depend on the set flags.
+	When including vector headers (e.g., <linear/vec2.hpp>), the specializations declared depend on the set flags.
 	
 	For example: with only @c AM_FLAG_TYPE_FLOAT set, @c vec1, @c vec2, etc., will be defined; if @c AM_FLAG_TYPE_INT were included, @c ivec1, @c ivec2, etc., would also be defined.
 	@remark Defaults to @c AM_FLAG_TYPE_ALL.
@@ -134,7 +134,7 @@ namespace am {
 #define AM_CONFIG_VECTOR_TYPES AM_FLAG_TYPE_ALL
 /**
 	Matrix types to declare.
-	When including matrix headers (e.g., <mat2x2.hpp>), the specializations declared depend on the set flags.
+	When including matrix headers (e.g., <linear/mat2x2.hpp>), the specializations declared depend on the set flags.
 	
 	With @c AM_FLAG_TYPE_FLOAT set, @c mat2x2, @c mat3x3, etc., will be defined; no other flags, apart from @c AM_FLAG_TYPE_NONE, are valid.
 	@remark Defaults to @c AM_FLAG_TYPE_FLOAT.

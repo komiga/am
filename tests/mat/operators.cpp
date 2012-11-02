@@ -1,13 +1,12 @@
 
 #include <am/config.hpp>
-#include <am/matrix.hpp>
+#include <am/linear/matrix.hpp>
 
 #include "./common.hpp"
-#include <cstdio>
 
 void test_mat2x2() {
 	// Operators
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_i{
 			 1.0f, 0.0f,
 			 0.0f, 1.0f},
@@ -43,7 +42,7 @@ void test_mat2x2() {
 			 1.0f,-0.5f}
 	;
 	TEST_MAT_OPS_SQUARE(
-		am::mat2x2,
+		am::linear::mat2x2,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -81,34 +80,34 @@ void test_mat2x2() {
 
 	// Multiplications
 	// 2x2 * 2x2 -> 2x2
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_y22{mat_i}
 	;
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_xy22{mat_x}
 	;
 	// 2x2 * 3x2 -> 3x2
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_y32{
 			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f}
 	;
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_xy32{
 			1.0f, 3.0f,
 			2.0f, 4.0f,
 			0.0f, 0.0f}
 	;
 	// 2x2 * 4x2 -> 4x2
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_y42{
 			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f,
 			0.0f, 0.0f}
 	;
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_xy42{
 			1.0f, 3.0f,
 			2.0f, 4.0f,
@@ -120,7 +119,7 @@ void test_mat2x2() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y42, mat_xy42);
 
 	// Properties
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_x_tr{
 			1.0f, 2.0f,
 			3.0f, 4.0f}
@@ -135,7 +134,7 @@ void test_mat2x2() {
 
 void test_mat2x3() {
 	// Operators
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_i{
 			  1.0f,  0.0f,  0.0f,
 			  0.0f,  1.0f,  0.0f},
@@ -168,7 +167,7 @@ void test_mat2x3() {
 			  2.0f/2.0f, 2.0f/4.0f, 2.0f/6.0f}
 	;
 	TEST_MAT_OPS(
-		am::mat2x3,
+		am::linear::mat2x3,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -202,36 +201,36 @@ void test_mat2x3() {
 
 	// Multiplications
 	// 2x3 * 2x2 -> 2x3
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_y22{
 			1.0f, 0.0f,
 			0.0f, 1.0f}
 	;
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_xy22{mat_x}
 	;
 	// 2x3 * 3x2 -> 3x3
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_y32{
 			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f}
 	;
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_xy32{
 			1.0f, 3.0f, 5.0f,
 			2.0f, 4.0f, 6.0f,
 			0.0f, 0.0f, 0.0f}
 	;
 	// 2x3 * 4x2 -> 4x3
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_y42{
 			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f,
 			0.0f, 0.0f}
 	;
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_xy42{
 			1.0f, 3.0f, 5.0f,
 			2.0f, 4.0f, 6.0f,
@@ -243,7 +242,7 @@ void test_mat2x3() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y42, mat_xy42);
 
 	// Properties
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_x_tr{
 			1.0f, 2.0f,
 			3.0f, 4.0f,
@@ -257,7 +256,7 @@ void test_mat2x3() {
 
 void test_mat2x4() {
 	// Operators
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_i{
 			  1.0f,  0.0f,  0.0f,  0.0f,
 			  0.0f,  1.0f,  0.0f,  0.0f},
@@ -290,7 +289,7 @@ void test_mat2x4() {
 			  2.0f/2.0f, 2.0f/4.0f, 2.0f/6.0f, 2.0f/8.0f}
 	;
 	TEST_MAT_OPS(
-		am::mat2x4,
+		am::linear::mat2x4,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -324,36 +323,36 @@ void test_mat2x4() {
 
 	// Multiplications
 	// 2x4 * 2x2 -> 2x4
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_y22{
 			1.0f, 0.0f,
 			0.0f, 1.0f}
 	;
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_xy22{mat_x}
 	;
 	// 2x4 * 3x2 -> 3x4
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_y32{
 			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f}
 	;
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_xy32{
 			1.0f, 3.0f, 5.0f, 7.0f,
 			2.0f, 4.0f, 6.0f, 8.0f,
 			0.0f, 0.0f, 0.0f, 0.0f}
 	;
 	// 2x4 * 4x2 -> 4x4
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_y42{
 			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f,
 			0.0f, 0.0f}
 	;
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_xy42{
 			1.0f, 3.0f, 5.0f, 7.0f,
 			2.0f, 4.0f, 6.0f, 8.0f,
@@ -365,7 +364,7 @@ void test_mat2x4() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y42, mat_xy42);
 
 	// Properties
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_x_tr{
 			1.0f, 2.0f,
 			3.0f, 4.0f,
@@ -380,7 +379,7 @@ void test_mat2x4() {
 
 void test_mat3x2() {
 	// Operators
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_i{
 			  1.0f,  0.0f,
 			  0.0f,  1.0f,
@@ -423,7 +422,7 @@ void test_mat3x2() {
 			  2.0f/3.0f, 2.0f/6.0f}
 	;
 	TEST_MAT_OPS(
-		am::mat3x2,
+		am::linear::mat3x2,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -457,35 +456,35 @@ void test_mat3x2() {
 
 	// Multiplications
 	// 3x2 * 2x3 -> 2x2
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_y23{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f}
 	;
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_xy23{
 			1.0f, 4.0f,
 			2.0f, 5.0f}
 	;
 	// 3x2 * 3x3 -> 3x2
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_y33{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 1.0f}
 	;
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_xy33{mat_x}
 	;
 	// 3x2 * 4x3 -> 4x2
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_y43{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 1.0f,
 			0.0f, 0.0f, 0.0f}
 	;
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_xy43{
 			1.0f, 4.0f,
 			2.0f, 5.0f,
@@ -497,7 +496,7 @@ void test_mat3x2() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y43, mat_xy43);
 
 	// Properties
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_x_tr{
 			1.0f, 2.0f, 3.0f,
 			4.0f, 5.0f, 6.0f}
@@ -510,7 +509,7 @@ void test_mat3x2() {
 
 void test_mat3x3() {
 	// Operators
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_i{
 			  1.0f,  0.0f,  0.0f,
 			  0.0f,  1.0f,  0.0f,
@@ -561,7 +560,7 @@ void test_mat3x3() {
 			0.625f, -0.5f,0.125f}
 	;
 	TEST_MAT_OPS_SQUARE(
-		am::mat3x3,
+		am::linear::mat3x3,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -599,32 +598,32 @@ void test_mat3x3() {
 
 	// Multiplications
 	// 3x3 * 2x3 -> 2x3
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_y23{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f}
 	;
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_xy23{
 			1.0f, 4.0f, 7.0f,
 			2.0f, 5.0f, 8.0f}
 	;
 	// 3x3 * 3x3 -> 3x3
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_y33{mat_i}
 	;
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_xy33{mat_x}
 	;
 	// 3x3 * 4x3 -> 4x3
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_y43{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 1.0f,
 			0.0f, 0.0f, 0.0f}
 	;
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_xy43{
 			1.0f, 4.0f, 7.0f,
 			2.0f, 5.0f, 8.0f,
@@ -636,7 +635,7 @@ void test_mat3x3() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y43, mat_xy43);
 
 	// Properties
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_x_tr{
 			1.0f, 2.0f, 3.0f,
 			4.0f, 5.0f, 6.0f,
@@ -652,7 +651,7 @@ void test_mat3x3() {
 
 void test_mat3x4() {
 	// Operators
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_i{
 			  1.0f,  0.0f,  0.0f,  0.0f,
 			  0.0f,  1.0f,  0.0f,  0.0f,
@@ -695,7 +694,7 @@ void test_mat3x4() {
 			  2.0f/3.0f, 2.0f/6.0f, 2.0f/9.0f, 2.0f/12.0f}
 	;
 	TEST_MAT_OPS(
-		am::mat3x4,
+		am::linear::mat3x4,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -729,35 +728,35 @@ void test_mat3x4() {
 
 	// Multiplications
 	// 3x4 * 2x3 -> 2x4
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_y23{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f}
 	;
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_xy23{
 			1.0f, 4.0f, 7.0f, 10.0f,
 			2.0f, 5.0f, 8.0f, 11.0f}
 	;
 	// 3x4 * 3x3 -> 3x4
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_y33{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 1.0f}
 	;
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_xy33{mat_x}
 	;
 	// 3x4 * 4x3 -> 4x4
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_y43{
 			1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 1.0f,
 			0.0f, 0.0f, 0.0f}
 	;
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_xy43{
 			1.0f, 4.0f, 7.0f, 10.0f,
 			2.0f, 5.0f, 8.0f, 11.0f,
@@ -769,7 +768,7 @@ void test_mat3x4() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y43, mat_xy43);
 
 	// Properties
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_x_tr{
 			 1.0f,  2.0f,  3.0f,
 			 4.0f,  5.0f,  6.0f,
@@ -784,7 +783,7 @@ void test_mat3x4() {
 
 void test_mat4x2() {
 	// Operators
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_i{
 			  1.0f,  0.0f,
 			  0.0f,  1.0f,
@@ -837,7 +836,7 @@ void test_mat4x2() {
 			 2.0f/4.0f, 2.0f/8.0f}
 	;
 	TEST_MAT_OPS(
-		am::mat4x2,
+		am::linear::mat4x2,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -871,38 +870,38 @@ void test_mat4x2() {
 
 	// Multiplications
 	// 4x2 * 2x4 -> 2x2
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_y24{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f}
 	;
-	am::mat2x2 const
+	am::linear::mat2x2 const
 		mat_xy24{
 			1.0f, 5.0f,
 			2.0f, 6.0f}
 	;
 	// 4x2 * 3x4 -> 3x2
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_y34{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f,
 			0.0f, 0.0f, 1.0f, 0.0f}
 	;
-	am::mat3x2 const
+	am::linear::mat3x2 const
 		mat_xy34{
 			1.0f, 5.0f,
 			2.0f, 6.0f,
 			3.0f, 7.0f}
 	;
 	// 4x2 * 4x4 -> 4x2
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_y44{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f,
 			0.0f, 0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f}
 	;
-	am::mat4x2 const
+	am::linear::mat4x2 const
 		mat_xy44{mat_x}
 	;
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y24, mat_xy24);
@@ -910,7 +909,7 @@ void test_mat4x2() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y44, mat_xy44);
 
 	// Properties
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_x_tr{
 			1.0f, 2.0f, 3.0f, 4.0f,
 			5.0f, 6.0f, 7.0f, 8.0f}
@@ -923,7 +922,7 @@ void test_mat4x2() {
 
 void test_mat4x3() {
 	// Operators
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_i{
 			  1.0f,  0.0f,  0.0f,
 			  0.0f,  1.0f,  0.0f,
@@ -976,7 +975,7 @@ void test_mat4x3() {
 			 2.0f/4.0f, 2.0f/8.0f, 2.0f/12.0f}
 	;
 	TEST_MAT_OPS(
-		am::mat4x3,
+		am::linear::mat4x3,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -1010,38 +1009,38 @@ void test_mat4x3() {
 
 	// Multiplications
 	// 4x3 * 2x4 -> 2x3
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_y24{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f}
 	;
-	am::mat2x3 const
+	am::linear::mat2x3 const
 		mat_xy24{
 			1.0f, 5.0f, 9.0f,
 			2.0f, 6.0f,10.0f}
 	;
 	// 4x3 * 3x4 -> 3x3
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_y34{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f,
 			0.0f, 0.0f, 1.0f, 0.0f}
 	;
-	am::mat3x3 const
+	am::linear::mat3x3 const
 		mat_xy34{
 			1.0f, 5.0f, 9.0f,
 			2.0f, 6.0f,10.0f,
 			3.0f, 7.0f,11.0f}
 	;
 	// 4x3 * 4x4 -> 4x3
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_y44{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f,
 			0.0f, 0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f}
 	;
-	am::mat4x3 const
+	am::linear::mat4x3 const
 		mat_xy44{mat_x}
 	;
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y24, mat_xy24);
@@ -1049,7 +1048,7 @@ void test_mat4x3() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y44, mat_xy44);
 
 	// Properties
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_x_tr{
 			1.0f,  2.0f,  3.0f,  4.0f,
 			5.0f,  6.0f,  7.0f,  8.0f,
@@ -1063,7 +1062,7 @@ void test_mat4x3() {
 
 void test_mat4x4() {
 	// Operators
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_i{
 			  1.0f,  0.0f,  0.0f,  0.0f,
 			  0.0f,  1.0f,  0.0f,  0.0f,
@@ -1126,7 +1125,7 @@ void test_mat4x4() {
 			  0.5f, -0.2f, -0.3f,  0.2f}
 	;
 	TEST_MAT_OPS_SQUARE(
-		am::mat4x4,
+		am::linear::mat4x4,
 		mat_i,
 		mat_x,
 		// unary plus and minus
@@ -1164,34 +1163,34 @@ void test_mat4x4() {
 
 	// Multiplications
 	// 4x4 * 2x4 -> 2x4
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_y24{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f}
 	;
-	am::mat2x4 const
+	am::linear::mat2x4 const
 		mat_xy24{
 			1.0f, 5.0f, 9.0f,13.0f,
 			2.0f, 6.0f,10.0f,14.0f}
 	;
 	// 4x4 * 3x4 -> 3x4
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_y34{
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f, 0.0f,
 			0.0f, 0.0f, 1.0f, 0.0f}
 	;
-	am::mat3x4 const
+	am::linear::mat3x4 const
 		mat_xy34{
 			1.0f, 5.0f, 9.0f,13.0f,
 			2.0f, 6.0f,10.0f,14.0f,
 			3.0f, 7.0f,11.0f,15.0f}
 	;
 	// 4x4 * 4x4 -> 4x4
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_y44{mat_i}
 	;
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_xy44{mat_x}
 	;
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y24, mat_xy24);
@@ -1199,7 +1198,7 @@ void test_mat4x4() {
 	TEST_MAT_XOP_RHS(mat_x, *, mat_y44, mat_xy44);
 
 	// Properties
-	am::mat4x4 const
+	am::linear::mat4x4 const
 		mat_x_tr{
 			 1.0f, 2.0f, 3.0f, 4.0f,
 			 5.0f, 6.0f, 7.0f, 8.0f,
