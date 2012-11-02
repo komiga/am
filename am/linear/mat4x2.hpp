@@ -1,7 +1,6 @@
 /**
 @file linear/mat4x2.hpp
 @brief 4x2 matrix.
-@defgroup mat4x2 4x2 matrix
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -29,7 +28,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup mat4x2
+	@defgroup mat4x2 4x2 matrix
 	@{
 */
 

@@ -4,6 +4,21 @@
 @defgroup hash Hash algorithms
 @details
 
+Although it is not exposed (due to Doxygen not recognizing type aliasing), @c hash::common_hash_type<HashLength> can be used to get the common hash type.
+
+All lengths up to and including @c HashLength::HL64 are aliases to unsigned integers of the appropriate (explicit) size. For larger hash lengths (@c HL128 and up), the type is:
+
+@code
+struct {
+	union {
+		uint8_t data[L];
+		uint32_t chunks[L>>2];
+	};
+};
+@endcode
+
+where @c L is the @c HashLength template parameter. Any hash algorithm outputting @c HL128 or greater will take an output parameter rather than returning the hash.
+
 @remark All hash functions taking a standard string will operate over the <em>bytes</em> of the raw string data.
 
 @note A majority of the hashing algorithms implemented are in the public domain or have their own licenses and/or copyrights (which is indicated in the appropriate files).

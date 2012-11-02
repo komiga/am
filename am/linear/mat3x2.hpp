@@ -1,7 +1,6 @@
 /**
 @file linear/mat3x2.hpp
 @brief 3x2 matrix.
-@defgroup mat3x2 3x2 matrix
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -29,7 +28,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup mat3x2
+	@defgroup mat3x2 3x2 matrix
 	@{
 */
 

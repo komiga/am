@@ -35,7 +35,7 @@ Which essentially means you can't use it with MSVC. Deal with it.\*
 
 ## License
 
-**AM** carries the MIT license, which is gracefully plastered below.
+**AM** carries the MIT license, which is gracefully plastered below. Some algorithms have separate (MIT-compatible) licenses, copyrights, or are in the public domain. These are indicated in the appropriate sections.
 
 ```
 Copyright (c) 2012 Tim Howard

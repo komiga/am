@@ -1,7 +1,6 @@
 /**
 @file linear/vec1.hpp
-@brief 1-dimensional vector specializations.
-@defgroup vec1 1-dimensional vector
+@brief 1-dimensional vector.
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -27,7 +26,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup vec1
+	@defgroup vec1 1-dimensional vector
 	@{
 */
 

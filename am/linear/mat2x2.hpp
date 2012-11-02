@@ -1,7 +1,6 @@
 /**
 @file linear/mat2x2.hpp
 @brief 2x2 matrix.
-@defgroup mat2x2 2x2 matrix
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -28,7 +27,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup mat2x2
+	@defgroup mat2x2 2x2 matrix
 	@{
 */
 

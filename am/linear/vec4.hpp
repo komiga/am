@@ -1,7 +1,6 @@
 /**
 @file linear/vec4.hpp
-@brief 4-dimensional vector specializations.
-@defgroup vec4 4-dimensional vector
+@brief 4-dimensional vector.
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -27,7 +26,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup vec4
+	@defgroup vec4 4-dimensional vector
 	@{
 */
 

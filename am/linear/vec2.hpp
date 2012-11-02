@@ -1,7 +1,6 @@
 /**
 @file linear/vec2.hpp
-@brief 2-dimensional vector specializations.
-@defgroup vec2 2-dimensional vector
+@brief 2-dimensional vector.
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -27,7 +26,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup vec2
+	@defgroup vec2 2-dimensional vector
 	@{
 */
 

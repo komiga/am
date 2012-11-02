@@ -1,7 +1,6 @@
 /**
 @file arithmetic_types.hpp
 @brief Arithmetic types.
-@defgroup arithmetic_types Arithmetic types
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -15,7 +14,7 @@
 namespace am {
 
 /**
-	@addtogroup arithmetic_types
+	@defgroup arithmetic_types Arithmetic types
 	@details
 	Integer types are defined to strictly-sized 16-, 32-, and 64-bit arithmetic types (respective to: low, medium, high).
 	Medium- and high-precision floating-point types are defined to system single- and double-precision types, respectively (which usually correspond to IEEE-754 32- and 64-bit floating-point types, respectively).

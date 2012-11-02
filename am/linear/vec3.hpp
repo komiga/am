@@ -1,7 +1,6 @@
 /**
 @file linear/vec3.hpp
-@brief 3-dimensional vector specializations.
-@defgroup vec3 3-dimensional vector
+@brief 3-dimensional vector.
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -27,7 +26,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup vec3
+	@defgroup vec3 3-dimensional vector
 	@{
 */
 

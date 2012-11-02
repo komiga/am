@@ -2,6 +2,7 @@
 #include <am/hash/fnv.hpp>
 
 #include "./common.hpp"
+#include <iostream>
 #include <string>
 
 void test_fnv() {
@@ -10,8 +11,8 @@ void test_fnv() {
 		hash_data<uint64_t> const data_64[5];
 	};
 	#define TEST_FNV_HASH_SET(data, func_pred)\
-		TEST_HASH_SET(data.data_32, am::hash::func_pred<am::hash::HS32>, am::hash::func_pred ## _str<am::hash::HS32, std::string>);\
-		TEST_HASH_SET(data.data_64, am::hash::func_pred<am::hash::HS64>, am::hash::func_pred ## _str<am::hash::HS64, std::string>);
+		TEST_HASH_SET(data.data_32, am::hash::func_pred<am::hash::HL32>, am::hash::func_pred ## _str<am::hash::HL32, std::string>);\
+		TEST_HASH_SET(data.data_64, am::hash::func_pred<am::hash::HL64>, am::hash::func_pred ## _str<am::hash::HL64, std::string>);
 
 	// FNV-0
 	static fnv_hash_data const s_testdata_fnv0={{
@@ -59,7 +60,16 @@ void test_fnv() {
 	TEST_FNV_HASH_SET(s_testdata_fnv1a, fnv1a);
 }
 
+#define TEST_HASH_COMMON_HASH_LENGTH(L){\
+		am::hash::common_hash_type<am::hash::L> x;\
+		assert(sizeof(x.data)==sizeof(x.chunks));\
+	}
+
 int main(int argc, char const* argv[]) {
+	TEST_HASH_COMMON_HASH_LENGTH(HL128);
+	TEST_HASH_COMMON_HASH_LENGTH(HL256);
+	TEST_HASH_COMMON_HASH_LENGTH(HL512);
+	TEST_HASH_COMMON_HASH_LENGTH(HL1024);
 	test_fnv();
 	return 0;
 }

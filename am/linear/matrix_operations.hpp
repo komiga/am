@@ -1,7 +1,6 @@
 /**
 @file linear/matrix_operations.hpp
 @brief Matrix operations.
-@defgroup matrix_ops Matrix operations
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -25,7 +24,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup matrix_ops
+	@defgroup matrix_ops Matrix operations
 	@{
 */
 

@@ -1,6 +1,6 @@
 /**
 @file detail/hash/fnv_impl.hpp
-@brief FNV hash and variations (implementations).
+@brief FNV (implementation).
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -20,29 +20,27 @@ namespace hash {
 
 /** @cond INTERNAL */
 
-namespace {
-template<::am::hash::HashSize S> struct fnv_internals;
+template<::am::hash::HashLength L> using fnv_hash_type=::am::hash::common_hash_type<L>;
 
-template<> struct fnv_internals<::am::hash::HashSize::HS32> {
-	typedef uint32_t value_type;
-	static constexpr value_type prime=0x01000193;
-	static constexpr value_type offset_basis=0x811c9dc5;
+namespace {
+template<::am::hash::HashLength L> struct fnv_internals;
+template<> struct fnv_internals<::am::hash::HashLength::HL32> {
+	static constexpr uint32_t prime=0x01000193;
+	static constexpr uint32_t offset_basis=0x811c9dc5;
 };
 
-template<> struct fnv_internals<::am::hash::HashSize::HS64> {
-	typedef uint64_t value_type;
-	static constexpr value_type prime=0x00000100000001b3;
-	static constexpr value_type offset_basis=0xcbf29ce484222325;
+template<> struct fnv_internals<::am::hash::HashLength::HL64> {
+	static constexpr uint64_t prime=0x00000100000001b3;
+	static constexpr uint64_t offset_basis=0xcbf29ce484222325;
 };
 } // anonymous namespace
 
-template<::am::hash::HashSize S>
+template<::am::hash::HashLength L>
 struct fnv0_impl {
-	typedef fnv_internals<S> internals;
-	typedef typename internals::value_type value_type;
+	typedef fnv_internals<L> internals;
 
-	static value_type calc(uint8_t const* const data, std::size_t const size) {
-		value_type x=0x00;
+	static fnv_hash_type<L> calc(uint8_t const* const data, std::size_t const size) {
+		fnv_hash_type<L> x=0x00;
 		std::for_each(data, data+size, [&x](uint8_t const byte) {
 			x*=internals::prime;
 			x^=byte;
@@ -51,13 +49,12 @@ struct fnv0_impl {
 	}
 };
 
-template<::am::hash::HashSize S>
+template<::am::hash::HashLength L>
 struct fnv1_impl {
-	typedef fnv_internals<S> internals;
-	typedef typename internals::value_type value_type;
+	typedef fnv_internals<L> internals;
 
-	static value_type calc(uint8_t const* const data, std::size_t const size) {
-		value_type x=internals::offset_basis;
+	static fnv_hash_type<L> calc(uint8_t const* const data, std::size_t const size) {
+		fnv_hash_type<L> x=internals::offset_basis;
 		std::for_each(data, data+size, [&x](uint8_t const byte) {
 			x*=internals::prime;
 			x^=byte;
@@ -66,13 +63,12 @@ struct fnv1_impl {
 	}
 };
 
-template<::am::hash::HashSize S>
+template<::am::hash::HashLength L>
 struct fnv1a_impl {
-	typedef fnv_internals<S> internals;
-	typedef typename internals::value_type value_type;
+	typedef fnv_internals<L> internals;
 
-	static value_type calc(uint8_t const* const data, std::size_t const size) {
-		value_type x=internals::offset_basis;
+	static fnv_hash_type<L> calc(uint8_t const* const data, std::size_t const size) {
+		fnv_hash_type<L> x=internals::offset_basis;
 		std::for_each(data, data+size, [&x](uint8_t const byte) {
 			x^=byte;
 			x*=internals::prime;

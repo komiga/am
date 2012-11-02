@@ -1,7 +1,6 @@
 /**
 @file linear/vector_operations.hpp
 @brief Vector operations.
-@defgroup vector_ops Vector operations
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
@@ -25,7 +24,7 @@ namespace linear {
 	@{
 */
 /**
-	@addtogroup vector_ops
+	@defgroup vector_ops Vector operations
 	@{
 */
 

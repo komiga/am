@@ -15,6 +15,8 @@
 
 AM carries the MIT license, meaning you can do whatever you want to with it.
 
+@note Some algorithms have separate (MIT-compatible) licenses, copyrights, or are in the public domain. These are indicated in the appropriate sections.
+
 @verbatim
 Copyright (c) 2012 Tim Howard
 
