@@ -25,6 +25,7 @@ A compiler with support for simpleton C++11 features, such as:
 
 * Aggregate initialization
 * Type traits (`<type_traits>` header)
+* Lambdas
 * `constexpr`
 * `static_assert()`
 
