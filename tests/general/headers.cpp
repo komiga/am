@@ -5,6 +5,7 @@
 #include <am/arithmetic_types.hpp>
 #include <am/linear/vector.hpp>
 #include <am/linear/matrix.hpp>
+#include <am/hash/fnv.hpp>
 
 int main(int argc, char const* argv[]) {
 	am::linear:: vec1 const a1{1.0};

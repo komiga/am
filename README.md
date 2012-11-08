@@ -21,17 +21,16 @@ Because I can.
 
 ## Requirements
 
-A compiler with support for simpleton C++11 features, such as:
+One only needs a compiler with support for the following C++11 features:
 
 * Aggregate initialization
 * Type traits (`<type_traits>` header)
+* Type aliases
 * Lambdas
 * `constexpr`
 * `static_assert()`
 
-Which essentially means you can't use it with MSVC. Deal with it.\*
-
-\* *Actually, it is probably fairly easy to make it work in MSVC — if you're feeling masochistic enough, by all means.*
+Which essentially means you can't use it with MSVC. Deal with it. **Clang 3.1** or later is recommended. Earliest supporting GCC is version 4.7.
 
 ## License
 
