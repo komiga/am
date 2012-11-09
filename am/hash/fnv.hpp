@@ -54,7 +54,7 @@ namespace hash {
 template<HashLength L, class impl_=detail::hash::fnv0_impl<L> >
 inline detail::hash::fnv_hash_type<L> fnv0(void const* const data, std::size_t const size) {
 	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return impl_::calc(static_cast<uint8_t const*>(data), size);
+	return impl_::calc(reinterpret_cast<uint8_t const*>(data), size);
 }
 /**
 	Calculate the FNV-0 hash of a standard string.
@@ -79,7 +79,7 @@ inline detail::hash::fnv_hash_type<L> fnv0_str(stringT const& str) {
 template<HashLength L, class impl_=detail::hash::fnv1_impl<L> >
 inline detail::hash::fnv_hash_type<L> fnv1(void const* const data, std::size_t const size) {
 	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return impl_::calc(static_cast<uint8_t const*>(data), size);
+	return impl_::calc(reinterpret_cast<uint8_t const*>(data), size);
 }
 /**
 	Calculate the FNV-1 hash of a standard string.
@@ -104,7 +104,7 @@ inline detail::hash::fnv_hash_type<L> fnv1_str(stringT const& str) {
 template<HashLength L, class impl_=detail::hash::fnv1a_impl<L> >
 inline detail::hash::fnv_hash_type<L> fnv1a(void const* const data, std::size_t const size) {
 	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return impl_::calc(static_cast<uint8_t const*>(data), size);
+	return impl_::calc(reinterpret_cast<uint8_t const*>(data), size);
 }
 /**
 	Calculate the FNV-1a hash of a standard string.
