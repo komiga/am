@@ -31,4 +31,12 @@ void TEST_HASH_SET(H const* const set, DF hash_func, SF str_hash_func) {
 	}
 }
 
+template<class H, typename S, typename DF, typename SF>
+void TEST_HASH_SEEDED_SET(H const* const set, S const seed, DF hash_func, SF str_hash_func) {
+	for (H const* it=set; nullptr!=it->input; ++it) {
+		assert(it->value==hash_func(it->input, std::strlen(it->input), seed));
+		assert(it->value==str_hash_func(std::string{it->input}, seed));
+	}
+}
+
 #endif // AM_TESTS_HASH_COMMON_HPP_
