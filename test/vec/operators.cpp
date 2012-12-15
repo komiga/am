@@ -54,8 +54,8 @@ int main(int argc, char const* argv[]) {
 	TEST_VEC_SOP_ALL(ivec,  0x01, --,  0x00);
 
 	// TODO: More rigour
-	#define PRINT_VEC3(v, name) printf(name ": {%f, %f, %f}\n", v.x, v.y, v.z);
-	#define PRINT_FLOAT(f, name) printf(name ": %f\n", f);
+	#define PRINT_VEC3(v, name) std::printf(name ": {%f, %f, %f}\n", v.x, v.y, v.z);
+	#define PRINT_FLOAT(f, name) std::printf(name ": %f\n", f);
 
 	am::linear::vec3 const
 		a{1.0, 2.0, 3.0},
