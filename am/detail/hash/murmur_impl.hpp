@@ -130,7 +130,7 @@ struct murmur2_64b_impl {
 		uint32_t h2=static_cast<uint32_t>(seed>>32);
 		uint32_t k;
 
-		printf("size=%lu h1=%08x h2=%08x  ", size, h1, h2);
+		//std::printf("size=%-2lu h1=%08x h2=%08x  ", size, h1, h2);
 
 		// Core
 		while (8<=size) {
@@ -141,7 +141,7 @@ struct murmur2_64b_impl {
 			size-=8;
 		}
 
-		printf("C size=%lu h1=%08x h2=%08x  ", size, h1, h2);
+		//std::printf("C size=%-2lu h1=%08x h2=%08x  ", size, h1, h2);
 
 		// Partial block (h1)
 		if (4<=size) {
@@ -150,7 +150,7 @@ struct murmur2_64b_impl {
 			size-=4;
 		}
 
-		printf("P size=%lu h1=%08x h2=%08x\n", size, h1, h2);
+		//std::printf("P size=%-2lu h1=%08x h2=%08x\n", size, h1, h2);
 
 		// Tail
 		uint8_t const* tail=reinterpret_cast<uint8_t const*>(block);
