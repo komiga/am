@@ -3,11 +3,25 @@
 	[
 		{
 			"name": "Root",
-			"path": "./"
+			"path": "./",
+			"folder_exclude_patterns":
+			[
+				"doc",
+				"am",
+				"test"
+			],
+			"file_exclude_patterns":
+			[
+				"am.sublime-workspace"
+			]
 		},
 		{
 			"name": "- Doc",
-			"path": "./doc"
+			"path": "./doc/",
+			"folder_exclude_patterns":
+			[
+				"html"
+			]
 		},
 		{
 			"name": "- Source",
@@ -15,7 +29,16 @@
 		},
 		{
 			"name": "- Test",
-			"path": "./test/"
+			"path": "./test/",
+			"folder_exclude_patterns":
+			[
+				"out"
+			],
+			"file_exclude_patterns":
+			[
+				"Makefile",
+				"*.make"
+			]
 		}
 	],
 	"settings":
