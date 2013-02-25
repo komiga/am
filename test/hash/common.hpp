@@ -1,6 +1,6 @@
 
-#ifndef AM_TESTS_HASH_COMMON_HPP_
-#define AM_TESTS_HASH_COMMON_HPP_
+#ifndef AM_TEST_HASH_COMMON_HPP_
+#define AM_TEST_HASH_COMMON_HPP_
 
 #include <cassert>
 #include <cstring>
@@ -39,4 +39,4 @@ void TEST_HASH_SEEDED_SET(H const* const set, S const seed, DF hash_func, SF str
 	}
 }
 
-#endif // AM_TESTS_HASH_COMMON_HPP_
+#endif // AM_TEST_HASH_COMMON_HPP_

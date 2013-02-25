@@ -64,7 +64,8 @@ inline typename conType::value_type determinant(conType const& m) {
 /**
 	Calculate the inverse of a (square) matrix.
 
-	@warning The values in the resultant matrix are undefined if @a m is singular.
+	@warning The values in the resultant matrix are undefined if @a m is
+	singular.
 	@remark Only defined for the following matrix types:
 	- @c mat2x2
 	- @c mat3x3

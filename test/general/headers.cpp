@@ -7,7 +7,7 @@
 #include <am/linear/matrix.hpp>
 #include <am/hash/fnv.hpp>
 
-int main(int argc, char const* argv[]) {
+signed main() {
 	am::linear:: vec1 const a1{1.0};
 	am::linear::ivec1 const b1{};
 	am::linear::uvec1 const c1{};

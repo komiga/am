@@ -30,9 +30,11 @@ namespace linear {
 
 /** @cond INTERNAL */
 #define AM_VEC_OP_REQUIRE_FLOATING_POINT(conType)\
-	AM_STATIC_ASSERT(detail::linear::is_vector<conType>::value,\
+	AM_STATIC_ASSERT(\
+		detail::linear::is_vector<conType>::value,\
 		"conType must be a vector");\
-	AM_STATIC_ASSERT(detail::linear::is_construct_floating_point<conType>::value,\
+	AM_STATIC_ASSERT(\
+		detail::linear::is_construct_floating_point<conType>::value,\
 		"conType must be floating-point");
 /** @endcond */
 
@@ -60,7 +62,10 @@ inline typename conType::value_type length(conType const& v) {
 	@param r Second vector.
 */
 template<class conType>
-inline typename conType::value_type distance(conType const& v, conType const& r) {
+inline typename conType::value_type distance(
+	conType const& v,
+	conType const& r
+) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(conType);
 	return conType::operations::distance(v, r);
 }
@@ -75,7 +80,10 @@ inline typename conType::value_type distance(conType const& v, conType const& r)
 	@param r Second vector.
 */
 template<class conType>
-inline typename conType::value_type dot(conType const& v, conType const& r) {
+inline typename conType::value_type dot(
+	conType const& v,
+	conType const& r
+) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(conType);
 	return conType::operations::dot(v, r);
 }
@@ -83,14 +91,18 @@ inline typename conType::value_type dot(conType const& v, conType const& r) {
 /**
 	Calculate the cross product of two 3-dimensional vectors.
 
-	@remark Defined for all 3-dimensional floating-point vector specializations (of any precision).
+	@remark Defined for all 3-dimensional floating-point vector
+	specializations (of any precision).
 	@returns The cross product of @a v and @a r.
 	@tparam T A floating-point arithmetic type.
 	@param v First vector.
 	@param r Second vector.
 */
 template<typename T>
-inline detail::linear::tvec3<T> cross(detail::linear::tvec3<T> const& v, detail::linear::tvec3<T> const& r) {
+inline detail::linear::tvec3<T> cross(
+	detail::linear::tvec3<T> const& v,
+	detail::linear::tvec3<T> const& r
+) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(detail::linear::tvec3<T>);
 	return detail::linear::tvec3<T>::operations::cross(v, r);
 }
@@ -120,7 +132,11 @@ inline conType normalize(conType const& v) {
 	@param ng Geometric normal vector.
 */
 template<class conType>
-inline conType faceforward(conType const& n, conType const& i, conType const& ng) {
+inline conType faceforward(
+	conType const& n,
+	conType const& i,
+	conType const& ng
+) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(conType);
 	return conType::operations::faceforward(n, i, ng);
 }
@@ -153,7 +169,11 @@ inline conType reflect(conType const& i, conType const& n) {
 	@param eta Ratio of indices of refraction.
 */
 template<class conType>
-inline conType refract(conType const& i, conType const& n, typename conType::value_type const& eta) {
+inline conType refract(
+	conType const& i,
+	conType const& n,
+	typename conType::value_type const& eta
+) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(conType);
 	return conType::operations::refract(i, n, eta);
 }

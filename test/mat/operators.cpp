@@ -1213,7 +1213,7 @@ void test_mat4x4() {
 	);
 }
 
-int main(int argc, char const* argv[]) {
+signed main() {
 	test_mat2x2();
 	test_mat2x3();
 	test_mat2x4();

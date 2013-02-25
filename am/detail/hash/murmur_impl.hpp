@@ -4,7 +4,9 @@
 
 @author Tim Howard
 @copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
-Although the AM implementations are under the MIT license, the Murmur algorithms themselves are in the public domain and no copyright is claimed on them.
+Although the AM implementations are under the MIT license,
+the Murmur algorithms themselves are in the public domain
+and no copyright is claimed on them.
 */
 
 #ifndef AM_DETAIL_HASH_MURMUR_IMPL_HPP_
@@ -18,22 +20,29 @@ namespace hash {
 
 /** @cond INTERNAL */
 
-template<::am::hash::HashLength L> using murmur_hash_type=::am::hash::common_hash_type<L>;
+template<::am::hash::HashLength L>
+using murmur_hash_type=::am::hash::common_hash_type<L>;
 
 // NOTE: Specific-case unsafe ROTL; lacks mask guard on amt
 #define AM_ROTL32__(x, amt)\
 	((x<<amt) | (x>>(32-amt)))
 
-template<::am::hash::HashLength L> struct murmur2_impl;
+template<::am::hash::HashLength L>
+struct murmur2_impl;
 
 // MurmurHash2
 template<>
 struct murmur2_impl<::am::hash::HashLength::HL32> {
 	static constexpr uint32_t M=0x5bd1e995;
-	static constexpr unsigned int R=24;
+	static constexpr unsigned R=24;
 
-	static uint32_t calc(uint8_t const* const data, std::size_t const size, uint32_t const seed) {
-		std::size_t const aligned_size=size&~0x03; // Rounded data size; essentially (size>>2)<<2
+	static uint32_t calc(
+		uint8_t const* const data,
+		std::size_t const size,
+		uint32_t const seed
+	) {
+		// Rounded data size; essentially (size>>2)<<2
+		std::size_t const aligned_size=size&~0x03;
 		uint8_t const* const end=data+aligned_size;
 		uint32_t const* block=reinterpret_cast<uint32_t const*>(data);
 		uint32_t h=seed^size;
@@ -72,10 +81,15 @@ struct murmur2_impl<::am::hash::HashLength::HL32> {
 template<>
 struct murmur2_impl<::am::hash::HashLength::HL64> {
 	static constexpr uint64_t M=0xc6a4a7935bd1e995;
-	static constexpr unsigned int R=47;
+	static constexpr unsigned R=47;
 
-	static uint64_t calc(uint8_t const* const data, std::size_t const size, uint64_t const seed) {
-		std::size_t const aligned_size=size&~0x07; // Rounded data size; essentially (size>>3)<<3
+	static uint64_t calc(
+		uint8_t const* const data,
+		std::size_t const size,
+		uint64_t const seed
+	) {
+		// Rounded data size; essentially (size>>3)<<3
+		std::size_t const aligned_size=size&~0x07;
 		uint8_t const* const end=data+aligned_size;
 		uint64_t const* block=reinterpret_cast<uint64_t const*>(data);
 		uint64_t h=seed^(size*M);
@@ -121,11 +135,16 @@ struct murmur2_impl<::am::hash::HashLength::HL64> {
 
 struct murmur2_64b_impl {
 	static constexpr uint32_t M=0x5bd1e995;
-	static constexpr unsigned int R=24;
+	static constexpr unsigned R=24;
 
-	static uint64_t calc(uint8_t const* const data, std::size_t size, uint64_t const seed) {
+	static uint64_t calc(
+		uint8_t const* const data,
+		std::size_t size,
+		uint64_t const seed
+	) {
 		uint32_t const* block=reinterpret_cast<uint32_t const*>(data);
-		// NOTE: Using specific variation for h2 from SMHasher; originally h2=0 and seed was unsigned int
+		// NOTE: Using specific variation for h2 from SMHasher;
+		// originally h2=0 and seed was unsigned signed
 		uint32_t h1=static_cast<uint32_t>(seed^size);
 		uint32_t h2=static_cast<uint32_t>(seed>>32);
 		uint32_t k;
@@ -185,15 +204,22 @@ struct murmur3_impl<::am::hash::HashLength::HL32> {
 	static constexpr uint32_t F1=0x85ebca6b;
 	static constexpr uint32_t F2=0xc2b2ae35;
 
-	static uint32_t calc(uint8_t const* const data, std::size_t const size, uint32_t const seed) {
-		std::size_t const nblocks=size>>2; // Number of 32-bit blocks
-		std::size_t const aligned_size=size&~0x03; // Rounded data size; essentially (size>>2)<<2
-		uint32_t const* const blocks=reinterpret_cast<uint32_t const*>(data+aligned_size);
+	static uint32_t calc(
+		uint8_t const* const data,
+		std::size_t const size,
+		uint32_t const seed
+	) {
+		// Number of 32-bit blocks
+		std::size_t const nblocks=size>>2;
+		// Rounded data size; essentially (size>>2)<<2
+		std::size_t const aligned_size=size&~0x03;
+		uint32_t const* const blocks=
+			reinterpret_cast<uint32_t const*>(data+aligned_size);
 		uint32_t h=seed;
 		uint32_t k;
 
 		// Core
-		for (int i=-nblocks; i; ++i) {
+		for (signed i=-nblocks; i; ++i) {
 			k=blocks[i];
 			k*=C1;
 			k=AM_ROTL32__(k, 15);

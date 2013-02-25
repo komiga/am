@@ -1,6 +1,6 @@
 
-#ifndef AM_TESTS_VEC_COMMON_HPP_
-#define AM_TESTS_VEC_COMMON_HPP_
+#ifndef AM_TEST_VEC_COMMON_HPP_
+#define AM_TEST_VEC_COMMON_HPP_
 
 #include <cassert>
 
@@ -94,4 +94,4 @@
 		assert((x op).operator==(decltype(x){result}));\
 	}
 
-#endif // AM_TESTS_VEC_COMMON_HPP_
+#endif // AM_TEST_VEC_COMMON_HPP_

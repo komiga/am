@@ -53,7 +53,10 @@ template<typename T>
 struct tmat2x4 {
 public:
 	/** @cond INTERNAL */
-	AM_STATIC_ASSERT(true==std::is_floating_point<T>::value, "T must be a floating-point type");
+	AM_STATIC_ASSERT(
+		true==std::is_floating_point<T>::value,
+		"T must be a floating-point type"
+	);
 	/** @endcond */
 
 	/** Type of @c *this. */
@@ -82,7 +85,7 @@ public:
 	typedef row_type const& row_cref;
 	typedef col_type const& col_cref;
 
-	inline static transpose_type transpose(type_cref m) {
+	static transpose_type transpose(type_cref m) {
 		return transpose_type{
 			m.data[0].x, m.data[1].x,
 			m.data[0].y, m.data[1].y,
@@ -90,72 +93,72 @@ public:
 			m.data[0].w, m.data[1].w};
 	}
 
-	inline static type postfix_increment(type_cref m) {
+	static type postfix_increment(type_cref m) {
 		return type{
 			m.data[0]++,
 			m.data[1]++};
 	}
-	inline static type postfix_decrement(type_cref m) {
+	static type postfix_decrement(type_cref m) {
 		return type{
 			m.data[0]--,
 			m.data[1]--};
 	}
 
-	inline static type unary_negative(type_cref m) {
+	static type unary_negative(type_cref m) {
 		return type{
 			-m.data[0],
 			-m.data[1]};
 	}
 
-	inline static type scalar_add(type_cref m, value_cref s) {
+	static type scalar_add(type_cref m, value_cref s) {
 		return type{
 			m.data[0] + s,
 			m.data[1] + s};
 	}
 
-	inline static type add(type_cref m, type_cref n) {
+	static type add(type_cref m, type_cref n) {
 		return type{
 			m.data[0] + n.data[0],
 			m.data[1] + n.data[1]};
 	}
 
-	inline static type scalar_subtract_rhs(type_cref m, value_cref s) {
+	static type scalar_subtract_rhs(type_cref m, value_cref s) {
 		return type{
 			m.data[0] - s,
 			m.data[1] - s};
 	}
-	inline static type scalar_subtract_lhs(type_cref m, value_cref s) {
+	static type scalar_subtract_lhs(type_cref m, value_cref s) {
 		return type{
 			s - m.data[0],
 			s - m.data[1]};
 	}
 
-	inline static type subtract(type_cref m, type_cref n) {
+	static type subtract(type_cref m, type_cref n) {
 		return type{
 			m.data[0] - n.data[0],
 			m.data[1] - n.data[1]};
 	}
 
-	inline static type scalar_multiply(type_cref m, value_cref s) {
+	static type scalar_multiply(type_cref m, value_cref s) {
 		return type{
 			m.data[0] * s,
 			m.data[1] * s};
 	}
 
-	inline static col_type row_multiply(type_cref m, row_cref v) {
+	static col_type row_multiply(type_cref m, row_cref v) {
 		return col_type{
 			m.data[0].x * v.x + m.data[1].x * v.y,
 			m.data[0].y * v.x + m.data[1].y * v.y,
 			m.data[0].z * v.x + m.data[1].z * v.y,
 			m.data[0].w * v.x + m.data[1].w * v.y};
 	}
-	inline static row_type col_multiply(type_cref m, col_cref v) {
+	static row_type col_multiply(type_cref m, col_cref v) {
 		return row_type{
 			m.data[0].x * v.x + m.data[0].y * v.y + m.data[0].z * v.z + m.data[0].w * v.w,
 			m.data[1].x * v.x + m.data[1].y * v.y + m.data[1].z * v.z + m.data[1].w * v.w};
 	}
 
-	inline static type multiply(type_cref m, tmat2x2<T> const& n) {
+	static type multiply(type_cref m, tmat2x2<T> const& n) {
 		return type{
 			m.data[0].x * n.data[0].x + m.data[1].x * n.data[0].y,
 			m.data[0].y * n.data[0].x + m.data[1].y * n.data[0].y,
@@ -166,7 +169,7 @@ public:
 			m.data[0].z * n.data[1].x + m.data[1].z * n.data[1].y,
 			m.data[0].w * n.data[1].x + m.data[1].w * n.data[1].y};
 	}
-	inline static tmat3x4<T> multiply(type_cref m, tmat3x2<T> const& n) {
+	static tmat3x4<T> multiply(type_cref m, tmat3x2<T> const& n) {
 		return tmat3x4<T>{
 			m.data[0].x * n.data[0].x + m.data[1].x * n.data[0].y,
 			m.data[0].y * n.data[0].x + m.data[1].y * n.data[0].y,
@@ -181,7 +184,7 @@ public:
 			m.data[0].z * n.data[2].x + m.data[1].z * n.data[2].y,
 			m.data[0].w * n.data[2].x + m.data[1].w * n.data[2].y};
 	}
-	inline static tmat4x4<T> multiply(type_cref m, tmat4x2<T> const& n) {
+	static tmat4x4<T> multiply(type_cref m, tmat4x2<T> const& n) {
 		return tmat4x4<T>{
 			m.data[0].x * n.data[0].x + m.data[1].x * n.data[0].y,
 			m.data[0].y * n.data[0].x + m.data[1].y * n.data[0].y,
@@ -201,12 +204,12 @@ public:
 			m.data[0].w * n.data[3].x + m.data[1].w * n.data[3].y};
 	}
 
-	inline static type scalar_divide_rhs(type_cref m, value_cref s) {
+	static type scalar_divide_rhs(type_cref m, value_cref s) {
 		return type{
 			m.data[0] / s,
 			m.data[1] / s};
 	}
-	inline static type scalar_divide_lhs(type_cref m, value_cref s) {
+	static type scalar_divide_lhs(type_cref m, value_cref s) {
 		return type{
 			s / m.data[0],
 			s / m.data[1]};
@@ -218,30 +221,30 @@ public:
 	/**
 		Construct to identity.
 	*/
-	inline tmat2x4() /** @cond INTERNAL */: data{
+	tmat2x4() : data{
 		col_type{T(1), T(0), T(0), T(0)},
-		col_type{T(0), T(1), T(0), T(0)}}/** @endcond */ {}
+		col_type{T(0), T(1), T(0), T(0)}} {}
 	/**
 		Construct uninitialized.
 	*/
-	inline explicit tmat2x4(ctor_no_init) {}
+	explicit tmat2x4(ctor_no_init) {}
 
 	/**
 		Construct to main diagonal.
 		@param s Value.
 	*/
-	inline explicit tmat2x4(value_type const& s) /** @cond INTERNAL */: data{
+	explicit tmat2x4(value_type const& s) : data{
 		col_type{s, T(0), T(0), T(0)},
-		col_type{T(0), s, T(0), T(0)}}/** @endcond */ {}
+		col_type{T(0), s, T(0), T(0)}} {}
 	/**
 		Construct to main diagonal.
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
 	template<typename U>
-	inline explicit tmat2x4(U const& s) /** @cond INTERNAL */: data{
+	explicit tmat2x4(U const& s) : data{
 		col_type{T(s), T(0), T(0), T(0)},
-		col_type{T(0), T(s), T(0), T(0)}}/** @endcond */ {}
+		col_type{T(0), T(s), T(0), T(0)}} {}
 
 	/**
 		Construct to values.
@@ -254,10 +257,13 @@ public:
 		@param z2 Z value of second column.
 		@param w2 W value of second column.
 	*/
-	inline explicit tmat2x4(value_type const& x1, value_type const& y1, value_type const& z1, value_type const& w1,
-							value_type const& x2, value_type const& y2, value_type const& z2, value_type const& w2) /** @cond INTERNAL */: data{
+	explicit tmat2x4(
+			value_type const& x1, value_type const& y1,
+			value_type const& z1, value_type const& w1,
+			value_type const& x2, value_type const& y2,
+			value_type const& z2, value_type const& w2) : data{
 		col_type{x1, y1, z1, w1},
-		col_type{x2, y2, z2, w2}}/** @endcond */ {}
+		col_type{x2, y2, z2, w2}} {}
 	/**
 		Construct to values.
 		@tparam X1,Y1,Z1,W1, X2,Y2,Z2,W2 An arithmetic type.
@@ -270,21 +276,25 @@ public:
 		@param z2 Z value of second column.
 		@param w2 W value of second column.
 	*/
-	template<typename X1, typename Y1, typename Z1, typename W1, typename X2, typename Y2, typename Z2, typename W2>
-	inline explicit tmat2x4(X1 const& x1, Y1 const& y1, Z1 const& z1, W1 const& w1,
-							X2 const& x2, Y2 const& y2, Z2 const& z2, W2 const& w2) /** @cond INTERNAL */: data{
+	template<
+		typename X1, typename Y1, typename Z1, typename W1,
+		typename X2, typename Y2, typename Z2, typename W2
+	>
+	explicit tmat2x4(
+			X1 const& x1, Y1 const& y1, Z1 const& z1, W1 const& w1,
+		 	X2 const& x2, Y2 const& y2, Z2 const& z2, W2 const& w2) : data{
 		col_type{T(x1), T(y1), T(z1), T(w1)},
-		col_type{T(x2), T(y2), T(z2), T(w2)}}/** @endcond */ {}
+		col_type{T(x2), T(y2), T(z2), T(w2)}} {}
 
 	/**
 		Construct to column vectors.
 		@param c1 First column.
 		@param c2 Second column.
 	*/
-	inline explicit tmat2x4(col_type const& c1,
-							col_type const& c2) /** @cond INTERNAL */: data{
+	explicit tmat2x4(col_type const& c1,
+					 col_type const& c2) : data{
 		c1,
-		c2}/** @endcond */ {}
+		c2} {}
 	/**
 		Construct to column vectors.
 		@tparam C1, C2 An arithmetic type.
@@ -292,27 +302,27 @@ public:
 		@param c2 Second column.
 	*/
 	template<typename C1, typename C2>
-	inline explicit tmat2x4(tvec4<C1> const& c1,
-							tvec4<C2> const& c2) /** @cond INTERNAL */: data{
+	explicit tmat2x4(tvec4<C1> const& c1,
+					 tvec4<C2> const& c2) : data{
 		col_type{c1},
-		col_type{c2}}/** @endcond */ {}
+		col_type{c2}} {}
 
 	/**
 		Construct to matrix.
 		@param m Matrix to copy.
 	*/
-	inline tmat2x4(type const& m) /** @cond INTERNAL */: data{
+	tmat2x4(type const& m) : data{
 		m.data[0],
-		m.data[1]}/** @endcond */ {}
+		m.data[1]} {}
 	/**
 		Construct to matrix.
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
 	template<typename U>
-	inline tmat2x4(tmat2x4<U> const& m) /** @cond INTERNAL */: data{
+	tmat2x4(tmat2x4<U> const& m) : data{
 		col_type{m.data[0]},
-		col_type{m.data[1]}}/** @endcond */ {}
+		col_type{m.data[1]}} {}
 /// @}
 
 /** @name Properties */ /// @{
@@ -320,28 +330,30 @@ public:
 		Get number of columns.
 		@returns @c 2.
 	*/
-	inline static AM_CONSTEXPR size_type size() { return size_type(2); }
+	static AM_CONSTEXPR size_type size() { return size_type(2); }
 	/**
 		Get size of column vector.
 		@returns @c 4.
 	*/
-	inline static AM_CONSTEXPR size_type col_size() { return col_type::size(); }
+	static AM_CONSTEXPR size_type col_size() { return col_type::size(); }
 	/**
 		Get size of row vector.
 		@returns @c 2.
 	*/
-	inline static AM_CONSTEXPR size_type row_size() { return row_type::size(); }
+	static AM_CONSTEXPR size_type row_size() { return row_type::size(); }
 	/**
 		Get column at index.
+		@note An assert will catch invalid indices;
+		see @c data for completely raw access.
 		@returns The column at @a i.
 		@param i Index to retrieve.
 	*/
-	inline col_type& operator[](size_type const& i) {
+	col_type& operator[](size_type const& i) {
 		assert(size()>i);
 		return data[i];
 	}
 	/** @copydoc operator[](size_type const&) */
-	inline col_type const& operator[](size_type const& i) const {
+	col_type const& operator[](size_type const& i) const {
 		assert(size()>i);
 		return data[i];
 	}
@@ -350,20 +362,24 @@ public:
 /** @name Comparison operators */ /// @{
 	/**
 		Equivalence operator.
-		@returns @c true if the two matrices are equal, @c false if they are not.
+		@returns
+		- @c true if the two matrices are equal,
+		- @c false if they are not.
 		@param m Matrix to compare with.
 	*/
-	inline bool operator==(type const& m) const {
+	bool operator==(type const& m) const {
 		return
 			data[0]==m.data[0] &&
 			data[1]==m.data[1];
 	}
 	/**
 		Non-equivalence operator.
-		@returns @c false if the two matrices are equal, @c true if they are not.
+		@returns
+		- @c false if the two matrices are equal,
+		- @c true if they are not.
 		@param m Matrix to compare with.
 	*/
-	inline bool operator!=(type const& m) const {
+	bool operator!=(type const& m) const {
 		return
 			data[0]!=m.data[0] ||
 			data[1]!=m.data[1];
@@ -375,7 +391,7 @@ public:
 		Prefix increment.
 		@returns @c *this after operation.
 	*/
-	inline type& operator++() {
+	type& operator++() {
 		++data[0];
 		++data[1];
 		return *this;
@@ -384,7 +400,7 @@ public:
 		Prefix decrement.
 		@returns @c *this after operation.
 	*/
-	inline type& operator--() {
+	type& operator--() {
 		--data[0];
 		--data[1];
 		return *this;
@@ -399,7 +415,7 @@ public:
 		@param m Matrix to copy.
 	*/
 	template<typename U>
-	inline type& operator=(tmat2x4<U> const& m) {
+	type& operator=(tmat2x4<U> const& m) {
 		data[0]=m.data[0];
 		data[1]=m.data[1];
 		return *this;
@@ -414,7 +430,7 @@ public:
 		@param s Value to add.
 	*/
 	template<typename U>
-	inline type& operator+=(U const& s) {
+	type& operator+=(U const& s) {
 		data[0]+=T(s);
 		data[1]+=T(s);
 		return *this;
@@ -426,7 +442,7 @@ public:
 		@param m Matrix to add.
 	*/
 	template<typename U>
-	inline type& operator+=(tmat2x4<U> const& m) {
+	type& operator+=(tmat2x4<U> const& m) {
 		data[0]+=m.data[0];
 		data[1]+=m.data[1];
 		return *this;
@@ -438,7 +454,7 @@ public:
 		@param s Value to subtract.
 	*/
 	template<typename U>
-	inline type& operator-=(U const& s) {
+	type& operator-=(U const& s) {
 		data[0]-=T(s);
 		data[1]-=T(s);
 		return *this;
@@ -450,7 +466,7 @@ public:
 		@param m Matrix to subtract.
 	*/
 	template<typename U>
-	inline type& operator-=(tmat2x4<U> const& m) {
+	type& operator-=(tmat2x4<U> const& m) {
 		data[0]-=m.data[0];
 		data[1]-=m.data[1];
 		return *this;
@@ -462,7 +478,7 @@ public:
 		@param s Scalar.
 	*/
 	template<typename U>
-	inline type& operator*=(U const& s) {
+	type& operator*=(U const& s) {
 		data[0]*=T(s);
 		data[1]*=T(s);
 		return *this;
@@ -474,13 +490,13 @@ public:
 		@param s Value to divide by.
 	*/
 	template<typename U>
-	inline type& operator/=(U const& s) {
+	type& operator/=(U const& s) {
 		data[0]/=T(s);
 		data[1]/=T(s);
 		return *this;
 	}
 /// @}
-};
+}; // struct tmat2x4
 
 /** @name mat2x4 increment and decrement operators */ /// @{
 	/**
@@ -490,7 +506,7 @@ public:
 		@param m Matrix.
 	*/
 	template<typename T>
-	inline tmat2x4<T> operator++(tmat2x4<T> const& m, int) {
+	inline tmat2x4<T> operator++(tmat2x4<T> const& m, signed) {
 		return tmat2x4<T>::operations::postfix_increment(m);
 	}
 	/**
@@ -500,7 +516,7 @@ public:
 		@param m Matrix.
 	*/
 	template<typename T>
-	inline tmat2x4<T> operator--(tmat2x4<T> const& m, int) {
+	inline tmat2x4<T> operator--(tmat2x4<T> const& m, signed) {
 		return tmat2x4<T>::operations::postfix_decrement(m);
 	}
 /// @}
@@ -625,7 +641,10 @@ public:
 		@param v Vector (right-hand).
 	*/
 	template<typename T>
-	inline typename tmat2x4<T>::col_type operator*(tmat2x4<T> const& m, typename tmat2x4<T>::row_type const& v) {
+	inline typename tmat2x4<T>::col_type operator*(
+		tmat2x4<T> const& m,
+		typename tmat2x4<T>::row_type const& v
+	) {
 		return tmat2x4<T>::operations::row_multiply(m, v);
 	}
 	/**
@@ -636,7 +655,10 @@ public:
 		@param m Matrix (right-hand).
 	*/
 	template<typename T>
-	inline typename tmat2x4<T>::row_type operator*(typename tmat2x4<T>::col_type const& v, tmat2x4<T> const& m) {
+	inline typename tmat2x4<T>::row_type operator*(
+		typename tmat2x4<T>::col_type const& v,
+		tmat2x4<T> const& m
+	) {
 		return tmat2x4<T>::operations::col_multiply(m, v);
 	}
 	/**

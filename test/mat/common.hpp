@@ -1,6 +1,6 @@
 
-#ifndef AM_TESTS_MAT_COMMON_HPP_
-#define AM_TESTS_MAT_COMMON_HPP_
+#ifndef AM_TEST_MAT_COMMON_HPP_
+#define AM_TEST_MAT_COMMON_HPP_
 
 #include <cassert>
 
@@ -162,4 +162,4 @@
 		TEST_MAT_PROP(inv_mat, inverse, inv_result);\
 	}
 
-#endif // AM_TESTS_MAT_COMMON_HPP_
+#endif // AM_TEST_MAT_COMMON_HPP_
