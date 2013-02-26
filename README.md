@@ -37,7 +37,7 @@ Which essentially means you can't use it with MSVC. Deal with it. **Clang 3.1** 
 **AM** carries the MIT license, which is gracefully plastered below. Some algorithms have separate (MIT-compatible) licenses, copyrights, or are in the public domain. These are indicated in the appropriate sections.
 
 ```
-Copyright (c) 2012 Tim Howard
+Copyright (c) 2012-2013 Tim Howard
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

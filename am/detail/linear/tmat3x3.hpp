@@ -3,7 +3,8 @@
 @brief 3x3 matrix.
 
 @author Tim Howard
-@copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
+@copyright 2012-2013 Tim Howard under the MIT license;
+see @ref index or the accompanying LICENSE file for full text.
 */
 
 #ifndef AM_DETAIL_LINEAR_TMAT3X3_HPP_

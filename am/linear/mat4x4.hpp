@@ -3,7 +3,8 @@
 @brief 4x4 matrix.
 
 @author Tim Howard
-@copyright 2012 Tim Howard under the MIT license; see @ref index or the accompanying LICENSE file for full text.
+@copyright 2012-2013 Tim Howard under the MIT license;
+see @ref index or the accompanying LICENSE file for full text.
 */
 
 #ifndef AM_LINEAR_MAT4X4_HPP_
