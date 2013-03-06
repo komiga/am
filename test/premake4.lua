@@ -1,8 +1,3 @@
--- AM tests premake file
-
---[[if _ACTION=="clean" then
-	os.rmdir(outpath)
-end]]
 
 newoption {
 	trigger="clang",
@@ -37,12 +32,32 @@ function setup_test(name, src)
 		flags {"ExtraWarnings", "Optimize"}
 	
 	configuration {"linux"}
-		buildoptions {"-std=c++0x", "-pedantic"}
+		buildoptions {
+			"-pedantic-errors",
+			"-Werror",
+			"-Wextra",
 
-	configuration {"clang"}
-		links {
-			"stdc++"
+			"-Wuninitialized",
+			"-Winit-self",
+
+			"-Wmissing-field-initializers",
+			"-Wredundant-decls",
+
+			"-Wold-style-cast",
+
+			"-Wnon-virtual-dtor",
+			"-Woverloaded-virtual",
+
+			"-Wunused"
 		}
+
+	configuration {"linux", "not clang"}
+		buildoptions {"-std=c++0x"}
+
+	configuration {"linux", "clang"}
+		buildoptions {"-std=c++11"}
+		buildoptions {"-stdlib=libstdc++"}
+		links {"stdc++"}
 
 	configuration {}
 		targetdir(".")
@@ -68,4 +83,3 @@ if _ACTION=="clean" then
 		os.rmdir(prj.basedir.."/out")
 	end
 end
-
