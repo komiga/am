@@ -19,7 +19,7 @@ struct {
 
 where @c L is the @c HashLength template parameter. Any hash algorithm outputting @c HL128 or greater will take an output parameter rather than returning the hash.
 
-@remark All hash functions taking a standard string will operate over the <em>bytes</em> of the raw string data.
+@remarks All hash functions taking a standard string will operate over the <em>bytes</em> of the raw string data.
 
 @note A majority of the hashing algorithms implemented are in the public domain or have their own licenses and/or copyrights (which is indicated in the appropriate files).
 

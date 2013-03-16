@@ -55,19 +55,19 @@ namespace am {
 
 /**
 	Precision for AM-supplied floating-point type specializations.
-	@remark Defaults to @c AM_PRECISION_MEDIUM.
+	@remarks Defaults to @c AM_PRECISION_MEDIUM.
 	@sa AM_CONFIG_VECTOR_TYPES, AM_CONFIG_MATRIX_TYPES
 */
 #define AM_CONFIG_FLOAT_PRECISION AM_PRECISION_MEDIUM
 /**
 	Precision for AM-supplied signed integer type specializations.
-	@remark Defaults to @c AM_PRECISION_MEDIUM.
+	@remarks Defaults to @c AM_PRECISION_MEDIUM.
 	@sa AM_CONFIG_VECTOR_TYPES, AM_CONFIG_MATRIX_TYPES
 */
 #define AM_CONFIG_INT_PRECISION AM_PRECISION_MEDIUM
 /**
 	Precision for AM-supplied unsigned integer type specializations.
-	@remark Defaults to @c AM_PRECISION_MEDIUM.
+	@remarks Defaults to @c AM_PRECISION_MEDIUM.
 	@sa AM_CONFIG_VECTOR_TYPES, AM_CONFIG_MATRIX_TYPES
 */
 #define AM_CONFIG_UINT_PRECISION AM_PRECISION_MEDIUM
@@ -137,8 +137,8 @@ namespace am {
 	For example: with only @c AM_FLAG_TYPE_FLOAT set, @c vec1,
 	@c vec2, etc., will be defined; if @c AM_FLAG_TYPE_INT were
 	included, @c ivec1, @c ivec2, etc., would also be defined.
-	@remark Defaults to @c AM_FLAG_TYPE_would also be defined.
-	@remark Defaults to @c AM_FLAG_TYPE_ALL.
+	@remarks Defaults to @c AM_FLAG_TYPE_would also be defined.
+	@remarks Defaults to @c AM_FLAG_TYPE_ALL.
 	@sa AM_CONFIG_MATRIX_TYPES,
 		AM_FLAG_TYPE_NONE,
 		AM_FLAG_TYPE_FLOAT,
@@ -155,7 +155,7 @@ namespace am {
 	With @c AM_FLAG_TYPE_FLOAT set, @c mat2x2, @c mat3x3, etc.,
 	will be defined; no other flags, apart from @c AM_FLAG_TYPE_NONE,
 	are valid.
-	@remark Defaults to @c AM_FLAG_TYPE_FLOAT.
+	@remarks Defaults to @c AM_FLAG_TYPE_FLOAT.
 	@sa AM_CONFIG_VECTOR_TYPES,
 		AM_FLAG_TYPE_NONE,
 		AM_FLAG_TYPE_FLOAT

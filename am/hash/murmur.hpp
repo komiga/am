@@ -39,7 +39,7 @@ namespace hash {
 	  MurmurHash64A will be used for @c murmur2<HL64>; see @c murmur2_64b for
 	  MurmurHash64B (which only deals in @c HL64).
 
-	@remark Only lengths @c HashLength::HL32 and @c HashLength::HL64 are
+	@remarks Only lengths @c HashLength::HL32 and @c HashLength::HL64 are
 	supplied for @c murmur2; only @c HashLength::HL32 is supplied for
 	@c murmur3.
 	@note Although the AM implementations are under the MIT license, the

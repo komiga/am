@@ -39,7 +39,7 @@ namespace hash {
 
 	FNV-1a is the recommended version.
 
-	@remark Only lengths @c HashLength::HL32 and @c HL64 are supplied.
+	@remarks Only lengths @c HashLength::HL32 and @c HL64 are supplied.
 	@note Although the AM implementations are under the MIT license, the
 	FNV algorithms themselves are in the public domain and no copyright
 	is claimed on them.

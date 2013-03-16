@@ -32,7 +32,7 @@ namespace linear {
 /**
 	Get the transpose a matrix.
 
-	@remark Defined for all matrix types.
+	@remarks Defined for all matrix types.
 	@returns The transpose of @a m.
 	@tparam conType A specialized matrix type.
 	@param m Matrix.
@@ -47,7 +47,7 @@ inline typename conType::transpose_type transpose(conType const& m) {
 /**
 	Calculate the determinant of a (square) matrix.
 
-	@remark Only defined for the following matrix types:
+	@remarks Only defined for the following matrix types:
 	- @c mat2x2
 	- @c mat3x3
 	- @c mat4x4
@@ -67,7 +67,7 @@ inline typename conType::value_type determinant(conType const& m) {
 
 	@warning The values in the resultant matrix are undefined if @a m is
 	singular.
-	@remark Only defined for the following matrix types:
+	@remarks Only defined for the following matrix types:
 	- @c mat2x2
 	- @c mat3x3
 	- @c mat4x4

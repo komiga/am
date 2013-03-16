@@ -42,7 +42,7 @@ namespace linear {
 /**
 	Calculate the length of a vector.
 
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns The length of @a v.
 	@tparam conType Any floating-point vector type.
 	@param v Vector.
@@ -56,7 +56,7 @@ inline typename conType::value_type length(conType const& v) {
 /**
 	Calculate the distance between two vectors.
 
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns The distance between @a v and @a r.
 	@tparam conType A floating-point vector type.
 	@param v First vector.
@@ -74,7 +74,7 @@ inline typename conType::value_type distance(
 /**
 	Calculate the dot product of two vectors.
 
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns The dot product of @a v and @a r.
 	@tparam conType A floating-point vector type.
 	@param v First vector.
@@ -92,7 +92,7 @@ inline typename conType::value_type dot(
 /**
 	Calculate the cross product of two 3-dimensional vectors.
 
-	@remark Defined for all 3-dimensional floating-point vector
+	@remarks Defined for all 3-dimensional floating-point vector
 	specializations (of any precision).
 	@returns The cross product of @a v and @a r.
 	@tparam T A floating-point arithmetic type.
@@ -111,7 +111,7 @@ inline detail::linear::tvec3<T> cross(
 /**
 	Normalize a vector.
 
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns @a v normalized.
 	@tparam conType A floating-point vector type.
 	@param v Vector to normalize.
@@ -125,7 +125,7 @@ inline conType normalize(conType const& v) {
 /**
 	Orient a normal vector to point away from a surface.
 
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns Either @c n or @c -n.
 	@tparam conType A floating-point vector type.
 	@param n Normal vector to orient.
@@ -146,7 +146,7 @@ inline conType faceforward(
 	Calculate the reflection direction vector for an incident vector.
 
 	@note @a n should be a normalized vector.
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns The reflection direction vector.
 	@tparam conType A floating-point vector type.
 	@param i Incident vector.
@@ -162,7 +162,7 @@ inline conType reflect(conType const& i, conType const& n) {
 	Calculate the refraction direction vector for an incident vector.
 
 	@note @a i and @a n should be normalized vectors.
-	@remark Defined for all floating-point vector types.
+	@remarks Defined for all floating-point vector types.
 	@returns The refraction direction vector.
 	@tparam conType A floating-point vector type.
 	@param i Incident vector.
