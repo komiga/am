@@ -33,15 +33,19 @@ namespace linear {
 	Get the transpose a matrix.
 
 	@remarks Defined for all matrix types.
+
 	@returns The transpose of @a m.
-	@tparam conType A specialized matrix type.
+	@tparam ConType A specialized matrix type.
 	@param m Matrix.
 */
-template<class conType>
-inline typename conType::transpose_type transpose(conType const& m) {
-	AM_STATIC_ASSERT(detail::linear::is_matrix<conType>::value,
-		"conType must be a matrix");
-	return conType::operations::transpose(m);
+template<class ConType>
+inline typename ConType::transpose_type
+transpose(
+	ConType const& m
+) {
+	AM_STATIC_ASSERT(detail::linear::is_matrix<ConType>::value,
+		"ConType must be a matrix");
+	return ConType::operations::transpose(m);
 }
 
 /**
@@ -51,15 +55,19 @@ inline typename conType::transpose_type transpose(conType const& m) {
 	- @c mat2x2
 	- @c mat3x3
 	- @c mat4x4
+
 	@returns The determinant of @a m.
-	@tparam conType A specialized square matrix type.
+	@tparam ConType A specialized square matrix type.
 	@param m Matrix.
 */
-template<class conType>
-inline typename conType::value_type determinant(conType const& m) {
-	AM_STATIC_ASSERT(detail::linear::is_square_matrix<conType>::value,
-		"conType must be a square matrix");
-	return conType::operations::determinant(m);
+template<class ConType>
+inline typename ConType::value_type
+determinant(
+	ConType const& m
+) {
+	AM_STATIC_ASSERT(detail::linear::is_square_matrix<ConType>::value,
+		"ConType must be a square matrix");
+	return ConType::operations::determinant(m);
 }
 
 /**
@@ -67,19 +75,24 @@ inline typename conType::value_type determinant(conType const& m) {
 
 	@warning The values in the resultant matrix are undefined if @a m is
 	singular.
+
 	@remarks Only defined for the following matrix types:
 	- @c mat2x2
 	- @c mat3x3
 	- @c mat4x4
+
 	@returns The inverse of @a m.
-	@tparam conType A specialized square matrix type.
+	@tparam ConType A specialized square matrix type.
 	@param m Matrix.
 */
-template<class conType>
-inline conType inverse(conType const& m) {
-	AM_STATIC_ASSERT(detail::linear::is_square_matrix<conType>::value,
-		"conType must be a square matrix");
-	return conType::operations::inverse(m);
+template<class ConType>
+inline ConType
+inverse(
+	ConType const& m
+) {
+	AM_STATIC_ASSERT(detail::linear::is_square_matrix<ConType>::value,
+		"ConType must be a square matrix");
+	return ConType::operations::inverse(m);
 }
 
 /** @} */ // end of doc-group matrix_ops

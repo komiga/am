@@ -20,38 +20,49 @@ namespace linear {
 
 /**
 	Whether the given type is a @ref vector "vector".
+
 	@tparam T Any type.
 */
 template<typename T>
-struct is_vector : public std::false_type {};
+struct is_vector
+	: public std::false_type
+{};
 
 /**
 	Whether the given type is a @ref matrix "matrix".
+
 	@tparam T Any type.
 */
 template<typename T>
-struct is_matrix : public std::false_type {};
+struct is_matrix
+	: public std::false_type
+{};
 
 /**
 	Whether the given type is a square @ref matrix "matrix".
+
 	@tparam T Any type.
 */
 template<typename T>
-struct is_square_matrix : public std::false_type {};
+struct is_square_matrix
+	: public std::false_type
+{};
 
 /**
 	Whether the components in a linear construct are floating-point
 	arithmetic types.
-	@warning This assumes conType is a linear construct such as a
+
+	@warning This assumes ConType is a linear construct such as a
 	@ref matrix "matrix" or a @ref vector "vector" (i.e., a type that has
 	a @c value_type member typedef).
-	@tparam conType A specialized linear construct.
+
+	@tparam ConType A specialized linear construct.
 */
-template<class conType>
+template<class ConType>
 struct is_construct_floating_point {
 	/** Whether the linear construct is floating-point. */
 	constexpr static bool value
-		=std::is_floating_point<typename conType::value_type>::value;
+		=std::is_floating_point<typename ConType::value_type>::value;
 };
 
 /** @cond INTERNAL */
