@@ -37,7 +37,8 @@ struct murmur2_impl<::am::hash::HashLength::HL32> {
 	static constexpr uint32_t M=0x5bd1e995;
 	static constexpr unsigned R=24;
 
-	static uint32_t calc(
+	static uint32_t
+	calc(
 		uint8_t const* const data,
 		std::size_t const size,
 		uint32_t const seed
@@ -84,7 +85,8 @@ struct murmur2_impl<::am::hash::HashLength::HL64> {
 	static constexpr uint64_t M=0xc6a4a7935bd1e995;
 	static constexpr unsigned R=47;
 
-	static uint64_t calc(
+	static uint64_t
+	calc(
 		uint8_t const* const data,
 		std::size_t const size,
 		uint64_t const seed
@@ -138,7 +140,8 @@ struct murmur2_64b_impl {
 	static constexpr uint32_t M=0x5bd1e995;
 	static constexpr unsigned R=24;
 
-	static uint64_t calc(
+	static uint64_t
+	calc(
 		uint8_t const* const data,
 		std::size_t size,
 		uint64_t const seed
@@ -195,7 +198,8 @@ struct murmur2_64b_impl {
 };
 #undef AM_MURMUR2_64B_CMIX__
 
-template<::am::hash::HashLength L> struct murmur3_impl;
+template<::am::hash::HashLength L>
+struct murmur3_impl;
 
 template<>
 struct murmur3_impl<::am::hash::HashLength::HL32> {
@@ -205,7 +209,8 @@ struct murmur3_impl<::am::hash::HashLength::HL32> {
 	static constexpr uint32_t F1=0x85ebca6b;
 	static constexpr uint32_t F2=0xc2b2ae35;
 
-	static uint32_t calc(
+	static uint32_t
+	calc(
 		uint8_t const* const data,
 		std::size_t const size,
 		uint32_t const seed

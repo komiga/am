@@ -29,12 +29,15 @@ using fnv_hash_type=::am::hash::common_hash_type<L>;
 namespace {
 template<::am::hash::HashLength L>
 struct fnv_internals;
-template<> struct fnv_internals<::am::hash::HashLength::HL32> {
+
+template<>
+struct fnv_internals<::am::hash::HashLength::HL32> {
 	static constexpr uint32_t prime=0x01000193;
 	static constexpr uint32_t offset_basis=0x811c9dc5;
 };
 
-template<> struct fnv_internals<::am::hash::HashLength::HL64> {
+template<>
+struct fnv_internals<::am::hash::HashLength::HL64> {
 	static constexpr uint64_t prime=0x00000100000001b3;
 	static constexpr uint64_t offset_basis=0xcbf29ce484222325;
 };
@@ -44,7 +47,8 @@ template<::am::hash::HashLength L>
 struct fnv0_impl {
 	typedef fnv_internals<L> internals;
 
-	static fnv_hash_type<L> calc(
+	static fnv_hash_type<L>
+	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
@@ -61,7 +65,8 @@ template<::am::hash::HashLength L>
 struct fnv1_impl {
 	typedef fnv_internals<L> internals;
 
-	static fnv_hash_type<L> calc(
+	static fnv_hash_type<L>
+	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
@@ -78,7 +83,8 @@ template<::am::hash::HashLength L>
 struct fnv1a_impl {
 	typedef fnv_internals<L> internals;
 
-	static fnv_hash_type<L> calc(
+	static fnv_hash_type<L>
+	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {

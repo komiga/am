@@ -23,21 +23,21 @@ namespace hash {
 /**
 	Hash lengths.
 */
-enum HashLength {
+enum HashLength : unsigned {
 	/** 8-bit hash length. */
-	HL8=1,
+	HL8=1u,
 	/** 32-bit hash length. */
-	HL32=4,
+	HL32=4u,
 	/** 64-bit hash length. */
-	HL64=8,
+	HL64=8u,
 	/** 128-bit hash length. */
-	HL128=16,
+	HL128=16u,
 	/** 256-bit hash length. */
-	HL256=32,
+	HL256=32u,
 	/** 512-bit hash length. */
-	HL512=64,
+	HL512=64u,
 	/** 1024-bit hash length. */
-	HL1024=128
+	HL1024=128u
 };
 
 /** @cond INTERNAL */
@@ -51,12 +51,18 @@ struct common_hash_type_impl {
 	};
 };
 
-template<> struct common_hash_type_impl<HashLength::HL8>
-	{typedef uint8_t type;};
-template<> struct common_hash_type_impl<HashLength::HL32>
-	{typedef uint32_t type;};
-template<> struct common_hash_type_impl<HashLength::HL64>
-	{typedef uint64_t type;};
+template<>
+struct common_hash_type_impl<HashLength::HL8> {
+	typedef uint8_t type;
+};
+template<>
+struct common_hash_type_impl<HashLength::HL32> {
+	typedef uint32_t type;
+};
+template<>
+struct common_hash_type_impl<HashLength::HL64> {
+	typedef uint64_t type;
+};
 
 template<HashLength L>
 using common_hash_type=typename common_hash_type_impl<L>::type;
