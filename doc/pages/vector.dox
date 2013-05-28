@@ -5,6 +5,7 @@
 @defgroup vector Vectors
 @details
 
-@remarks All built-in vector-vector and vector-scalar operators are component-wise.
+@remarks All built-in vector-vector and vector-scalar operators are
+component-wise.
 
 */

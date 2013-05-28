@@ -5,8 +5,11 @@
 @defgroup matrix Matrices
 @details
 
-Matrices are in <strong>column-row</strong> format (that is, @c A[i] on a matrix retrieves a column vector).
+Matrices are in <strong>column-row</strong> format (that is, @c A[i] on a matrix
+retrieves a column vector).
 
-@remarks All built-in operators on matrices are component-wise, except for multiplication and division (which perform the proper linear algebraic calculations).
+@remarks All built-in operators on matrices are component-wise, except for
+multiplication and division (which perform the proper linear algebraic
+calculations).
 
 */

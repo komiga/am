@@ -4,7 +4,8 @@
 @mainpage
 @section README
 
-<strong>All the Maths‽</strong> (<strong>AM</strong>) is a mathematics library which supplies:
+<strong>All the Maths‽</strong> (<strong>AM</strong>) is a mathematics library
+which supplies:
 
 - @ref vector "Vectors" and @ref matrix "matrices"
 - @ref hash "Hashing algorithms"
@@ -15,7 +16,8 @@
 
 AM carries the MIT license, meaning you can do whatever you want to with it.
 
-@note Some algorithms have separate (MIT-compatible) licenses, copyrights, or are in the public domain. These are indicated in the appropriate sections.
+@note Some algorithms have separate (MIT-compatible) licenses, copyrights, or
+are in the public domain. These are indicated in the appropriate sections.
 
 @verbatim
 Copyright (c) 2012-2013 Tim Howard

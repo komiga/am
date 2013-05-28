@@ -4,6 +4,9 @@
 @defgroup linear Linear algebra
 @details
 
-Everything in this module is mostly designed to be compatible with GLSL (4.20.8). That means all built-in operators, except for matrix-matrix and matrix-vector division and multiplication (which are the proper linear algebraic calculations), are component-wise.
+Everything in this module is mostly designed to be compatible with
+GLSL (4.20.8). That means all built-in operators, except for matrix-matrix and
+matrix-vector division and multiplication (which are the proper linear algebraic
+calculations), are component-wise.
 
 */

@@ -5,9 +5,9 @@
 @defgroup literals Literals
 @details
 
-@remark MurmurHash literals are not provided due to the seed
-parameter. They can easily be defined with a predefined seed if a
-constexpr implementation is supplied for the desired hash algorithm.
-AM currently has a constexpr implementation only for MurmurHash3.
+@remark MurmurHash literals are not provided due to the seed parameter. They
+can easily be defined with a predefined seed if a constexpr implementation is
+supplied for the desired hash algorithm. AM currently has a constexpr
+implementation only for MurmurHash3.
 
 */
