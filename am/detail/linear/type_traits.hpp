@@ -61,7 +61,7 @@ struct is_square_matrix
 template<class ConType>
 struct is_construct_floating_point {
 	/** Whether the linear construct is floating-point. */
-	constexpr static bool value
+	static AM_CONSTEXPR bool value
 		=std::is_floating_point<typename ConType::value_type>::value;
 };
 
