@@ -23,19 +23,64 @@ struct hash_data {
 	char const* const input;
 };
 
-template<class H, typename DF, typename SF>
-void TEST_HASH_SET(H const* const set, DF hash_func, SF str_hash_func) {
+template<
+	class H,
+	typename DF,
+	typename SF,
+	typename CF
+>
+void TEST_HASH_SET(
+	H const* const set,
+	DF hash_func,
+	SF str_hash_func,
+	CF constexpr_hash_func
+) {
 	for (H const* it=set; nullptr!=it->input; ++it) {
-		assert(it->value==hash_func(it->input, std::strlen(it->input)));
+		std::size_t const size=std::strlen(it->input);
+		assert(it->value==hash_func(it->input, size));
 		assert(it->value==str_hash_func(std::string{it->input}));
+		assert(it->value==constexpr_hash_func(it->input, size));
 	}
 }
 
-template<class H, typename S, typename DF, typename SF>
-void TEST_HASH_SEEDED_SET(H const* const set, S const seed, DF hash_func, SF str_hash_func) {
+template<
+	class H,
+	typename S,
+	typename DF,
+	typename SF
+>
+void TEST_HASH_SEEDED_SET(
+	H const* const set,
+	S const seed,
+	DF hash_func,
+	SF str_hash_func
+) {
 	for (H const* it=set; nullptr!=it->input; ++it) {
-		assert(it->value==hash_func(it->input, std::strlen(it->input), seed));
+		std::size_t const size=std::strlen(it->input);
+		assert(it->value==hash_func(it->input, size, seed));
 		assert(it->value==str_hash_func(std::string{it->input}, seed));
+	}
+}
+
+template<
+	class H,
+	typename S,
+	typename DF,
+	typename SF,
+	typename CF
+>
+void TEST_HASH_SEEDED_SET_CE(
+	H const* const set,
+	S const seed,
+	DF hash_func,
+	SF str_hash_func,
+	CF constexpr_hash_func
+) {
+	for (H const* it=set; nullptr!=it->input; ++it) {
+		std::size_t const size=std::strlen(it->input);
+		assert(it->value==hash_func(it->input, size, seed));
+		assert(it->value==str_hash_func(std::string{it->input}, seed));
+		assert(it->value==constexpr_hash_func(it->input, size, seed));
 	}
 }
 

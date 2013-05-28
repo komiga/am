@@ -24,18 +24,14 @@ namespace hash {
 template<::am::hash::HashLength L>
 using murmur_hash_type=::am::hash::common_hash_type<L>;
 
-// NOTE: Specific-case unsafe ROTL; lacks mask guard on amt
-#define AM_ROTL32__(x, amt)\
-	((x<<amt) | (x>>(32-amt)))
-
 template<::am::hash::HashLength L>
 struct murmur2_impl;
 
 // MurmurHash2
 template<>
 struct murmur2_impl<::am::hash::HashLength::HL32> {
-	static constexpr uint32_t M=0x5bd1e995;
-	static constexpr unsigned R=24;
+	static AM_CONSTEXPR uint32_t const M=0x5bd1e995;
+	static AM_CONSTEXPR unsigned const R=24;
 
 	static uint32_t
 	calc(
@@ -82,8 +78,8 @@ struct murmur2_impl<::am::hash::HashLength::HL32> {
 // MurmurHash64A
 template<>
 struct murmur2_impl<::am::hash::HashLength::HL64> {
-	static constexpr uint64_t M=0xc6a4a7935bd1e995;
-	static constexpr unsigned R=47;
+	static AM_CONSTEXPR uint64_t const M=0xc6a4a7935bd1e995;
+	static AM_CONSTEXPR unsigned const R=47;
 
 	static uint64_t
 	calc(
@@ -137,8 +133,8 @@ struct murmur2_impl<::am::hash::HashLength::HL64> {
 	hx*=M; hx^=k
 
 struct murmur2_64b_impl {
-	static constexpr uint32_t M=0x5bd1e995;
-	static constexpr unsigned R=24;
+	static AM_CONSTEXPR uint32_t const M=0x5bd1e995;
+	static AM_CONSTEXPR unsigned const R=24u;
 
 	static uint64_t
 	calc(
@@ -203,24 +199,33 @@ struct murmur3_impl;
 
 template<>
 struct murmur3_impl<::am::hash::HashLength::HL32> {
-	static constexpr uint32_t C1=0xcc9e2d51;
-	static constexpr uint32_t C2=0x1b873593;
-	static constexpr uint32_t C3=0xe6546b64;
-	static constexpr uint32_t F1=0x85ebca6b;
-	static constexpr uint32_t F2=0xc2b2ae35;
+	static AM_CONSTEXPR uint32_t const C1=0xcc9e2d51u;
+	static AM_CONSTEXPR uint32_t const C2=0x1b873593u;
+	static AM_CONSTEXPR uint32_t const C3=0xe6546b64u;
+	static AM_CONSTEXPR uint32_t const F1=0x85ebca6bu;
+	static AM_CONSTEXPR uint32_t const F2=0xc2b2ae35u;
+
+	// NOTE: Specific-case unsafe ROTL; lacks mask guard on amt
+	inline static AM_CONSTEXPR uint32_t
+	rotl32(
+		uint32_t const x,
+		uint32_t const amt
+	) noexcept {
+		return (x<<amt) | (x>>(32-amt));
+	}
 
 	static uint32_t
 	calc(
 		uint8_t const* const data,
 		std::size_t const size,
 		uint32_t const seed
-	) {
+	) noexcept {
 		// Number of 32-bit blocks
 		std::size_t const nblocks=size>>2;
 		// Rounded data size; essentially (size>>2)<<2
 		std::size_t const aligned_size=size&~0x03;
-		uint32_t const* const blocks=
-			reinterpret_cast<uint32_t const*>(data+aligned_size);
+		uint32_t const* const blocks
+			=reinterpret_cast<uint32_t const*>(data+aligned_size);
 		uint32_t h=seed;
 		uint32_t k;
 
@@ -228,24 +233,24 @@ struct murmur3_impl<::am::hash::HashLength::HL32> {
 		for (signed i=-nblocks; i; ++i) {
 			k=blocks[i];
 			k*=C1;
-			k=AM_ROTL32__(k, 15);
+			k=rotl32(k, 15);
 			k*=C2;
 
 			h^=k;
-			h=AM_ROTL32__(h, 13);
+			h=rotl32(h, 13);
 			h=h*5+C3;
 		}
 
 		// Tail
 		uint8_t const* const tail=data+aligned_size;
 		k=0;
-		switch (size&3) {
+		switch (size&0x03) {
 			// Reverse tail & partial core mixin
 			case 3: k^=tail[2]<<16;
 			case 2: k^=tail[1]<<8;
 			case 1: k^=tail[0];
 			k*=C1;
-			k=AM_ROTL32__(k, 15);
+			k=rotl32(k, 15);
 			k*=C2;
 			h^=k;
 		}
@@ -260,9 +265,98 @@ struct murmur3_impl<::am::hash::HashLength::HL32> {
 
 		return h;
 	}
-};
 
-#undef AM_ROTL32__
+// constexpr
+struct ce_impl final {
+	// Only handles every whole 4-byte block
+	inline static AM_CONSTEXPR uint32_t
+	body(
+		char const* const iter,
+		char const* const end,
+		uint32_t const h
+	) noexcept {
+		return (end>iter)
+			? body(
+				iter+4u, end,
+				do_block(
+					h,
+					iter[0] | iter[1]<<8 | iter[2]<<16 | iter[3]<<24
+				)
+			)
+			: h
+		;
+	}
+
+	inline static AM_CONSTEXPR uint32_t
+	do_block(
+		uint32_t const h,
+		uint32_t const k
+	) noexcept {
+		return rotl32(h^(rotl32(k*C1, 15)*C2), 13)*5+C3;
+	}
+
+	// Handle the last non-whole block (if there is one) and mix it in
+	inline static AM_CONSTEXPR uint32_t
+	tail(
+		char const* const tail,
+		uint32_t const size,
+		uint32_t const h
+	) noexcept {
+		return (0==(size&0x03))
+			? h
+			: h^(rotl32(tail_cascade(tail, size&0x03, 0)*C1, 15)*C2)
+		;
+	}
+
+	inline static AM_CONSTEXPR uint32_t
+	tail_cascade(
+		char const* const tail,
+		uint32_t const slots,
+		uint32_t const k
+	) noexcept {
+		return (0==slots)
+			? k
+			: tail_cascade(tail, slots-1, k^tail[slots-1]<<((slots-1)<<3))
+		;
+	}
+
+	inline static AM_CONSTEXPR uint32_t
+	avalanche(
+		uint32_t h,
+		uint32_t const size
+	) noexcept {
+		return a1(h^size);
+	}
+
+	inline static AM_CONSTEXPR uint32_t
+	a1(uint32_t const h) noexcept { return a2(F1*(h^h>>16)); }
+	inline static AM_CONSTEXPR uint32_t
+	a2(uint32_t const h) noexcept { return a3(F2*(h^h>>13)); }
+	inline static AM_CONSTEXPR uint32_t
+	a3(uint32_t const h) noexcept { return h^h>>16; }
+}; // struct ce_impl
+
+	inline static AM_CONSTEXPR uint32_t
+	calc_c_seq(
+		char const* const data,
+		uint32_t const size,
+		uint32_t const seed
+	) noexcept {
+		return
+		ce_impl::avalanche(
+			ce_impl::tail(
+				data+(size&~0x03), // aligned to 4-byte block
+				size,
+				ce_impl::body(
+					data,
+					data+(size&~0x03),
+					seed
+				)
+			),
+			size
+		);
+	}
+};
 
 /** @endcond */ // INTERNAL
 

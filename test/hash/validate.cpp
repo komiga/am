@@ -4,22 +4,35 @@
 
 #include "./common.hpp"
 #include <string>
+#include <iostream>
+#include <iomanip>
 
 #define HASH_STR_1 ""
 #define HASH_STR_2 "A"
 #define HASH_STR_3 "foobar"
 #define HASH_STR_4 "nC63rvRg4lT_(&&bJr@95}Tu5KZ-j<oh"
 
+using namespace am::hash::literals;
+
+static AM_CONSTEXPR auto const s_l_fnv1a_32="fnv1a_32"_fnv1a_32;
+static AM_CONSTEXPR auto const s_l_fnv1a_64="fnv1a_64"_fnv1a_64;
+static AM_CONSTEXPR auto const s_l_murmur3_32
+	=am::hash::murmur3_c<am::hash::HL32>("murmur3_32", 10u, 0);
+
 void test_fnv() {
 	struct fnv_hash_data {
 		hash_data<uint32_t> const data_32[5];
 		hash_data<uint64_t> const data_64[5];
 	};
-	#define TEST_FNV_HASH_SET(data_, func_pred)\
-		TEST_HASH_SET(data_.data_32, am::hash::func_pred<am::hash::HL32>,\
-			am::hash::func_pred ## _str<am::hash::HL32, std::string>);\
-		TEST_HASH_SET(data_.data_64, am::hash::func_pred<am::hash::HL64>,\
-			am::hash::func_pred ## _str<am::hash::HL64, std::string>);
+	#define TEST_FNV_HASH_SET(data_, func_pred_)\
+		TEST_HASH_SET(data_.data_32,\
+			am::hash::func_pred_<am::hash::HL32>,\
+			am::hash::func_pred_ ## _str<am::hash::HL32, std::string>,\
+			am::hash::func_pred_ ## _c<am::hash::HL32>);\
+		TEST_HASH_SET(data_.data_64,\
+			am::hash::func_pred_<am::hash::HL64>,\
+			am::hash::func_pred_ ## _str<am::hash::HL64, std::string>,\
+			am::hash::func_pred_ ## _c<am::hash::HL64>);
 
 	// FNV-0
 	static fnv_hash_data const s_testdata_fnv0{{
@@ -96,9 +109,10 @@ void test_murmur() {
 		hash_data<uint32_t> const data_32[5];
 	};
 	#define TEST_MURMUR3_HASH_SET(data_)\
-		TEST_HASH_SEEDED_SET(data_.data_32, data_.seed,\
+		TEST_HASH_SEEDED_SET_CE(data_.data_32, data_.seed,\
 			am::hash::murmur3<am::hash::HL32>,\
-			am::hash::murmur3_str<am::hash::HL32, std::string>);
+			am::hash::murmur3_str<am::hash::HL32, std::string>,\
+			am::hash::murmur3_c<am::hash::HL32>);
 
 	// MurmurHash2 and MurmurHash64A
 	static murmur2_hash_data const s_testdata_murmur2{
@@ -146,6 +160,13 @@ void test_murmur() {
 	}
 
 signed main() {
+	std::cout
+		<<std::hex<<std::left<<std::setfill('0')
+		<<"fnv1a_32: "<<std::setw(8)<<s_l_fnv1a_32<<'\n'
+		<<"fnv1a_64: "<<std::setw(8)<<s_l_fnv1a_64<<'\n'
+		<<"s_l_murmur3_32: "<<std::setw(8)<<s_l_murmur3_32<<'\n'
+	; std::cout.flush();
+
 	TEST_HASH_COMMON_HASH_LENGTH(HL128);
 	TEST_HASH_COMMON_HASH_LENGTH(HL256);
 	TEST_HASH_COMMON_HASH_LENGTH(HL512);

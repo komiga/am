@@ -32,70 +32,147 @@ struct fnv_internals;
 
 template<>
 struct fnv_internals<::am::hash::HashLength::HL32> {
-	static constexpr uint32_t prime=0x01000193;
-	static constexpr uint32_t offset_basis=0x811c9dc5;
+	static AM_CONSTEXPR uint32_t const prime=0x01000193;
+	static AM_CONSTEXPR uint32_t const offset_basis=0x811c9dc5;
 };
 
 template<>
 struct fnv_internals<::am::hash::HashLength::HL64> {
-	static constexpr uint64_t prime=0x00000100000001b3;
-	static constexpr uint64_t offset_basis=0xcbf29ce484222325;
+	static AM_CONSTEXPR uint64_t const prime=0x00000100000001b3;
+	static AM_CONSTEXPR uint64_t const offset_basis=0xcbf29ce484222325;
 };
+
+template<::am::hash::HashLength L>
+struct fnv0_internals {
+	static AM_CONSTEXPR fnv_hash_type<L> const prime=fnv_internals<L>::prime;
+	static AM_CONSTEXPR fnv_hash_type<L> const offset_basis=0x00;
+};
+
 } // anonymous namespace
 
 template<::am::hash::HashLength L>
 struct fnv0_impl {
-	typedef fnv_internals<L> internals;
+	typedef fnv0_internals<L> internals;
+	typedef fnv_hash_type<L> hash_type;
 
-	static fnv_hash_type<L>
+	static hash_type
 	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		fnv_hash_type<L> x=0x00;
+		hash_type x=internals::offset_basis;
 		std::for_each(data, data+size, [&x](uint8_t const byte) {
 			x*=internals::prime;
 			x^=byte;
 		});
 		return x;
+	}
+
+	static AM_CONSTEXPR hash_type
+	calc_c_seq(
+		char const* const data,
+		std::size_t const size,
+		std::size_t const index,
+		hash_type const value
+	) {
+		return (index<size)
+			? calc_c_seq(
+				data, size,
+				index+1u,
+				(value*internals::prime)^data[index]
+			)
+			: value
+		;
 	}
 };
 
 template<::am::hash::HashLength L>
 struct fnv1_impl {
 	typedef fnv_internals<L> internals;
+	typedef fnv_hash_type<L> hash_type;
 
-	static fnv_hash_type<L>
+	static hash_type
 	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		fnv_hash_type<L> x=internals::offset_basis;
+		hash_type x=internals::offset_basis;
 		std::for_each(data, data+size, [&x](uint8_t const byte) {
 			x*=internals::prime;
 			x^=byte;
 		});
 		return x;
+	}
+
+	static AM_CONSTEXPR hash_type
+	calc_c_seq(
+		char const* const data,
+		std::size_t const size,
+		std::size_t const index,
+		hash_type const value
+	) {
+		return (index<size)
+			? calc_c_seq(
+				data, size,
+				index+1u,
+				(value*internals::prime)^data[index]
+			)
+			: value
+		;
 	}
 };
 
 template<::am::hash::HashLength L>
 struct fnv1a_impl {
 	typedef fnv_internals<L> internals;
+	typedef fnv_hash_type<L> hash_type;
 
-	static fnv_hash_type<L>
+	static hash_type
 	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		fnv_hash_type<L> x=internals::offset_basis;
+		hash_type x=internals::offset_basis;
 		std::for_each(data, data+size, [&x](uint8_t const byte) {
 			x^=byte;
 			x*=internals::prime;
 		});
 		return x;
 	}
+
+	static AM_CONSTEXPR hash_type
+	calc_c_seq(
+		char const* const data,
+		std::size_t const size,
+		std::size_t const index,
+		hash_type const value
+	) {
+		return (index<size)
+			? calc_c_seq(
+				data, size,
+				index+1u,
+				(value^data[index])*internals::prime
+			)
+			: value
+		;
+	}
 };
+
+template<
+	class Impl
+>
+static AM_CONSTEXPR typename Impl::hash_type
+calc_c_adaptor(
+	char const* const data,
+	std::size_t const size
+) {
+	return Impl::calc_c_seq(
+		data,
+		size,
+		0u,
+		Impl::internals::offset_basis
+	);
+}
 
 /** @endcond */ // INTERNAL
 

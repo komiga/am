@@ -29,10 +29,10 @@ namespace hash {
 
 	- <strong>FNV-0</strong>:
 	  the first FNV (using an @c offset_basis of @c 0 -- given a
-	  0-length input, it will return @c 0).
+	  0-size input, it will return @c 0).
 	- <strong>FNV-1</strong>:
 	  the same as FNV-0, but with an arbitrary non-zero
-	  @c offset_basis.
+	  @c offset_basis (0-size input will yield a non-zero hash).
 	- <strong>FNV-1a</strong>:
 	  an alternate version of FNV-1 with the multiplication and XOR
 	  operations swapped; this alternate version has much better
@@ -53,8 +53,8 @@ namespace hash {
 	AM_STATIC_ASSERT(\
 		HashLength::HL32<=hash_length &&\
 		HashLength::HL64>=hash_length,\
-		"FNV is not implemented for hash lengths less than 32 bits"\
-		" or greater than 64 bits"\
+		"FNV is not implemented for hash lengths"\
+		" less than 32 bits or greater than 64 bits"\
 	);
 /** @endcond */
 
@@ -81,6 +81,7 @@ fnv0(
 		size
 	);
 }
+
 /**
 	Calculate the FNV-0 hash of a standard string.
 
@@ -107,6 +108,30 @@ fnv0_str(
 }
 
 /**
+	Calculate the FNV-0 hash of a C-string (constexpr).
+
+	@returns The FNV-0 hash of the given string.
+	@tparam L Hash length.
+	@param data C-string.
+	@param size Size in bytes of @a data.
+*/
+template<
+	HashLength L,
+	class Impl=detail::hash::fnv0_impl<L>
+>
+inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
+fnv0_c(
+	char const* const data,
+	std::size_t const size
+) {
+	AM_HASH_FNV_RESTRICT_LENGTH(L);
+	return detail::hash::calc_c_adaptor<Impl>(
+		data,
+		size
+	);
+}
+
+/**
 	Calculate the FNV-1 hash of a sequence of bytes.
 
 	@returns The FNV-1 hash of the given data.
@@ -129,6 +154,7 @@ fnv1(
 		size
 	);
 }
+
 /**
 	Calculate the FNV-1 hash of a standard string.
 
@@ -138,6 +164,7 @@ fnv1(
 	inferred from @a str.
 	@param str A string.
 */
+
 template<
 	HashLength L,
 	class StringT,
@@ -151,6 +178,30 @@ fnv1_str(
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
 		str.size()<<(sizeof(typename StringT::value_type)>>1)
+	);
+}
+
+/**
+	Calculate the FNV-1 hash of a C-string (constexpr).
+
+	@returns The FNV-1 hash of the given string.
+	@tparam L Hash length.
+	@param data C-string.
+	@param size Size in bytes of @a data.
+*/
+template<
+	HashLength L,
+	class Impl=detail::hash::fnv1_impl<L>
+>
+inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
+fnv1_c(
+	char const* const data,
+	std::size_t const size
+) {
+	AM_HASH_FNV_RESTRICT_LENGTH(L);
+	return detail::hash::calc_c_adaptor<Impl>(
+		data,
+		size
 	);
 }
 
@@ -177,6 +228,7 @@ fnv1a(
 		size
 	);
 }
+
 /**
 	Calculate the FNV-1a hash of a standard string.
 
@@ -202,9 +254,79 @@ fnv1a_str(
 	);
 }
 
+/**
+	Calculate the FNV-1a hash of a C-string (constexpr).
+
+	@returns The FNV-1a hash of the given string.
+	@tparam L Hash length.
+	@param data C-string.
+	@param size Size in bytes of @a data.
+*/
+template<
+	HashLength L,
+	class Impl=detail::hash::fnv1a_impl<L>
+>
+inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
+fnv1a_c(
+	char const* const data,
+	std::size_t const size
+) {
+	AM_HASH_FNV_RESTRICT_LENGTH(L);
+	return detail::hash::calc_c_adaptor<Impl>(
+		data,
+		size
+	);
+}
+
 /** @} */ // end of doc-group fnv
 /** @} */ // end of doc-group hash
 
+namespace literals {
+
+// Why, Doxygen, why?
+/**
+	@addtogroup hash
+	@{
+*/
+/**
+	@addtogroup literals
+	@{
+*/
+
+/**
+	32-bit FNV-1a literal.
+
+	@returns The FNV-1a hash of the given string.
+	@param data C-string.
+	@param size Size in bytes of @a data.
+*/
+inline AM_CONSTEXPR detail::hash::fnv_hash_type<HashLength::HL32>
+operator"" _fnv1a_32(
+	char const* const data,
+	std::size_t const size
+) {
+	return fnv1a_c<HashLength::HL32>(data, size);
+}
+
+/**
+	64-bit FNV-1a literal.
+
+	@returns The FNV-1a hash of the given string.
+	@param data C-string.
+	@param size Size in bytes of @a data.
+*/
+inline AM_CONSTEXPR detail::hash::fnv_hash_type<HashLength::HL64>
+operator"" _fnv1a_64(
+	char const* const data,
+	std::size_t const size
+) {
+	return fnv1a_c<HashLength::HL64>(data, size);
+}
+
+/** @} */ // end of doc-group literals
+/** @} */ // end of doc-group hash
+
+} // namespace literals
 } // namespace hash
 } // namespace am
 

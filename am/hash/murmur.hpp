@@ -94,6 +94,7 @@ inline detail::hash::murmur_hash_type<L> murmur2(
 		seed
 	);
 }
+
 /**
 	Calculate the MurmurHash2 or MurmurHash64A (MurmurHash2 64-bit
 	version for x64 processors) of a standard string.
@@ -105,7 +106,6 @@ inline detail::hash::murmur_hash_type<L> murmur2(
 	@param str A string.
 	@param seed A seed.
 */
-
 template<HashLength L,
 	class StringT,
 	class Impl=detail::hash::murmur2_impl<L>
@@ -186,7 +186,7 @@ inline detail::hash::murmur_hash_type<L>
 murmur3(
 	void const* const data,
 	std::size_t const size,
-	uint32_t seed
+	detail::hash::murmur_hash_type<L> const seed
 ) {
 	AM_HASH_MURMUR_V3_RESTRICT_LENGTH(L);
 	return Impl::calc(
@@ -195,6 +195,7 @@ murmur3(
 		seed
 	);
 }
+
 /**
 	Calculate the MurmurHash3 of a standard string.
 
@@ -205,7 +206,6 @@ murmur3(
 	@param str A string.
 	@param seed A seed.
 */
-
 template<
 	HashLength L,
 	class StringT,
@@ -214,12 +214,39 @@ template<
 inline detail::hash::murmur_hash_type<L>
 murmur3_str(
 	StringT const& str,
-	uint32_t seed
+	detail::hash::murmur_hash_type<L> const seed
 ) {
 	AM_HASH_MURMUR_V3_RESTRICT_LENGTH(L);
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
 		str.size()<<(sizeof(typename StringT::value_type)>>1),
+		seed
+	);
+}
+
+/**
+	Calculate the MurmurHash3 of a C-string (constexpr).
+
+	@returns The hash of the given string.
+	@tparam L Hash length.
+	@param data C-string.
+	@param size Size in bytes of @a data.
+	@param seed A seed.
+*/
+template<
+	HashLength L,
+	class Impl=detail::hash::murmur3_impl<L>
+>
+inline AM_CONSTEXPR detail::hash::murmur_hash_type<L>
+murmur3_c(
+	char const* const data,
+	std::size_t const size,
+	detail::hash::murmur_hash_type<L> const seed
+) {
+	AM_HASH_MURMUR_V3_RESTRICT_LENGTH(L);
+	return Impl::calc_c_seq(
+		data,
+		static_cast<uint32_t>(size),
 		seed
 	);
 }
