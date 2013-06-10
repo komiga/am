@@ -14,6 +14,7 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "./type_traits.hpp"
 
 #include <cassert>
+#include <cmath>
 #include <type_traits>
 
 namespace am {
