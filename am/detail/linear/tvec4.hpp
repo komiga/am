@@ -78,27 +78,55 @@ struct tvec4 {
 	typedef type const& type_cref;
 	typedef value_type const& value_cref;
 
-	static value_type length(type_cref v) {
+	static value_type
+	length(
+		type_cref v
+	) {
 		return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
 	}
-	static value_type distance(type_cref v, type_cref r) {
+	static value_type
+	distance(
+		type_cref v,
+		type_cref r
+	) {
 		return operations::length(r - v);
 	}
-	static value_type dot(type_cref v, type_cref r) {
+	static value_type
+	dot(
+		type_cref v,
+		type_cref r
+	) {
 		return v.x * r.x + v.y * r.y + v.z * r.z + v.w * r.w;
 	}
-	static type normalize(type_cref v) {
+	static type
+	normalize(
+		type_cref v
+	) {
 		return
 			v * (value_type(1)
 				/ std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w));
 	}
-	static type faceforward(type_cref n, type_cref i, type_cref ng) {
+	static type
+	faceforward(
+		type_cref n,
+		type_cref i,
+		type_cref ng
+	) {
 		return dot(ng, i) < 0 ? n : -n;
 	}
-	static type reflect(type_cref i, type_cref n) {
+	static type
+	reflect(
+		type_cref i,
+		type_cref n
+	) {
 		return i - value_type(2) * n * dot(n, i);
 	}
-	static type refract(type_cref i, type_cref n, value_cref eta) {
+	static type
+	refract(
+		type_cref i,
+		type_cref n,
+		value_cref eta
+	) {
 		value_type const d=dot(n, i);
 		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
 		return k < value_type(0)
@@ -113,26 +141,35 @@ struct tvec4 {
 		Construct zeroed.
 	*/
 	tvec4() :
-		x{T(0)}, y{T(0)}, z{T(0)}, w{T(0)} {}
+		x{T(0)}, y{T(0)}, z{T(0)}, w{T(0)}
+	{}
 	/**
 		Construct uninitialized.
 	*/
-	explicit tvec4(ctor_no_init) {}
+	explicit tvec4(
+		ctor_no_init
+	) {}
 
 	/**
 		Construct all components to value.
 		@param s Value.
 	*/
-	explicit tvec4(value_type const& s) :
-		x{s}, y{s}, z{s}, w{s} {}
+	explicit tvec4(
+		value_type const& s
+	) :
+		x{s}, y{s}, z{s}, w{s}
+	{}
 	/**
 		Construct all components to value.
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
 	template<typename U>
-	explicit tvec4(U const& s) :
-		x{T(s)}, y{T(s)}, z{T(s)}, w{T(s)} {}
+	explicit tvec4(
+		U const& s
+	) :
+		x{T(s)}, y{T(s)}, z{T(s)}, w{T(s)}
+	{}
 
 	/**
 		Construct to values.
@@ -145,8 +182,10 @@ struct tvec4 {
 			value_type const& c1,
 			value_type const& c2,
 			value_type const& c3,
-			value_type const& c4) :
-		x{c1}, y{c2}, z{c3}, w{c4} {}
+			value_type const& c4
+	) :
+		x{c1}, y{c2}, z{c3}, w{c4}
+	{}
 	/**
 		Construct to values.
 		@tparam U, V, H, L An arithmetic type.
@@ -161,22 +200,33 @@ struct tvec4 {
 		typename H,
 		typename L
 	>
-	explicit tvec4(U const& c1, V const& c2, H const& c3, L const& c4) :
-		x{T(c1)}, y{T(c2)}, z{T(c3)}, w{T(c4)} {}
+	explicit tvec4(
+		U const& c1,
+		V const& c2,
+		H const& c3,
+		L const& c4
+	) :
+		x{T(c1)}, y{T(c2)}, z{T(c3)}, w{T(c4)}
+	{}
 
 	/**
 		Construct to vector.
 		@param v Vector to copy.
 	*/
-	tvec4(type const& v) :
-		x{v.x}, y{v.y}, z{v.z}, w{v.w} {}
+	tvec4(
+		type const& v
+	) :
+		x{v.x}, y{v.y}, z{v.z}, w{v.w}
+	{}
 	/**
 		Construct to vector.
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
 	template<typename U>
-	tvec4(tvec4<U> const& v) :
+	tvec4(
+		tvec4<U> const& v
+	) :
 		x{T(v.x)}, y{T(v.y)}, z{T(v.z)}, w{T(v.w)} {}
 
 	/**
@@ -186,7 +236,10 @@ struct tvec4 {
 		@param v Y, Z, and W vector.
 	*/
 	template<typename U, typename V>
-	explicit tvec4(U const& c1, tvec3<V> const& v) :
+	explicit tvec4(
+		U const& c1,
+		tvec3<V> const& v
+	) :
 		x{T(c1)}, y{T(v.x)}, z{T(v.y)}, w{T(v.z)} {}
 	/**
 		Construct to XYZ vector and W value.
@@ -195,7 +248,10 @@ struct tvec4 {
 		@param c4 W value.
 	*/
 	template<typename U, typename V>
-	explicit tvec4(tvec3<U> const& v, V const& c4) :
+	explicit tvec4(
+		tvec3<U> const& v,
+		V const& c4
+	) :
 		x{T(v.x)}, y{T(v.y)}, z{T(v.z)}, w{T(c4)} {}
 
 	/**
@@ -210,7 +266,11 @@ struct tvec4 {
 		typename V,
 		typename H
 	>
-	explicit tvec4(U const& c1, V const& c2, tvec2<H> const& v) :
+	explicit tvec4(
+		U const& c1,
+		V const& c2,
+		tvec2<H> const& v
+	) :
 		x{T(c1)}, y{T(c2)}, z{T(v.x)}, w{T(v.y)} {}
 	/**
 		Construct to XY vector, Z value, and W value.
@@ -224,7 +284,11 @@ struct tvec4 {
 		typename V,
 		typename H
 	>
-	explicit tvec4(tvec2<U> const& v, V const& c3, H const& c4) :
+	explicit tvec4(
+		tvec2<U> const& v,
+		V const& c3,
+		H const& c4
+	) :
 		x{T(v.x)}, y{T(v.y)}, z{T(c3)}, w{T(c4)} {}
 	/**
 		Construct to XY and ZW vectors.
@@ -236,7 +300,10 @@ struct tvec4 {
 		typename U,
 		typename V
 	>
-	explicit tvec4(tvec2<U> const& v1, tvec2<V> const& v2) :
+	explicit tvec4(
+		tvec2<U> const& v1,
+		tvec2<V> const& v2
+	) :
 		x{T(v1.x)}, y{T(v1.y)}, z{T(v2.x)}, w{T(v2.y)} {}
 /// @}
 
@@ -245,7 +312,10 @@ struct tvec4 {
 		Get number of components.
 		@returns @c 4.
 	*/
-	static AM_CONSTEXPR size_type size() { return size_type(4); }
+	static AM_CONSTEXPR size_type
+	size() {
+		return size_type(4);
+	}
 	/**
 		Get value at index.
 		@note An assert will catch invalid indices;
@@ -253,12 +323,18 @@ struct tvec4 {
 		@returns The value at @a i.
 		@param i Index to retrieve.
 	*/
-	value_type& operator[](size_type const& i) {
+	value_type&
+	operator[](
+		size_type const& i
+	) {
 		assert(size()>i);
 		return (&x)[i];
 	}
 	/** @copydoc operator[](size_type const&) */
-	value_type const& operator[](size_type const& i) const {
+	value_type const&
+	operator[](
+		size_type const& i
+	) const {
 		assert(size()>i);
 		return (&x)[i];
 	}
@@ -270,7 +346,10 @@ struct tvec4 {
 		@returns @c true if the two vectors are equal, @c false if they are not.
 		@param v Vector to compare with.
 	*/
-	bool operator==(type const& v) const {
+	bool
+	operator==(
+		type const& v
+	) const {
 		return
 			this->x==v.x &&
 			this->y==v.y &&
@@ -282,7 +361,10 @@ struct tvec4 {
 		@returns @c false if the two vectors are equal, @c true if they are not.
 		@param v Vector to compare with.
 	*/
-	bool operator!=(type const& v) const {
+	bool
+	operator!=(
+		type const& v
+	) const {
 		return
 			this->x!=v.x ||
 			this->y!=v.y ||
@@ -296,7 +378,8 @@ struct tvec4 {
 		Prefix increment.
 		@returns @c *this after operation.
 	*/
-	type& operator++() {
+	type&
+	operator++() {
 		++this->x;
 		++this->y;
 		++this->z;
@@ -307,7 +390,8 @@ struct tvec4 {
 		Prefix decrement.
 		@returns @c *this after operation.
 	*/
-	type& operator--() {
+	type&
+	operator--() {
 		--this->x;
 		--this->y;
 		--this->z;
@@ -324,7 +408,10 @@ struct tvec4 {
 		@param s Value.
 	*/
 	template<typename U>
-	type& operator=(U const& s) {
+	type&
+	operator=(
+		U const& s
+	) {
 		this->x=T(s);
 		this->y=T(s);
 		this->z=T(s);
@@ -338,7 +425,10 @@ struct tvec4 {
 		@param v Vector to copy.
 	*/
 	template<typename U>
-	type& operator=(tvec4<U> const& v) {
+	type&
+	operator=(
+		tvec4<U> const& v
+	) {
 		this->x=T(v.x);
 		this->y=T(v.y);
 		this->z=T(v.z);
@@ -355,7 +445,10 @@ struct tvec4 {
 		@param s Value to add.
 	*/
 	template<typename U>
-	type& operator+=(U const& s) {
+	type&
+	operator+=(
+		U const& s
+	) {
 		this->x+=T(s);
 		this->y+=T(s);
 		this->z+=T(s);
@@ -369,7 +462,10 @@ struct tvec4 {
 		@param v Vector to add.
 	*/
 	template<typename U>
-	type& operator+=(tvec4<U> const& v) {
+	type&
+	operator+=(
+		tvec4<U> const& v
+	) {
 		this->x+=T(v.x);
 		this->y+=T(v.y);
 		this->z+=T(v.z);
@@ -383,7 +479,10 @@ struct tvec4 {
 		@param s Value to subtract.
 	*/
 	template<typename U>
-	type& operator-=(U const& s) {
+	type&
+	operator-=(
+		U const& s
+	) {
 		this->x-=T(s);
 		this->y-=T(s);
 		this->z-=T(s);
@@ -397,7 +496,10 @@ struct tvec4 {
 		@param v Vector to subtract.
 	*/
 	template<typename U>
-	type& operator-=(tvec4<U> const& v) {
+	type&
+	operator-=(
+		tvec4<U> const& v
+	) {
 		this->x-=T(v.x);
 		this->y-=T(v.y);
 		this->z-=T(v.z);
@@ -411,7 +513,10 @@ struct tvec4 {
 		@param s Scalar.
 	*/
 	template<typename U>
-	type& operator*=(U const& s) {
+	type&
+	operator*=(
+		U const& s
+	) {
 		this->x*=T(s);
 		this->y*=T(s);
 		this->z*=T(s);
@@ -425,7 +530,10 @@ struct tvec4 {
 		@param v Vector to multiply by.
 	*/
 	template<typename U>
-	type& operator*=(tvec4<U> const& v) {
+	type&
+	operator*=(
+		tvec4<U> const& v
+	) {
 		this->x*=T(v.x);
 		this->y*=T(v.y);
 		this->z*=T(v.z);
@@ -439,7 +547,10 @@ struct tvec4 {
 		@param s Value to divide by.
 	*/
 	template<typename U>
-	type& operator/=(U const& s) {
+	type&
+	operator/=(
+		U const& s
+	) {
 		this->x/=T(s);
 		this->y/=T(s);
 		this->z/=T(s);
@@ -453,7 +564,10 @@ struct tvec4 {
 		@param v Vector to divide by.
 	*/
 	template<typename U>
-	type& operator/=(tvec4<U> const& v) {
+	type&
+	operator/=(
+		tvec4<U> const& v
+	) {
 		this->x/=T(v.x);
 		this->y/=T(v.y);
 		this->z/=T(v.z);
@@ -467,7 +581,10 @@ struct tvec4 {
 		@param s Divisor.
 	*/
 	template<typename U>
-	type& operator%=(U const& s) {
+	type&
+	operator%=(
+		U const& s
+	) {
 		this->x%=T(s);
 		this->y%=T(s);
 		this->z%=T(s);
@@ -481,7 +598,10 @@ struct tvec4 {
 		@param v Divisor vector.
 	*/
 	template<typename U>
-	type& operator%=(tvec4<U> const& v) {
+	type&
+	operator%=(
+		tvec4<U> const& v
+	) {
 		this->x%=T(v.x);
 		this->y%=T(v.y);
 		this->z%=T(v.z);
@@ -498,7 +618,10 @@ struct tvec4 {
 		@param s Value to AND with.
 	*/
 	template<typename U>
-	type& operator&=(U const& s) {
+	type&
+	operator&=(
+		U const& s
+	) {
 		this->x&=T(s);
 		this->y&=T(s);
 		this->z&=T(s);
@@ -512,7 +635,10 @@ struct tvec4 {
 		@param v Vector to AND with.
 	*/
 	template<typename U>
-	type& operator&=(tvec4<U> const& v) {
+	type&
+	operator&=(
+		tvec4<U> const& v
+	) {
 		this->x&=T(v.x);
 		this->y&=T(v.y);
 		this->z&=T(v.z);
@@ -526,7 +652,10 @@ struct tvec4 {
 		@param s Value to OR with.
 	*/
 	template<typename U>
-	type& operator|=(U const& s) {
+	type&
+	operator|=(
+		U const& s
+	) {
 		this->x|=T(s);
 		this->y|=T(s);
 		this->z|=T(s);
@@ -540,7 +669,10 @@ struct tvec4 {
 		@param v Vector to OR with.
 	*/
 	template<typename U>
-	type& operator|=(tvec4<U> const& v) {
+	type&
+	operator|=(
+		tvec4<U> const& v
+	) {
 		this->x|=T(v.x);
 		this->y|=T(v.y);
 		this->z|=T(v.z);
@@ -554,7 +686,10 @@ struct tvec4 {
 		@param s Value to XOR with.
 	*/
 	template<typename U>
-	type& operator^=(U const& s) {
+	type&
+	operator^=(
+		U const& s
+	) {
 		this->x^=T(s);
 		this->y^=T(s);
 		this->z^=T(s);
@@ -568,7 +703,10 @@ struct tvec4 {
 		@param v Vector to XOR with.
 	*/
 	template<typename U>
-	type& operator^=(tvec4<U> const& v) {
+	type&
+	operator^=(
+		tvec4<U> const& v
+	) {
 		this->x^=T(v.x);
 		this->y^=T(v.y);
 		this->z^=T(v.z);
@@ -582,7 +720,10 @@ struct tvec4 {
 		@param s Left-shift value amount.
 	*/
 	template<typename U>
-	type& operator<<=(U const& s) {
+	type&
+	operator<<=(
+		U const& s
+	) {
 		this->x<<=T(s);
 		this->y<<=T(s);
 		this->z<<=T(s);
@@ -596,7 +737,10 @@ struct tvec4 {
 		@param v Left-shift vector amount.
 	*/
 	template<typename U>
-	type& operator<<=(tvec4<U> const& v) {
+	type&
+	operator<<=(
+		tvec4<U> const& v
+	) {
 		this->x<<=T(v.x);
 		this->y<<=T(v.y);
 		this->z<<=T(v.z);
@@ -610,7 +754,10 @@ struct tvec4 {
 		@param s Right-shift value amount.
 	*/
 	template<typename U>
-	type& operator>>=(U const& s) {
+	type&
+	operator>>=(
+		U const& s
+	) {
 		this->x>>=T(s);
 		this->y>>=T(s);
 		this->z>>=T(s);
@@ -624,7 +771,10 @@ struct tvec4 {
 		@param v Right-shift vector amount.
 	*/
 	template<typename U>
-	type& operator>>=(tvec4<U> const& v) {
+	type&
+	operator>>=(
+		tvec4<U> const& v
+	) {
 		this->x>>=T(v.x);
 		this->y>>=T(v.y);
 		this->z>>=T(v.z);
@@ -642,7 +792,11 @@ struct tvec4 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec4<T> operator++(tvec4<T> const& x, signed) {
+	inline tvec4<T>
+	operator++(
+		tvec4<T> const& x,
+		signed
+	) {
 		return tvec4<T>{x.x+T(1), x.y+T(1), x.z+T(1), x.w+T(1)};
 	}
 	/**
@@ -652,7 +806,11 @@ struct tvec4 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec4<T> operator--(tvec4<T> const& x, signed) {
+	inline tvec4<T>
+	operator--(
+		tvec4<T> const& x,
+		signed
+	) {
 		return tvec4<T>{x.x-T(1), x.y-T(1), x.z-T(1), x.w-T(1)};
 	}
 /// @}
@@ -665,7 +823,10 @@ struct tvec4 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec4<T> operator+(tvec4<T> const& x) {
+	inline tvec4<T>
+	operator+(
+		tvec4<T> const& x
+	) {
 		return tvec4<T>{x.x, x.y, x.z, x.w};
 	}
 	/**
@@ -675,11 +836,14 @@ struct tvec4 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec4<T> operator-(tvec4<T> const& x) {
-		return tvec4<T>{	-x.x,
-							-x.y,
-							-x.z,
-							-x.w};
+	inline tvec4<T>
+	operator-(
+		tvec4<T> const& x
+	) {
+		return tvec4<T>{-x.x,
+						-x.y,
+						-x.z,
+						-x.w};
 	}
 	/**
 		Vector unary bitwise-NOT.
@@ -688,11 +852,14 @@ struct tvec4 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec4<T> operator~(tvec4<T> const& x) {
-		return tvec4<T>{	~x.x,
-							~x.y,
-							~x.z,
-							~x.w};
+	inline tvec4<T>
+	operator~(
+		tvec4<T> const& x
+	) {
+		return tvec4<T>{~x.x,
+						~x.y,
+						~x.z,
+						~x.w};
 	}
 /// @}
 
@@ -705,7 +872,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator+(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator+(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x + y,
 						x.y + y,
 						x.z + y,
@@ -719,11 +890,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator+(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x + y.x,
-						  x + y.y,
-						  x + y.z,
-						  x + y.w};
+	inline tvec4<T>
+	operator+(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x + y.x,
+						x + y.y,
+						x + y.z,
+						x + y.w};
 	}
 	/**
 		Vector addition.
@@ -733,7 +908,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator+(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator+(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x + y.x,
 						x.y + y.y,
 						x.z + y.z,
@@ -747,7 +926,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator-(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator-(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x - y,
 						x.y - y,
 						x.z - y,
@@ -761,11 +944,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator-(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x - y.x,
-						  x - y.y,
-						  x - y.z,
-						  x - y.w};
+	inline tvec4<T>
+	operator-(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x - y.x,
+						x - y.y,
+						x - y.z,
+						x - y.w};
 	}
 	/**
 		Vector subtraction.
@@ -775,7 +962,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator-(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator-(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x - y.x,
 						x.y - y.y,
 						x.z - y.z,
@@ -789,7 +980,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator*(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator*(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x * y,
 						x.y * y,
 						x.z * y,
@@ -803,11 +998,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator*(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x * y.x,
-						  x * y.y,
-						  x * y.z,
-						  x * y.w};
+	inline tvec4<T>
+	operator*(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x * y.x,
+						x * y.y,
+						x * y.z,
+						x * y.w};
 	}
 	/**
 		Vector multiplication (direct component product).
@@ -817,7 +1016,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator*(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator*(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x * y.x,
 						x.y * y.y,
 						x.z * y.z,
@@ -831,7 +1034,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator/(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator/(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x / y,
 						x.y / y,
 						x.z / y,
@@ -845,11 +1052,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator/(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x / y.x,
-						  x / y.y,
-						  x / y.z,
-						  x / y.w};
+	inline tvec4<T>
+	operator/(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x / y.x,
+						x / y.y,
+						x / y.z,
+						x / y.w};
 	}
 	/**
 		Vector division (direct component quotient).
@@ -859,7 +1070,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator/(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator/(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x / y.x,
 						x.y / y.y,
 						x.z / y.z,
@@ -873,7 +1088,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator%(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator%(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x % y,
 						x.y % y,
 						x.z % y,
@@ -887,11 +1106,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator%(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x % y.x,
-						  x % y.y,
-						  x % y.z,
-						  x % y.w};
+	inline tvec4<T>
+	operator%(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x % y.x,
+						x % y.y,
+						x % y.z,
+						x % y.w};
 	}
 	/**
 		Vector modulo.
@@ -901,7 +1124,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator%(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator%(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x % y.x,
 						x.y % y.y,
 						x.z % y.z,
@@ -918,7 +1145,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator&(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator&(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x & y,
 						x.y & y,
 						x.z & y,
@@ -932,11 +1163,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator&(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x & y.x,
-						  x & y.y,
-						  x & y.z,
-						  x & y.w};
+	inline tvec4<T>
+	operator&(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x & y.x,
+						x & y.y,
+						x & y.z,
+						x & y.w};
 	}
 	/**
 		Vector bitwise-AND.
@@ -946,7 +1181,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator&(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator&(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x & y.x,
 						x.y & y.y,
 						x.z & y.z,
@@ -960,7 +1199,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator|(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator|(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x | y,
 						x.y | y,
 						x.z | y,
@@ -974,11 +1217,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator|(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x | y.x,
-						  x | y.y,
-						  x | y.z,
-						  x | y.w};
+	inline tvec4<T>
+	operator|(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x | y.x,
+						x | y.y,
+						x | y.z,
+						x | y.w};
 	}
 	/**
 		Vector bitwise-OR.
@@ -988,7 +1235,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator|(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator|(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x | y.x,
 						x.y | y.y,
 						x.z | y.z,
@@ -1002,7 +1253,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator^(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator^(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x ^ y,
 						x.y ^ y,
 						x.z ^ y,
@@ -1016,11 +1271,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator^(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x ^ y.x,
-						  x ^ y.y,
-						  x ^ y.z,
-						  x ^ y.w};
+	inline tvec4<T>
+	operator^(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x ^ y.x,
+						x ^ y.y,
+						x ^ y.z,
+						x ^ y.w};
 	}
 	/**
 		Vector bitwise-XOR.
@@ -1030,7 +1289,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator^(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator^(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x ^ y.x,
 						x.y ^ y.y,
 						x.z ^ y.z,
@@ -1044,7 +1307,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator<<(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator<<(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x << y,
 						x.y << y,
 						x.z << y,
@@ -1058,11 +1325,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator<<(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x << y.x,
-						  x << y.y,
-						  x << y.z,
-						  x << y.w};
+	inline tvec4<T>
+	operator<<(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x << y.x,
+						x << y.y,
+						x << y.z,
+						x << y.w};
 	}
 	/**
 		Vector bitwise left-shift.
@@ -1072,7 +1343,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator<<(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator<<(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x << y.x,
 						x.y << y.y,
 						x.z << y.z,
@@ -1086,7 +1361,11 @@ struct tvec4 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator>>(tvec4<T> const& x, T const& y) {
+	inline tvec4<T>
+	operator>>(
+		tvec4<T> const& x,
+		T const& y
+	) {
 		return tvec4<T>{x.x >> y,
 						x.y >> y,
 						x.z >> y,
@@ -1100,11 +1379,15 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator>>(T const& x, tvec4<T> const& y) {
-		return tvec4<T>{  x >> y.x,
-						  x >> y.y,
-						  x >> y.z,
-						  x >> y.w};
+	inline tvec4<T>
+	operator>>(
+		T const& x,
+		tvec4<T> const& y
+	) {
+		return tvec4<T>{x >> y.x,
+						x >> y.y,
+						x >> y.z,
+						x >> y.w};
 	}
 	/**
 		Vector bitwise right-shift.
@@ -1114,7 +1397,11 @@ struct tvec4 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec4<T> operator>>(tvec4<T> const& x, tvec4<T> const& y) {
+	inline tvec4<T>
+	operator>>(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
 		return tvec4<T>{x.x >> y.x,
 						x.y >> y.y,
 						x.z >> y.z,

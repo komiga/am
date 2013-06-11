@@ -82,7 +82,8 @@ template<
 	HashLength L,
 	class Impl=detail::hash::murmur2_impl<L>
 >
-inline detail::hash::murmur_hash_type<L> murmur2(
+inline detail::hash::murmur_hash_type<L>
+murmur2(
 	void const* const data,
 	std::size_t const size,
 	detail::hash::murmur_hash_type<L> const seed

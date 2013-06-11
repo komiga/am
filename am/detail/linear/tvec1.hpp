@@ -76,25 +76,59 @@ struct tvec1 {
 	typedef type const& type_cref;
 	typedef value_type const& value_cref;
 
-	static value_type length(type_cref v) {
+	static value_type
+	length(
+		type_cref v
+	) {
 		return std::abs(v.x);
 	}
-	static value_type distance(type_cref v, type_cref r) {
+
+	static value_type
+	distance(
+		type_cref v,
+		type_cref r
+	) {
 		return std::abs(r.x - v.x);
 	}
-	static value_type dot(type_cref v, type_cref r) {
+
+	static value_type
+	dot(
+		type_cref v,
+		type_cref r
+	) {
 		return v.x * r.x;
 	}
-	static type normalize(type_cref v) {
+
+	static type
+	normalize(
+		type_cref v
+	) {
 		return v.x < value_type(0) ? type(-1) : type(1);
 	}
-	static type faceforward(type_cref n, type_cref i, type_cref ng) {
+
+	static type
+	faceforward(
+		type_cref n,
+		type_cref i,
+		type_cref ng
+	) {
 		return dot(ng, i) < 0 ? type{n} : type{-n.x};
 	}
-	static type reflect(type_cref i, type_cref n) {
+
+	static type
+	reflect(
+		type_cref i,
+		type_cref n
+	) {
 		return i.x - value_type(2) * n.x * dot(n, i);
 	}
-	static type refract(type_cref i, type_cref n, value_cref eta) {
+
+	static type
+	refract(
+		type_cref i,
+		type_cref n,
+		value_cref eta
+	) {
 		value_type const d=dot(n, i);
 		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
 		return k < value_type(0)
@@ -109,40 +143,55 @@ struct tvec1 {
 		Construct zeroed.
 	*/
 	tvec1() :
-		x{T(0)} {}
+		x{T(0)}
+	{}
 	/**
 		Construct uninitialized.
 	*/
-	explicit tvec1(ctor_no_init) {}
+	explicit tvec1(
+		ctor_no_init
+	) {}
 	/**
 		Construct to value.
 		@param c1 X value.
 	*/
-	explicit tvec1(value_type const& c1) :
-		x{c1} {}
+	explicit tvec1(
+		value_type const& c1
+	) :
+		x{c1}
+	{}
 	/**
 		Construct to value.
 		@tparam U An arithmetic type.
 		@param c1 X value.
 	*/
 	template<typename U>
-	explicit tvec1(U const& c1) :
-		x{T(c1)} {}
+	explicit tvec1(
+		U const& c1
+	) :
+		x{T(c1)}
+	{}
 
 	/**
 		Construct to vector.
 		@param v Vector to copy.
 	*/
-	tvec1(type const& v) :
-		x{v.x} {}
+	tvec1(
+		type const& v
+	) :
+		x{v.x}
+	{}
 	/**
 		Construct to vector.
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
 	template<typename U>
-	tvec1(tvec1<U> const& v) :
-		x{T(v.x)} {}
+	tvec1(
+		tvec1<U> const& v
+	) :
+		x{T(v.x)}
+	{}
 
 	/**
 		Construct to higher-dimension vector.
@@ -151,16 +200,25 @@ struct tvec1 {
 		@param v Vector to copy.
 	*/
 	template<typename U>
-	explicit tvec1(tvec2<U> const& v) :
-		x{T(v.x)} {}
+	explicit tvec1(
+		tvec2<U> const& v
+	) :
+		x{T(v.x)}
+	{}
 	/** @copydoc tvec1(tvec2<U> const&) */
 	template<typename U>
-	explicit tvec1(tvec3<U> const& v) :
-		x{T(v.x)} {}
+	explicit tvec1(
+		tvec3<U> const& v
+	) :
+		x{T(v.x)}
+	{}
 	/** @copydoc tvec1(tvec2<U> const&) */
 	template<typename U>
-	explicit tvec1(tvec4<U> const& v) :
-		x{T(v.x)} {}
+	explicit tvec1(
+		tvec4<U> const& v
+	) :
+		x{T(v.x)}
+	{}
 /// @}
 
 /** @name Properties */ /// @{
@@ -168,7 +226,10 @@ struct tvec1 {
 		Get number of components.
 		@returns @c 1.
 	*/
-	static AM_CONSTEXPR size_type size() { return size_type(1); }
+	static AM_CONSTEXPR size_type
+	size() {
+		return size_type(1);
+	}
 	/**
 		Get value at index.
 		@note An assert will catch invalid indices;
@@ -176,12 +237,18 @@ struct tvec1 {
 		@returns The value at @a i.
 		@param i Index to retrieve.
 	*/
-	value_type& operator[](size_type const& i) {
+	value_type&
+	operator[](
+		size_type const& i
+	) {
 		assert(size()>i);
 		return this->x;
 	}
 	/** @copydoc operator[](size_type const&) */
-	value_type const& operator[](size_type const& i) const {
+	value_type const&
+	operator[](
+		size_type const& i
+	) const {
 		assert(size()>i);
 		return this->x;
 	}
@@ -195,7 +262,10 @@ struct tvec1 {
 		- @c false if they are not.
 		@param v Vector to compare with.
 	*/
-	bool operator==(type const& v) const {
+	bool
+	operator==(
+		type const& v
+	) const {
 		return this->x==v.x;
 	}
 	/**
@@ -205,7 +275,10 @@ struct tvec1 {
 		- @c true if they are not.
 		@param v Vector to compare with.
 	*/
-	bool operator!=(type const& v) const {
+	bool
+	operator!=(
+		type const& v
+	) const {
 		return this->x!=v.x;
 	}
 /// @}
@@ -215,7 +288,8 @@ struct tvec1 {
 		Prefix increment.
 		@returns @c *this after operation.
 	*/
-	type& operator++() {
+	type&
+	operator++() {
 		++this->x;
 		return *this;
 	}
@@ -223,7 +297,8 @@ struct tvec1 {
 		Prefix decrement.
 		@returns @c *this after operation.
 	*/
-	type& operator--() {
+	type&
+	operator--() {
 		--this->x;
 		return *this;
 	}
@@ -237,7 +312,10 @@ struct tvec1 {
 		@param s Value.
 	*/
 	template<typename U>
-	type& operator=(U const& s) {
+	type&
+	operator=(
+		U const& s
+	) {
 		this->x=T(s);
 		return *this;
 	}
@@ -248,7 +326,10 @@ struct tvec1 {
 		@param v Vector to copy.
 	*/
 	template<typename U>
-	type& operator=(tvec1<U> const& v) {
+	type&
+	operator=(
+		tvec1<U> const& v
+	) {
 		this->x=T(v.x);
 		return *this;
 	}
@@ -262,7 +343,10 @@ struct tvec1 {
 		@param s Value to add.
 	*/
 	template<typename U>
-	type& operator+=(U const& s) {
+	type&
+	operator+=(
+		U const& s
+	) {
 		this->x+=T(s);
 		return *this;
 	}
@@ -273,7 +357,10 @@ struct tvec1 {
 		@param v Vector to add.
 	*/
 	template<typename U>
-	type& operator+=(tvec1<U> const& v) {
+	type&
+	operator+=(
+		tvec1<U> const& v
+	) {
 		this->x+=T(v.x);
 		return *this;
 	}
@@ -284,7 +371,10 @@ struct tvec1 {
 		@param s Value to subtract.
 	*/
 	template<typename U>
-	type& operator-=(U const& s) {
+	type&
+	operator-=(
+		U const& s
+	) {
 		this->x-=T(s);
 		return *this;
 	}
@@ -295,7 +385,10 @@ struct tvec1 {
 		@param v Vector to subtract.
 	*/
 	template<typename U>
-	type& operator-=(tvec1<U> const& v) {
+	type&
+	operator-=(
+		tvec1<U> const& v
+	) {
 		this->x-=T(v.x);
 		return *this;
 	}
@@ -306,7 +399,10 @@ struct tvec1 {
 		@param s Scalar.
 	*/
 	template<typename U>
-	type& operator*=(U const& s) {
+	type&
+	operator*=(
+		U const& s
+	) {
 		this->x*=T(s);
 		return *this;
 	}
@@ -317,7 +413,10 @@ struct tvec1 {
 		@param v Vector to multiply by.
 	*/
 	template<typename U>
-	type& operator*=(tvec1<U> const& v) {
+	type&
+	operator*=(
+		tvec1<U> const& v
+	) {
 		this->x*=T(v.x);
 		return *this;
 	}
@@ -328,7 +427,10 @@ struct tvec1 {
 		@param s Value to divide by.
 	*/
 	template<typename U>
-	type& operator/=(U const& s) {
+	type&
+	operator/=(
+		U const& s
+	) {
 		this->x/=T(s);
 		return *this;
 	}
@@ -339,7 +441,10 @@ struct tvec1 {
 		@param v Vector to divide by.
 	*/
 	template<typename U>
-	type& operator/=(tvec1<U> const& v) {
+	type&
+	operator/=(
+		tvec1<U> const& v
+	) {
 		this->x/=T(v.x);
 		return *this;
 	}
@@ -350,7 +455,10 @@ struct tvec1 {
 		@param s Divisor.
 	*/
 	template<typename U>
-	type& operator%=(U const& s) {
+	type&
+	operator%=(
+		U const& s
+	) {
 		this->x%=T(s);
 		return *this;
 	}
@@ -361,7 +469,10 @@ struct tvec1 {
 		@param v Divisor vector.
 	*/
 	template<typename U>
-	type& operator%=(tvec1<U> const& v) {
+	type&
+	operator%=(
+		tvec1<U> const& v
+	) {
 		this->x%=T(v.x);
 		return *this;
 	}
@@ -375,7 +486,10 @@ struct tvec1 {
 		@param s Value to AND with.
 	*/
 	template<typename U>
-	type& operator&=(U const& s) {
+	type&
+	operator&=(
+		U const& s
+	) {
 		this->x&=T(s);
 		return *this;
 	}
@@ -386,7 +500,10 @@ struct tvec1 {
 		@param v Vector to AND with.
 	*/
 	template<typename U>
-	type& operator&=(tvec1<U> const& v) {
+	type&
+	operator&=(
+		tvec1<U> const& v
+	) {
 		this->x&=T(v.x);
 		return *this;
 	}
@@ -397,7 +514,10 @@ struct tvec1 {
 		@param s Value to OR with.
 	*/
 	template<typename U>
-	type& operator|=(U const& s) {
+	type&
+	operator|=(
+		U const& s
+	) {
 		this->x|=T(s);
 		return *this;
 	}
@@ -408,7 +528,10 @@ struct tvec1 {
 		@param v Vector to OR with.
 	*/
 	template<typename U>
-	type& operator|=(tvec1<U> const& v) {
+	type&
+	operator|=(
+		tvec1<U> const& v
+	) {
 		this->x|=T(v.x);
 		return *this;
 	}
@@ -419,7 +542,10 @@ struct tvec1 {
 		@param s Value to XOR with.
 	*/
 	template<typename U>
-	type& operator^=(U const& s) {
+	type&
+	operator^=(
+		U const& s
+	) {
 		this->x^=T(s);
 		return *this;
 	}
@@ -430,7 +556,10 @@ struct tvec1 {
 		@param v Vector to XOR with.
 	*/
 	template<typename U>
-	type& operator^=(tvec1<U> const& v) {
+	type&
+	operator^=(
+		tvec1<U> const& v
+	) {
 		this->x^=T(v.x);
 		return *this;
 	}
@@ -441,7 +570,10 @@ struct tvec1 {
 		@param s Left-shift value amount.
 	*/
 	template<typename U>
-	type& operator<<=(U const& s) {
+	type&
+	operator<<=(
+		U const& s
+	) {
 		this->x<<=T(s);
 		return *this;
 	}
@@ -452,7 +584,10 @@ struct tvec1 {
 		@param v Left-shift vector amount.
 	*/
 	template<typename U>
-	type& operator<<=(tvec1<U> const& v) {
+	type&
+	operator<<=(
+		tvec1<U> const& v
+	) {
 		this->x<<=T(v.x);
 		return *this;
 	}
@@ -463,7 +598,10 @@ struct tvec1 {
 		@param s Right-shift value amount.
 	*/
 	template<typename U>
-	type& operator>>=(U const& s) {
+	type&
+	operator>>=(
+		U const& s
+	) {
 		this->x>>=T(s);
 		return *this;
 	}
@@ -474,7 +612,10 @@ struct tvec1 {
 		@param v Right-shift vector amount.
 	*/
 	template<typename U>
-	type& operator>>=(tvec1<U> const& v) {
+	type&
+	operator>>=(
+		tvec1<U> const& v
+	) {
 		this->x>>=T(v.x);
 		return *this;
 	}
@@ -489,7 +630,12 @@ struct tvec1 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec1<T> operator++(tvec1<T> const& x, signed) {
+	inline
+	tvec1<T>
+	operator++(
+		tvec1<T> const& x,
+		signed
+	) {
 		return tvec1<T>{x.x+T(1)};
 	}
 	/**
@@ -499,7 +645,12 @@ struct tvec1 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec1<T> operator--(tvec1<T> const& x, signed) {
+	inline
+	tvec1<T>
+	operator--(
+		tvec1<T> const& x,
+		signed
+	) {
 		return tvec1<T>{x.x-T(1)};
 	}
 /// @}
@@ -512,7 +663,11 @@ struct tvec1 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec1<T> operator+(tvec1<T> const& x) {
+	inline
+	tvec1<T>
+	operator+(
+		tvec1<T> const& x
+	) {
 		return tvec1<T>{x.x};
 	}
 	/**
@@ -522,7 +677,11 @@ struct tvec1 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec1<T> operator-(tvec1<T> const& x) {
+	inline
+	tvec1<T>
+	operator-(
+		tvec1<T> const& x
+	) {
 		return tvec1<T>{-x.x};
 	}
 	/**
@@ -532,7 +691,11 @@ struct tvec1 {
 		@param x Vector.
 	*/
 	template<typename T>
-	inline tvec1<T> operator~(tvec1<T> const& x) {
+	inline
+	tvec1<T>
+	operator~(
+		tvec1<T> const& x
+	) {
 		return tvec1<T>{~x.x};
 	}
 /// @}
@@ -546,7 +709,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator+(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator+(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x + y};
 	}
 	/**
@@ -557,8 +725,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator+(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x + y.x};
+	inline
+	tvec1<T>
+	operator+(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x + y.x};
 	}
 	/**
 		Vector addition.
@@ -568,7 +741,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator+(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator+(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x + y.x};
 	}
 	/**
@@ -579,7 +757,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator-(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator-(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x - y};
 	}
 	/**
@@ -590,8 +773,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator-(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x - y.x};
+	inline
+	tvec1<T>
+	operator-(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x - y.x};
 	}
 	/**
 		Vector subtraction.
@@ -601,7 +789,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator-(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator-(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x - y.x};
 	}
 	/**
@@ -612,7 +805,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator*(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator*(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x * y};
 	}
 	/**
@@ -623,8 +821,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator*(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x * y.x};
+	inline
+	tvec1<T>
+	operator*(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x * y.x};
 	}
 	/**
 		Vector multiplication (direct component product).
@@ -634,7 +837,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator*(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator*(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x * y.x};
 	}
 	/**
@@ -645,7 +853,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator/(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator/(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x / y};
 	}
 	/**
@@ -656,8 +869,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator/(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x / y.x};
+	inline
+	tvec1<T>
+	operator/(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x / y.x};
 	}
 	/**
 		Vector division (direct component quotient).
@@ -667,7 +885,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator/(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator/(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x / y.x};
 	}
 	/**
@@ -678,7 +901,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator%(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator%(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x % y};
 	}
 	/**
@@ -689,8 +917,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator%(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x % y.x};
+	inline
+	tvec1<T>
+	operator%(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x % y.x};
 	}
 	/**
 		Vector modulo.
@@ -700,7 +933,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator%(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator%(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x % y.x};
 	}
 /// @}
@@ -714,7 +952,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator&(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator&(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x & y};
 	}
 	/**
@@ -725,8 +968,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator&(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x & y.x};
+	inline
+	tvec1<T>
+	operator&(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x & y.x};
 	}
 	/**
 		Vector bitwise-AND.
@@ -736,7 +984,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator&(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator&(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x & y.x};
 	}
 	/**
@@ -747,7 +1000,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator|(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator|(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x | y};
 	}
 	/**
@@ -758,8 +1016,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator|(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x | y.x};
+	inline
+	tvec1<T>
+	operator|(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x | y.x};
 	}
 	/**
 		Vector bitwise-OR.
@@ -769,7 +1032,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator|(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator|(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x | y.x};
 	}
 	/**
@@ -780,7 +1048,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator^(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator^(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x ^ y};
 	}
 	/**
@@ -791,8 +1064,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator^(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x ^ y.x};
+	inline
+	tvec1<T>
+	operator^(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x ^ y.x};
 	}
 	/**
 		Vector bitwise-XOR.
@@ -802,7 +1080,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator^(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator^(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x ^ y.x};
 	}
 	/**
@@ -813,7 +1096,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator<<(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator<<(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x << y};
 	}
 	/**
@@ -824,8 +1112,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator<<(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x << y.x};
+	inline
+	tvec1<T>
+	operator<<(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x << y.x};
 	}
 	/**
 		Vector bitwise left-shift.
@@ -835,7 +1128,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator<<(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator<<(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x << y.x};
 	}
 	/**
@@ -846,7 +1144,12 @@ struct tvec1 {
 		@param y Value (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator>>(tvec1<T> const& x, T const& y) {
+	inline
+	tvec1<T>
+	operator>>(
+		tvec1<T> const& x,
+		T const& y
+	) {
 		return tvec1<T>{x.x >> y};
 	}
 	/**
@@ -857,8 +1160,13 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator>>(T const& x, tvec1<T> const& y) {
-		return tvec1<T>{  x >> y.x};
+	inline
+	tvec1<T>
+	operator>>(
+		T const& x,
+		tvec1<T> const& y
+	) {
+		return tvec1<T>{x >> y.x};
 	}
 	/**
 		Vector bitwise right-shift.
@@ -868,7 +1176,12 @@ struct tvec1 {
 		@param y Vector (right-hand).
 	*/
 	template<typename T>
-	inline tvec1<T> operator>>(tvec1<T> const& x, tvec1<T> const& y) {
+	inline
+	tvec1<T>
+	operator>>(
+		tvec1<T> const& x,
+		tvec1<T> const& y
+	) {
 		return tvec1<T>{x.x >> y.x};
 	}
 /// @}

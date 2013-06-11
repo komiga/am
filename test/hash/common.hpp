@@ -6,14 +6,14 @@
 #include <cstring>
 
 #define TEST_HASH_FUNC_CSTR(func, L, input, result) {\
-		auto const x=am::hash::func<am::hash::HashLength::L>(input, std::strlen(input));\
-		assert(x==result);\
-	}
+	auto const x=am::hash::func<am::hash::HashLength::L>(input, std::strlen(input));\
+	assert(x==result);\
+}
 
 #define TEST_HASH_FUNC_STDSTR(func, L, input, result) {\
-		auto const x=am::hash::func<am::hash::HashLength::L>(input);\
-		assert(x==result);\
-	}
+	auto const x=am::hash::func<am::hash::HashLength::L>(input);\
+	assert(x==result);\
+}
 
 template<typename T>
 struct hash_data {
