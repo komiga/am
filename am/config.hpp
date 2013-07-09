@@ -79,8 +79,8 @@ namespace am {
 #else
 	AM_CONFIG_ASSERT(
 		// half-floats not supported
-		AM_PRECISION_LOW < AM_CONFIG_FLOAT_PRECISION &&
-		AM_PRECISION_HIGH>=AM_CONFIG_FLOAT_PRECISION,
+		AM_PRECISION_LOW  <  AM_CONFIG_FLOAT_PRECISION &&
+		AM_PRECISION_HIGH >= AM_CONFIG_FLOAT_PRECISION,
 		"AM_CONFIG_FLOAT_PRECISION invalid or not supported (only"
 		" medium- and high-precision floats are available)"
 	);
@@ -90,8 +90,8 @@ namespace am {
 	#define AM_CONFIG_INT_PRECISION AM_PRECISION_MEDIUM
 #else
 	AM_CONFIG_ASSERT(
-		AM_PRECISION_LOW <=AM_CONFIG_INT_PRECISION &&
-		AM_PRECISION_HIGH>=AM_CONFIG_INT_PRECISION,
+		AM_PRECISION_LOW  <= AM_CONFIG_INT_PRECISION &&
+		AM_PRECISION_HIGH >= AM_CONFIG_INT_PRECISION,
 		"AM_CONFIG_INT_PRECISION invalid"
 	);
 #endif
@@ -100,8 +100,8 @@ namespace am {
 	#define AM_CONFIG_UINT_PRECISION AM_PRECISION_MEDIUM
 #else
 	AM_CONFIG_ASSERT(
-		AM_PRECISION_LOW <=AM_CONFIG_UINT_PRECISION &&
-		AM_PRECISION_HIGH>=AM_CONFIG_UINT_PRECISION,
+		AM_PRECISION_LOW  <= AM_CONFIG_UINT_PRECISION &&
+		AM_PRECISION_HIGH >= AM_CONFIG_UINT_PRECISION,
 		"AM_CONFIG_UINT_PRECISION invalid"
 	);
 #endif
@@ -118,11 +118,11 @@ namespace am {
 /** No types. */
 #define AM_FLAG_TYPE_NONE	0
 /** Floating-point type. */
-#define AM_FLAG_TYPE_FLOAT	1<<0
+#define AM_FLAG_TYPE_FLOAT	1 << 0
 /** Signed integer type. */
-#define AM_FLAG_TYPE_INT	1<<1
+#define AM_FLAG_TYPE_INT	1 << 1
 /** Unsigned integer type. */
-#define AM_FLAG_TYPE_UINT	1<<2
+#define AM_FLAG_TYPE_UINT	1 << 2
 /** All types. */
 #define AM_FLAG_TYPE_ALL	\
 	(AM_FLAG_TYPE_FLOAT|AM_FLAG_TYPE_INT|AM_FLAG_TYPE_UINT)
@@ -168,7 +168,7 @@ namespace am {
 	#define AM_CONFIG_VECTOR_TYPES AM_FLAG_TYPE_ALL
 #else
 	AM_CONFIG_ASSERT(
-		0==(AM_CONFIG_VECTOR_TYPES&~(AM_FLAG_TYPE_ALL)),
+		0 == (AM_CONFIG_VECTOR_TYPES & ~(AM_FLAG_TYPE_ALL)),
 		"AM_CONFIG_VECTOR_TYPES has invalid flags set"
 	);
 #endif
@@ -177,7 +177,7 @@ namespace am {
 	#define AM_CONFIG_MATRIX_TYPES AM_FLAG_TYPE_FLOAT
 #else
 	AM_CONFIG_ASSERT(
-		0==(AM_CONFIG_MATRIX_TYPES&~(AM_FLAG_TYPE_FLOAT)),
+		0 == (AM_CONFIG_MATRIX_TYPES & ~(AM_FLAG_TYPE_FLOAT)),
 		"AM_CONFIG_MATRIX_TYPES has invalid flags set"
 	);
 #endif

@@ -47,21 +47,23 @@ AM_DETAIL_TYPE_IS_VECTOR(tvec3);
 	Generic 3-dimensional vector.
 	@tparam T An arithmetic type.
 */
-template<typename T>
+template<
+	typename T
+>
 struct tvec3 {
 	/** @cond INTERNAL */
 	AM_STATIC_ASSERT(
-		true==std::is_arithmetic<T>::value,
+		true == std::is_arithmetic<T>::value,
 		"T must be an arithmetic type"
 	);
 	/** @endcond */
 
 	/** Type of @c *this. */
-	typedef tvec3<T> type;
+	using type = tvec3<T>;
 	/** Type of components. */
-	typedef T value_type;
+	using value_type = T;
 	/** Size/length type. */
-	typedef std::size_t size_type;
+	using size_type = std::size_t;
 
 	/** Dummy enum for constructing uninitialized vectors. */
 	enum ctor_no_init {no_init};
@@ -74,8 +76,8 @@ struct tvec3 {
 
 /** @cond INTERNAL */
 	struct operations {
-	typedef type const& type_cref;
-	typedef value_type const& value_cref;
+	using type_cref = type const&;
+	using value_cref = value_type const&;
 
 	static value_type
 	length(
@@ -83,6 +85,7 @@ struct tvec3 {
 	) {
 		return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 	}
+
 	static value_type
 	distance(
 		type_cref v,
@@ -90,6 +93,7 @@ struct tvec3 {
 	) {
 		return operations::length(r - v);
 	}
+
 	static value_type
 	dot(
 		type_cref v,
@@ -97,6 +101,7 @@ struct tvec3 {
 	) {
 		return v.x * r.x + v.y * r.y + v.z * r.z;
 	}
+
 	static type
 	cross(
 		type_cref v,
@@ -107,6 +112,7 @@ struct tvec3 {
 			v.z * r.x - r.z * v.x,
 			v.x * r.y - r.x * v.y};
 	}
+
 	static type
 	normalize(
 		type_cref v
@@ -114,6 +120,7 @@ struct tvec3 {
 		return
 			v * (value_type(1) / std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 	}
+
 	static type
 	faceforward(
 		type_cref n,
@@ -122,6 +129,7 @@ struct tvec3 {
 	) {
 		return dot(ng, i) < 0 ? n : -n;
 	}
+
 	static type
 	reflect(
 		type_cref i,
@@ -129,14 +137,15 @@ struct tvec3 {
 	) {
 		return i - value_type(2) * n * dot(n, i);
 	}
+
 	static type
 	refract(
 		type_cref i,
 		type_cref n,
 		value_cref eta
 	) {
-		value_type const d=dot(n, i);
-		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
+		value_type const d = dot(n, i);
+		value_type const k = value_type(1) - eta * eta * (value_type(1) - d * d);
 		return k < value_type(0)
 			? type{value_type(0)}
 			: type{eta * i - (eta * d + std::sqrt(k)) * n};
@@ -154,7 +163,8 @@ struct tvec3 {
 	/**
 		Construct uninitialized.
 	*/
-	explicit tvec3(
+	explicit
+	tvec3(
 		ctor_no_init
 	) {}
 
@@ -162,7 +172,8 @@ struct tvec3 {
 		Construct all components to value.
 		@param s Value.
 	*/
-	explicit tvec3(
+	explicit
+	tvec3(
 		value_type const& s
 	) :
 		x{s}, y{s}, z{s}
@@ -172,8 +183,11 @@ struct tvec3 {
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
-	template<typename U>
-	explicit tvec3(
+	template<
+		typename U
+	>
+	explicit
+	tvec3(
 		U const& s
 	) :
 		x{T(s)}, y{T(s)}, z{T(s)}
@@ -185,7 +199,8 @@ struct tvec3 {
 		@param c2 Y value.
 		@param c3 Z value.
 	*/
-	explicit tvec3(
+	explicit
+	tvec3(
 		value_type const& c1,
 		value_type const& c2,
 		value_type const& c3
@@ -204,7 +219,8 @@ struct tvec3 {
 		typename V,
 		typename H
 	>
-	explicit tvec3(
+	explicit
+	tvec3(
 		U const& c1,
 		V const& c2,
 		H const& c3
@@ -226,7 +242,9 @@ struct tvec3 {
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
-	template<typename U>
+	template<
+		typename U
+	>
 	tvec3(
 		tvec3<U> const& v
 	) :
@@ -243,7 +261,8 @@ struct tvec3 {
 		typename U,
 		typename V
 	>
-	explicit tvec3(
+	explicit
+	tvec3(
 		U const& c1,
 		tvec2<V> const& v
 	) :
@@ -259,7 +278,8 @@ struct tvec3 {
 		typename U,
 		typename V
 	>
-	explicit tvec3(
+	explicit
+	tvec3(
 		tvec2<U> const& v,
 		V const& c3
 	) :
@@ -272,8 +292,11 @@ struct tvec3 {
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
-	template<typename U>
-	explicit tvec3(
+	template<
+		typename U
+	>
+	explicit
+	tvec3(
 		tvec4<U> const& v
 	) :
 		x{T(v.x)}, y{T(v.y)}, z{T(v.z)}
@@ -300,7 +323,7 @@ struct tvec3 {
 	operator[](
 		size_type const& i
 	) {
-		assert(size()>i);
+		assert(size() > i);
 		return (&x)[i];
 	}
 	/** @copydoc operator[](size_type const&) */
@@ -308,7 +331,7 @@ struct tvec3 {
 	operator[](
 		size_type const& i
 	) const {
-		assert(size()>i);
+		assert(size() > i);
 		return (&x)[i];
 	}
 /// @}

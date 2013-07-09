@@ -53,23 +53,23 @@ struct tmat3x3 {
 public:
 	/** @cond INTERNAL */
 	AM_STATIC_ASSERT(
-		true==std::is_floating_point<T>::value,
+		true == std::is_floating_point<T>::value,
 		"T must be a floating-point type"
 	);
 	/** @endcond */
 
 	/** Type of @c *this. */
-	typedef tmat3x3<T> type;
+	using type = tmat3x3<T>;
 	/** Type of transpose. */
-	typedef tmat3x3<T> transpose_type;
+	using transpose_type = tmat3x3<T>;
 	/** Type of components. */
-	typedef T value_type;
+	using value_type = T;
 	/** Type of rows. */
-	typedef tvec3<T> row_type;
+	using row_type = tvec3<T>;
 	/** Type of columns. */
-	typedef tvec3<T> col_type;
+	using col_type = tvec3<T>;
 	/** Size/length type. */
-	typedef std::size_t size_type;
+	using size_type = std::size_t;
 
 	/** Dummy enum for constructing uninitialized matrices. */
 	enum ctor_no_init {no_init};
@@ -79,10 +79,10 @@ public:
 
 /** @cond INTERNAL */
 	struct operations {
-	typedef type const& type_cref;
-	typedef value_type const& value_cref;
-	typedef row_type const& row_cref;
-	typedef col_type const& col_cref;
+	using type_cref = type const&;
+	using value_cref = value_type const&;
+	using row_cref = row_type const&;
+	using col_cref = col_type const&;
 
 	static transpose_type
 	transpose(
@@ -530,7 +530,7 @@ public:
 	operator[](
 		size_type const& i
 	) {
-		assert(size()>i);
+		assert(size() > i);
 		return data[i];
 	}
 	/** @copydoc operator[](size_type const&) */
@@ -538,7 +538,7 @@ public:
 	operator[](
 		size_type const& i
 	) const {
-		assert(size()>i);
+		assert(size() > i);
 		return data[i];
 	}
 /// @}
@@ -556,9 +556,9 @@ public:
 		type const& m
 	) const {
 		return
-			data[0]==m.data[0] &&
-			data[1]==m.data[1] &&
-			data[2]==m.data[2];
+			data[0] == m.data[0] &&
+			data[1] == m.data[1] &&
+			data[2] == m.data[2];
 	}
 	/**
 		Non-equivalence operator.
@@ -572,9 +572,9 @@ public:
 		type const& m
 	) const {
 		return
-			data[0]!=m.data[0] ||
-			data[1]!=m.data[1] ||
-			data[2]!=m.data[2];
+			data[0] != m.data[0] ||
+			data[1] != m.data[1] ||
+			data[2] != m.data[2];
 	}
 /// @}
 
@@ -615,9 +615,9 @@ public:
 	operator=(
 		tmat3x3<U> const& m
 	) {
-		data[0]=m.data[0];
-		data[1]=m.data[1];
-		data[2]=m.data[2];
+		data[0] =m .data[0];
+		data[1] =m .data[1];
+		data[2] =m .data[2];
 		return *this;
 	}
 /// @}
@@ -634,9 +634,9 @@ public:
 	operator+=(
 		U const& s
 	) {
-		data[0]+=T(s);
-		data[1]+=T(s);
-		data[2]+=T(s);
+		data[0] += T(s);
+		data[1] += T(s);
+		data[2] += T(s);
 		return *this;
 	}
 	/**
@@ -650,9 +650,9 @@ public:
 	operator+=(
 		tmat3x3<U> const& m
 	) {
-		data[0]+=m.data[0];
-		data[1]+=m.data[1];
-		data[2]+=m.data[2];		
+		data[0] += m.data[0];
+		data[1] += m.data[1];
+		data[2] += m.data[2];
 		return *this;
 	}
 	/**
@@ -666,9 +666,9 @@ public:
 	operator-=(
 		U const& s
 	) {
-		data[0]-=T(s);
-		data[1]-=T(s);
-		data[2]-=T(s);
+		data[0] -= T(s);
+		data[1] -= T(s);
+		data[2] -= T(s);
 		return *this;
 	}
 	/**
@@ -682,9 +682,9 @@ public:
 	operator-=(
 		tmat3x3<U> const& m
 	) {
-		data[0]-=m.data[0];
-		data[1]-=m.data[1];
-		data[2]-=m.data[2];
+		data[0] -= m.data[0];
+		data[1] -= m.data[1];
+		data[2] -= m.data[2];
 		return *this;
 	}
 	/**
@@ -698,9 +698,9 @@ public:
 	operator*=(
 		U const& s
 	) {
-		data[0]*=T(s);
-		data[1]*=T(s);
-		data[2]*=T(s);
+		data[0] *= T(s);
+		data[1] *= T(s);
+		data[2] *= T(s);
 		return *this;
 	}
 	/**
@@ -727,9 +727,9 @@ public:
 	operator/=(
 		U const& s
 	) {
-		data[0]/=T(s);
-		data[1]/=T(s);
-		data[2]/=T(s);
+		data[0] /= T(s);
+		data[1] /= T(s);
+		data[2] /= T(s);
 		return *this;
 	}
 	/**

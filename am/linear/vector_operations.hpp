@@ -30,13 +30,15 @@ namespace linear {
 */
 
 /** @cond INTERNAL */
-#define AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType)\
-	AM_STATIC_ASSERT(\
-		detail::linear::is_vector<ConType>::value,\
-		"ConType must be a vector");\
-	AM_STATIC_ASSERT(\
-		detail::linear::is_construct_floating_point<ConType>::value,\
-		"ConType must be floating-point");
+#define AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType)						\
+	AM_STATIC_ASSERT(													\
+		detail::linear::is_vector<ConType>::value,						\
+		"ConType must be a vector"										\
+	);																	\
+	AM_STATIC_ASSERT(													\
+		detail::linear::is_construct_floating_point<ConType>::value,	\
+		"ConType must be floating-point"								\
+	);
 /** @endcond */
 
 /**
@@ -48,7 +50,9 @@ namespace linear {
 	@tparam ConType Any floating-point vector type.
 	@param v Vector.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline typename ConType::value_type
 length(
 	ConType const& v
@@ -67,7 +71,9 @@ length(
 	@param v First vector.
 	@param r Second vector.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline typename ConType::value_type
 distance(
 	ConType const& v,
@@ -87,7 +93,9 @@ distance(
 	@param v First vector.
 	@param r Second vector.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline typename ConType::value_type
 dot(
 	ConType const& v,
@@ -127,7 +135,9 @@ cross(
 	@tparam ConType A floating-point vector type.
 	@param v Vector to normalize.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline ConType
 normalize(
 	ConType const& v
@@ -147,7 +157,9 @@ normalize(
 	@param i Incident vector.
 	@param ng Geometric normal vector.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline ConType
 faceforward(
 	ConType const& n,
@@ -170,7 +182,9 @@ faceforward(
 	@param i Incident vector.
 	@param n Surface normal vector.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline ConType
 reflect(
 	ConType const& i,
@@ -193,7 +207,9 @@ reflect(
 	@param n Surface normal vector.
 	@param eta Ratio of indices of refraction.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline ConType
 refract(
 	ConType const& i,

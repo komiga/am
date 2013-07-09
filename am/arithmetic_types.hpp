@@ -17,78 +17,82 @@ namespace am {
 /**
 	@defgroup arithmetic_types Arithmetic types
 	@details
+
 	Integer types are defined to strictly-sized 16-, 32-,
 	and 64-bit arithmetic types (respective to: low, medium, high).
 	Medium- and high-precision floating-point types are defined to
 	system single- and double-precision types, respectively (which
 	usually correspond to IEEE-754 32- and 64-bit floating-point
 	types, respectively).
-	
+
 	Note that no low-precision floating-point type is provided.
 	@{
 */
 
 /** Medium-precision floating-point. */
-typedef float mediump_float;
+using mediump_float = float;
 /** High-precision floating-point. */
-typedef double highp_float;
+using highp_float = double;
 
 /** Low-precision signed integer. */
-typedef int16_t lowp_int;
+using lowp_int = int16_t;
 /** Medium-precision signed integer. */
-typedef int32_t mediump_int;
+using mediump_int = int32_t;
 /** High-precision signed integer. */
-typedef int64_t highp_int;
+using highp_int = int64_t;
 
 /** Low-precision unsigned integer. */
-typedef uint16_t lowp_uint;
+using lowp_uint = uint16_t;
 /** Medium-precision unsigned integer. */
-typedef uint32_t mediump_uint;
+using mediump_uint = uint32_t;
 /** High-precision unsigned integer. */
-typedef uint64_t highp_uint;
+using highp_uint = uint64_t;
 
 #ifdef DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 
 /**
 	Component floating-point type specified by @c AM_CONFIG_FLOAT_PRECISION.
-	@sa AM_CONFIG_FLOAT_PRECISION
+	@sa
+		AM_CONFIG_FLOAT_PRECISION
 */
-typedef configuration_dependent component_float;
+using component_float = configuration_dependent;
 /**
 	Component signed integer type specified by @c AM_CONFIG_INT_PRECISION.
-	@sa AM_CONFIG_INT_PRECISION
+	@sa
+		AM_CONFIG_INT_PRECISION
 */
-typedef configuration_dependent component_int;
+using component_int = configuration_dependent;
 /**
 	Component unsigned integer type specified by @c AM_CONFIG_UINT_PRECISION.
-	@sa AM_CONFIG_UINT_PRECISION
+	@sa
+		AM_CONFIG_UINT_PRECISION
 */
-typedef configuration_dependent component_uint;
+using component_uint = configuration_dependent;
 
 #else // -
 
 // NOTE: Config validation guaranteed via config.hpp
 
 #if		AM_CONFIG_FLOAT_PRECISION==AM_PRECISION_MEDIUM
-	typedef mediump_float	component_float;
+	using component_float = mediump_float;
 #elif	AM_CONFIG_FLOAT_PRECISION==AM_PRECISION_HIGH
-	typedef highp_float		component_float;
+	using component_float = highp_float;
 #endif
 
 #if		AM_CONFIG_INT_PRECISION==AM_PRECISION_LOW
-	typedef lowp_int		component_int;
+	using component_int = lowp_int;
 #elif	AM_CONFIG_INT_PRECISION==AM_PRECISION_MEDIUM
-	typedef mediump_int		component_int;
+	using component_int = mediump_int;
 #elif	AM_CONFIG_INT_PRECISION==AM_PRECISION_HIGH
-	typedef highp_int		component_int;
+	using component_int = highp_int;
 #endif
 
 #if		AM_CONFIG_UINT_PRECISION==AM_PRECISION_LOW
-	typedef lowp_uint		component_uint;
+	using component_uint = lowp_uint;
 #elif	AM_CONFIG_UINT_PRECISION==AM_PRECISION_MEDIUM
-	typedef mediump_uint	component_uint;
+	using component_uint = mediump_uint;
 #elif	AM_CONFIG_UINT_PRECISION==AM_PRECISION_HIGH
-	typedef highp_uint		component_uint;
+	using component_uint = highp_uint;
 #endif
 
 #endif // DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI

@@ -53,18 +53,18 @@ namespace hash {
 */
 
 /** @cond INTERNAL */
-#define AM_HASH_MURMUR_V2_RESTRICT_LENGTH(hash_length)\
-	AM_STATIC_ASSERT(\
-		HashLength::HL32<=hash_length &&\
-		HashLength::HL64>=hash_length,\
-		"MurmurHash2 cannot produce hash lengths"\
-		" less than 32 bits or greater than 64 bits"\
+#define AM_HASH_MURMUR_V2_RESTRICT_LENGTH(hash_length)	\
+	AM_STATIC_ASSERT(									\
+		HashLength::HL32 <= hash_length &&				\
+		HashLength::HL64 >= hash_length,				\
+		"MurmurHash2 cannot produce hash lengths"		\
+		" less than 32 bits or greater than 64 bits"	\
 	);
 
-#define AM_HASH_MURMUR_V3_RESTRICT_LENGTH(hash_length)\
-	AM_STATIC_ASSERT(\
-		HashLength::HL32==hash_length,\
-		"Only the 32-bit MurmurHash3 is implemented"\
+#define AM_HASH_MURMUR_V3_RESTRICT_LENGTH(hash_length)	\
+	AM_STATIC_ASSERT(									\
+		HashLength::HL32 == hash_length,				\
+		"Only the 32-bit MurmurHash3 is implemented"	\
 	);
 /** @endcond */
 
@@ -80,7 +80,7 @@ namespace hash {
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::murmur2_impl<L>
+	class Impl = detail::hash::murmur2_impl<L>
 >
 inline detail::hash::murmur_hash_type<L>
 murmur2(
@@ -107,9 +107,10 @@ murmur2(
 	@param str A string.
 	@param seed A seed.
 */
-template<HashLength L,
+template<
+	HashLength L,
 	class StringT,
-	class Impl=detail::hash::murmur2_impl<L>
+	class Impl = detail::hash::murmur2_impl<L>
 >
 inline detail::hash::murmur_hash_type<L>
 murmur2_str(
@@ -119,7 +120,7 @@ murmur2_str(
 	AM_HASH_MURMUR_V2_RESTRICT_LENGTH(L);
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size()<<(sizeof(typename StringT::value_type)>>1),
+		str.size() << (sizeof(typename StringT::value_type) >> 1),
 		seed
 	);
 }
@@ -165,7 +166,7 @@ murmur2_64b_str(
 ) {
 	return detail::hash::murmur2_64b_impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size()<<(sizeof(typename StringT::value_type)>>1),
+		str.size() << (sizeof(typename StringT::value_type) >> 1),
 		seed
 	);
 }
@@ -181,7 +182,7 @@ murmur2_64b_str(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::murmur3_impl<L>
+	class Impl = detail::hash::murmur3_impl<L>
 >
 inline detail::hash::murmur_hash_type<L>
 murmur3(
@@ -210,7 +211,7 @@ murmur3(
 template<
 	HashLength L,
 	class StringT,
-	class Impl=detail::hash::murmur3_impl<L>
+	class Impl = detail::hash::murmur3_impl<L>
 >
 inline detail::hash::murmur_hash_type<L>
 murmur3_str(
@@ -220,7 +221,7 @@ murmur3_str(
 	AM_HASH_MURMUR_V3_RESTRICT_LENGTH(L);
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size()<<(sizeof(typename StringT::value_type)>>1),
+		str.size() << (sizeof(typename StringT::value_type) >> 1),
 		seed
 	);
 }
@@ -236,7 +237,7 @@ murmur3_str(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::murmur3_impl<L>
+	class Impl = detail::hash::murmur3_impl<L>
 >
 inline AM_CONSTEXPR detail::hash::murmur_hash_type<L>
 murmur3_c(

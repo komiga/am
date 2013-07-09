@@ -49,12 +49,12 @@ namespace hash {
 */
 
 /** @cond INTERNAL */
-#define AM_HASH_FNV_RESTRICT_LENGTH(hash_length)\
-	AM_STATIC_ASSERT(\
-		HashLength::HL32<=hash_length &&\
-		HashLength::HL64>=hash_length,\
-		"FNV is not implemented for hash lengths"\
-		" less than 32 bits or greater than 64 bits"\
+#define AM_HASH_FNV_RESTRICT_LENGTH(hash_length)		\
+	AM_STATIC_ASSERT(									\
+		HashLength::HL32 <= hash_length &&				\
+		HashLength::HL64 >= hash_length,				\
+		"FNV is not implemented for hash lengths"		\
+		" less than 32 bits or greater than 64 bits"	\
 	);
 /** @endcond */
 
@@ -68,7 +68,7 @@ namespace hash {
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::fnv0_impl<L>
+	class Impl = detail::hash::fnv0_impl<L>
 >
 inline detail::hash::fnv_hash_type<L>
 fnv0(
@@ -94,7 +94,7 @@ fnv0(
 template<
 	HashLength L,
 	class StringT,
-	class Impl=detail::hash::fnv0_impl<L>
+	class Impl = detail::hash::fnv0_impl<L>
 >
 inline detail::hash::fnv_hash_type<L>
 fnv0_str(
@@ -103,7 +103,7 @@ fnv0_str(
 	AM_HASH_FNV_RESTRICT_LENGTH(L);
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size()<<(sizeof(typename StringT::value_type)>>1)
+		str.size() << (sizeof(typename StringT::value_type) >> 1)
 	);
 }
 
@@ -117,7 +117,7 @@ fnv0_str(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::fnv0_impl<L>
+	class Impl = detail::hash::fnv0_impl<L>
 >
 inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
 fnv0_c(
@@ -141,7 +141,7 @@ fnv0_c(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::fnv1_impl<L>
+	class Impl = detail::hash::fnv1_impl<L>
 >
 inline detail::hash::fnv_hash_type<L>
 fnv1(
@@ -168,7 +168,7 @@ fnv1(
 template<
 	HashLength L,
 	class StringT,
-	class Impl=detail::hash::fnv1_impl<L>
+	class Impl = detail::hash::fnv1_impl<L>
 >
 inline detail::hash::fnv_hash_type<L>
 fnv1_str(
@@ -177,7 +177,7 @@ fnv1_str(
 	AM_HASH_FNV_RESTRICT_LENGTH(L);
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size()<<(sizeof(typename StringT::value_type)>>1)
+		str.size() << (sizeof(typename StringT::value_type) >> 1)
 	);
 }
 
@@ -191,7 +191,7 @@ fnv1_str(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::fnv1_impl<L>
+	class Impl = detail::hash::fnv1_impl<L>
 >
 inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
 fnv1_c(
@@ -215,7 +215,7 @@ fnv1_c(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::fnv1a_impl<L>
+	class Impl = detail::hash::fnv1a_impl<L>
 >
 inline detail::hash::fnv_hash_type<L>
 fnv1a(
@@ -241,7 +241,7 @@ fnv1a(
 template<
 	HashLength L,
 	class StringT,
-	class Impl=detail::hash::fnv1a_impl<L>
+	class Impl = detail::hash::fnv1a_impl<L>
 >
 inline detail::hash::fnv_hash_type<L>
 fnv1a_str(
@@ -250,7 +250,7 @@ fnv1a_str(
 	AM_HASH_FNV_RESTRICT_LENGTH(L);
 	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size()<<(sizeof(typename StringT::value_type)>>1)
+		str.size() << (sizeof(typename StringT::value_type) >> 1)
 	);
 }
 
@@ -264,7 +264,7 @@ fnv1a_str(
 */
 template<
 	HashLength L,
-	class Impl=detail::hash::fnv1a_impl<L>
+	class Impl = detail::hash::fnv1a_impl<L>
 >
 inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
 fnv1a_c(

@@ -23,48 +23,59 @@ namespace hash {
 
 /** @cond INTERNAL */
 
-template<::am::hash::HashLength L>
-using fnv_hash_type=::am::hash::common_hash_type<L>;
+template<
+	::am::hash::HashLength L
+>
+using fnv_hash_type = ::am::hash::common_hash_type<L>;
 
 namespace {
-template<::am::hash::HashLength L>
+template<
+	::am::hash::HashLength L
+>
 struct fnv_internals;
 
 template<>
 struct fnv_internals<::am::hash::HashLength::HL32> {
-	static AM_CONSTEXPR uint32_t const prime=0x01000193;
-	static AM_CONSTEXPR uint32_t const offset_basis=0x811c9dc5;
+	static AM_CONSTEXPR uint32_t const prime = 0x01000193;
+	static AM_CONSTEXPR uint32_t const offset_basis = 0x811c9dc5;
 };
 
 template<>
 struct fnv_internals<::am::hash::HashLength::HL64> {
-	static AM_CONSTEXPR uint64_t const prime=0x00000100000001b3;
-	static AM_CONSTEXPR uint64_t const offset_basis=0xcbf29ce484222325;
+	static AM_CONSTEXPR uint64_t const prime = 0x00000100000001b3;
+	static AM_CONSTEXPR uint64_t const offset_basis = 0xcbf29ce484222325;
 };
 
-template<::am::hash::HashLength L>
+template<
+	::am::hash::HashLength L
+>
 struct fnv0_internals {
-	static AM_CONSTEXPR fnv_hash_type<L> const prime=fnv_internals<L>::prime;
-	static AM_CONSTEXPR fnv_hash_type<L> const offset_basis=0x00;
+	static AM_CONSTEXPR fnv_hash_type<L> const prime = fnv_internals<L>::prime;
+	static AM_CONSTEXPR fnv_hash_type<L> const offset_basis = 0x00;
 };
 
 } // anonymous namespace
 
-template<::am::hash::HashLength L>
+template<
+	::am::hash::HashLength L
+>
 struct fnv0_impl {
-	typedef fnv0_internals<L> internals;
-	typedef fnv_hash_type<L> hash_type;
+	using internals = fnv0_internals<L>;
+	using hash_type = fnv_hash_type<L>;
 
 	static hash_type
 	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		hash_type x=internals::offset_basis;
-		std::for_each(data, data+size, [&x](uint8_t const byte) {
-			x*=internals::prime;
-			x^=byte;
-		});
+		hash_type x = internals::offset_basis;
+		std::for_each(
+			data, data + size,
+			[&x](uint8_t const byte) {
+				x *= internals::prime;
+				x ^= byte;
+			}
+		);
 		return x;
 	}
 
@@ -75,32 +86,37 @@ struct fnv0_impl {
 		std::size_t const index,
 		hash_type const value
 	) {
-		return (index<size)
+		return (index < size)
 			? calc_c_seq(
 				data, size,
-				index+1u,
-				(value*internals::prime)^data[index]
+				index + 1u,
+				(value * internals::prime) ^ data[index]
 			)
 			: value
 		;
 	}
 };
 
-template<::am::hash::HashLength L>
+template<
+	::am::hash::HashLength L
+>
 struct fnv1_impl {
-	typedef fnv_internals<L> internals;
-	typedef fnv_hash_type<L> hash_type;
+	using internals = fnv_internals<L>;
+	using hash_type = fnv_hash_type<L>;
 
 	static hash_type
 	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		hash_type x=internals::offset_basis;
-		std::for_each(data, data+size, [&x](uint8_t const byte) {
-			x*=internals::prime;
-			x^=byte;
-		});
+		hash_type x = internals::offset_basis;
+		std::for_each(
+			data, data + size,
+			[&x](uint8_t const byte) {
+				x *= internals::prime;
+				x ^= byte;
+			}
+		);
 		return x;
 	}
 
@@ -111,32 +127,37 @@ struct fnv1_impl {
 		std::size_t const index,
 		hash_type const value
 	) {
-		return (index<size)
+		return (index < size)
 			? calc_c_seq(
 				data, size,
-				index+1u,
-				(value*internals::prime)^data[index]
+				index + 1u,
+				(value * internals::prime) ^ data[index]
 			)
 			: value
 		;
 	}
 };
 
-template<::am::hash::HashLength L>
+template<
+	::am::hash::HashLength L
+>
 struct fnv1a_impl {
-	typedef fnv_internals<L> internals;
-	typedef fnv_hash_type<L> hash_type;
+	using internals = fnv_internals<L>;
+	using hash_type = fnv_hash_type<L>;
 
 	static hash_type
 	calc(
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		hash_type x=internals::offset_basis;
-		std::for_each(data, data+size, [&x](uint8_t const byte) {
-			x^=byte;
-			x*=internals::prime;
-		});
+		hash_type x = internals::offset_basis;
+		std::for_each(
+			data, data+size,
+			[&x](uint8_t const byte) {
+				x ^= byte;
+				x *= internals::prime;
+			}
+		);
 		return x;
 	}
 
@@ -147,11 +168,11 @@ struct fnv1a_impl {
 		std::size_t const index,
 		hash_type const value
 	) {
-		return (index<size)
+		return (index < size)
 			? calc_c_seq(
 				data, size,
-				index+1u,
-				(value^data[index])*internals::prime
+				index + 1u,
+				(value ^ data[index]) * internals::prime
 			)
 			: value
 		;

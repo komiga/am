@@ -47,21 +47,23 @@ AM_DETAIL_TYPE_IS_VECTOR(tvec4);
 	Generic 4-dimensional vector.
 	@tparam T An arithmetic type.
 */
-template<typename T>
+template<
+	typename T
+>
 struct tvec4 {
 	/** @cond INTERNAL */
 	AM_STATIC_ASSERT(
-		true==std::is_arithmetic<T>::value,
+		true == std::is_arithmetic<T>::value,
 		"T must be an arithmetic type"
 	);
 	/** @endcond */
 
 	/** Type of @c *this. */
-	typedef tvec4<T> type;
+	using type = tvec4<T>;
 	/** Type of components. */
-	typedef T value_type;
+	using value_type = T;
 	/** Size/length type. */
-	typedef std::size_t size_type;
+	using size_type = std::size_t;
 
 	/** Dummy enum for constructing uninitialized vectors. */
 	enum ctor_no_init {no_init};
@@ -75,8 +77,8 @@ struct tvec4 {
 
 /** @cond INTERNAL */
 	struct operations {
-	typedef type const& type_cref;
-	typedef value_type const& value_cref;
+	using type_cref = type const&;
+	using value_cref = value_type const&;
 
 	static value_type
 	length(
@@ -84,6 +86,7 @@ struct tvec4 {
 	) {
 		return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
 	}
+
 	static value_type
 	distance(
 		type_cref v,
@@ -91,6 +94,7 @@ struct tvec4 {
 	) {
 		return operations::length(r - v);
 	}
+
 	static value_type
 	dot(
 		type_cref v,
@@ -98,6 +102,7 @@ struct tvec4 {
 	) {
 		return v.x * r.x + v.y * r.y + v.z * r.z + v.w * r.w;
 	}
+
 	static type
 	normalize(
 		type_cref v
@@ -106,6 +111,7 @@ struct tvec4 {
 			v * (value_type(1)
 				/ std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w));
 	}
+
 	static type
 	faceforward(
 		type_cref n,
@@ -114,6 +120,7 @@ struct tvec4 {
 	) {
 		return dot(ng, i) < 0 ? n : -n;
 	}
+
 	static type
 	reflect(
 		type_cref i,
@@ -121,14 +128,15 @@ struct tvec4 {
 	) {
 		return i - value_type(2) * n * dot(n, i);
 	}
+
 	static type
 	refract(
 		type_cref i,
 		type_cref n,
 		value_cref eta
 	) {
-		value_type const d=dot(n, i);
-		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
+		value_type const d = dot(n, i);
+		value_type const k = value_type(1) - eta * eta * (value_type(1) - d * d);
 		return k < value_type(0)
 			? type{value_type(0)}
 			: type{eta * i - (eta * d + std::sqrt(k)) * n};
@@ -146,7 +154,8 @@ struct tvec4 {
 	/**
 		Construct uninitialized.
 	*/
-	explicit tvec4(
+	explicit
+	tvec4(
 		ctor_no_init
 	) {}
 
@@ -154,7 +163,8 @@ struct tvec4 {
 		Construct all components to value.
 		@param s Value.
 	*/
-	explicit tvec4(
+	explicit
+	tvec4(
 		value_type const& s
 	) :
 		x{s}, y{s}, z{s}, w{s}
@@ -164,8 +174,11 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
-	template<typename U>
-	explicit tvec4(
+	template<
+		typename U
+	>
+	explicit
+	tvec4(
 		U const& s
 	) :
 		x{T(s)}, y{T(s)}, z{T(s)}, w{T(s)}
@@ -178,7 +191,8 @@ struct tvec4 {
 		@param c3 Z value.
 		@param c4 W value.
 	*/
-	explicit tvec4(
+	explicit
+	tvec4(
 			value_type const& c1,
 			value_type const& c2,
 			value_type const& c3,
@@ -200,7 +214,8 @@ struct tvec4 {
 		typename H,
 		typename L
 	>
-	explicit tvec4(
+	explicit
+	tvec4(
 		U const& c1,
 		V const& c2,
 		H const& c3,
@@ -223,7 +238,9 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
-	template<typename U>
+	template<
+		typename U
+	>
 	tvec4(
 		tvec4<U> const& v
 	) :
@@ -235,8 +252,12 @@ struct tvec4 {
 		@param c1 X value.
 		@param v Y, Z, and W vector.
 	*/
-	template<typename U, typename V>
-	explicit tvec4(
+	template<
+		typename U,
+		typename V
+	>
+	explicit
+	tvec4(
 		U const& c1,
 		tvec3<V> const& v
 	) :
@@ -247,8 +268,12 @@ struct tvec4 {
 		@param v X, Y, and Z vector.
 		@param c4 W value.
 	*/
-	template<typename U, typename V>
-	explicit tvec4(
+	template<
+		typename U,
+		typename V
+	>
+	explicit
+	tvec4(
 		tvec3<U> const& v,
 		V const& c4
 	) :
@@ -266,7 +291,8 @@ struct tvec4 {
 		typename V,
 		typename H
 	>
-	explicit tvec4(
+	explicit
+	tvec4(
 		U const& c1,
 		V const& c2,
 		tvec2<H> const& v
@@ -284,7 +310,8 @@ struct tvec4 {
 		typename V,
 		typename H
 	>
-	explicit tvec4(
+	explicit
+	tvec4(
 		tvec2<U> const& v,
 		V const& c3,
 		H const& c4
@@ -300,7 +327,8 @@ struct tvec4 {
 		typename U,
 		typename V
 	>
-	explicit tvec4(
+	explicit
+	tvec4(
 		tvec2<U> const& v1,
 		tvec2<V> const& v2
 	) :
@@ -327,7 +355,7 @@ struct tvec4 {
 	operator[](
 		size_type const& i
 	) {
-		assert(size()>i);
+		assert(size() > i);
 		return (&x)[i];
 	}
 	/** @copydoc operator[](size_type const&) */
@@ -335,7 +363,7 @@ struct tvec4 {
 	operator[](
 		size_type const& i
 	) const {
-		assert(size()>i);
+		assert(size() > i);
 		return (&x)[i];
 	}
 /// @}
@@ -351,10 +379,10 @@ struct tvec4 {
 		type const& v
 	) const {
 		return
-			this->x==v.x &&
-			this->y==v.y &&
-			this->z==v.z &&
-			this->w==v.w;
+			this->x == v.x &&
+			this->y == v.y &&
+			this->z == v.z &&
+			this->w == v.w;
 	}
 	/**
 		Non-equivalence operator.
@@ -366,10 +394,10 @@ struct tvec4 {
 		type const& v
 	) const {
 		return
-			this->x!=v.x ||
-			this->y!=v.y ||
-			this->z!=v.z ||
-			this->w!=v.w;
+			this->x != v.x ||
+			this->y != v.y ||
+			this->z != v.z ||
+			this->w != v.w;
 	}
 /// @}
 
@@ -412,10 +440,10 @@ struct tvec4 {
 	operator=(
 		U const& s
 	) {
-		this->x=T(s);
-		this->y=T(s);
-		this->z=T(s);
-		this->w=T(s);
+		this->x = T(s);
+		this->y = T(s);
+		this->z = T(s);
+		this->w = T(s);
 		return *this;
 	}
 	/**
@@ -429,10 +457,10 @@ struct tvec4 {
 	operator=(
 		tvec4<U> const& v
 	) {
-		this->x=T(v.x);
-		this->y=T(v.y);
-		this->z=T(v.z);
-		this->w=T(v.w);
+		this->x = T(v.x);
+		this->y = T(v.y);
+		this->z = T(v.z);
+		this->w = T(v.w);
 		return *this;
 	}
 /// @}
@@ -449,10 +477,10 @@ struct tvec4 {
 	operator+=(
 		U const& s
 	) {
-		this->x+=T(s);
-		this->y+=T(s);
-		this->z+=T(s);
-		this->w+=T(s);
+		this->x += T(s);
+		this->y += T(s);
+		this->z += T(s);
+		this->w += T(s);
 		return *this;
 	}
 	/**
@@ -466,10 +494,10 @@ struct tvec4 {
 	operator+=(
 		tvec4<U> const& v
 	) {
-		this->x+=T(v.x);
-		this->y+=T(v.y);
-		this->z+=T(v.z);
-		this->w+=T(v.w);
+		this->x += T(v.x);
+		this->y += T(v.y);
+		this->z += T(v.z);
+		this->w += T(v.w);
 		return *this;
 	}
 	/**
@@ -483,10 +511,10 @@ struct tvec4 {
 	operator-=(
 		U const& s
 	) {
-		this->x-=T(s);
-		this->y-=T(s);
-		this->z-=T(s);
-		this->w-=T(s);
+		this->x -= T(s);
+		this->y -= T(s);
+		this->z -= T(s);
+		this->w -= T(s);
 		return *this;
 	}
 	/**
@@ -500,10 +528,10 @@ struct tvec4 {
 	operator-=(
 		tvec4<U> const& v
 	) {
-		this->x-=T(v.x);
-		this->y-=T(v.y);
-		this->z-=T(v.z);
-		this->w-=T(v.w);
+		this->x -= T(v.x);
+		this->y -= T(v.y);
+		this->z -= T(v.z);
+		this->w -= T(v.w);
 		return *this;
 	}
 	/**
@@ -517,10 +545,10 @@ struct tvec4 {
 	operator*=(
 		U const& s
 	) {
-		this->x*=T(s);
-		this->y*=T(s);
-		this->z*=T(s);
-		this->w*=T(s);
+		this->x *= T(s);
+		this->y *= T(s);
+		this->z *= T(s);
+		this->w *= T(s);
 		return *this;
 	}
 	/**
@@ -534,10 +562,10 @@ struct tvec4 {
 	operator*=(
 		tvec4<U> const& v
 	) {
-		this->x*=T(v.x);
-		this->y*=T(v.y);
-		this->z*=T(v.z);
-		this->w*=T(v.w);
+		this->x *= T(v.x);
+		this->y *= T(v.y);
+		this->z *= T(v.z);
+		this->w *= T(v.w);
 		return *this;
 	}
 	/**
@@ -551,10 +579,10 @@ struct tvec4 {
 	operator/=(
 		U const& s
 	) {
-		this->x/=T(s);
-		this->y/=T(s);
-		this->z/=T(s);
-		this->w/=T(s);
+		this->x /= T(s);
+		this->y /= T(s);
+		this->z /= T(s);
+		this->w /= T(s);
 		return *this;
 	}
 	/**
@@ -568,10 +596,10 @@ struct tvec4 {
 	operator/=(
 		tvec4<U> const& v
 	) {
-		this->x/=T(v.x);
-		this->y/=T(v.y);
-		this->z/=T(v.z);
-		this->w/=T(v.w);
+		this->x /= T(v.x);
+		this->y /= T(v.y);
+		this->z /= T(v.z);
+		this->w /= T(v.w);
 		return *this;
 	}
 	/**
@@ -585,10 +613,10 @@ struct tvec4 {
 	operator%=(
 		U const& s
 	) {
-		this->x%=T(s);
-		this->y%=T(s);
-		this->z%=T(s);
-		this->w%=T(s);
+		this->x %= T(s);
+		this->y %= T(s);
+		this->z %= T(s);
+		this->w %= T(s);
 		return *this;
 	}
 	/**
@@ -602,10 +630,10 @@ struct tvec4 {
 	operator%=(
 		tvec4<U> const& v
 	) {
-		this->x%=T(v.x);
-		this->y%=T(v.y);
-		this->z%=T(v.z);
-		this->w%=T(v.w);
+		this->x %= T(v.x);
+		this->y %= T(v.y);
+		this->z %= T(v.z);
+		this->w %= T(v.w);
 		return *this;
 	}
 /// @}
@@ -622,10 +650,10 @@ struct tvec4 {
 	operator&=(
 		U const& s
 	) {
-		this->x&=T(s);
-		this->y&=T(s);
-		this->z&=T(s);
-		this->w&=T(s);
+		this->x &= T(s);
+		this->y &= T(s);
+		this->z &= T(s);
+		this->w &= T(s);
 		return *this;
 	}
 	/**
@@ -639,10 +667,10 @@ struct tvec4 {
 	operator&=(
 		tvec4<U> const& v
 	) {
-		this->x&=T(v.x);
-		this->y&=T(v.y);
-		this->z&=T(v.z);
-		this->w&=T(v.w);
+		this->x &= T(v.x);
+		this->y &= T(v.y);
+		this->z &= T(v.z);
+		this->w &= T(v.w);
 		return *this;
 	}
 	/**
@@ -656,10 +684,10 @@ struct tvec4 {
 	operator|=(
 		U const& s
 	) {
-		this->x|=T(s);
-		this->y|=T(s);
-		this->z|=T(s);
-		this->w|=T(s);
+		this->x |= T(s);
+		this->y |= T(s);
+		this->z |= T(s);
+		this->w |= T(s);
 		return *this;
 	}
 	/**
@@ -673,10 +701,10 @@ struct tvec4 {
 	operator|=(
 		tvec4<U> const& v
 	) {
-		this->x|=T(v.x);
-		this->y|=T(v.y);
-		this->z|=T(v.z);
-		this->w|=T(v.w);
+		this->x |= T(v.x);
+		this->y |= T(v.y);
+		this->z |= T(v.z);
+		this->w |= T(v.w);
 		return *this;
 	}
 	/**
@@ -690,10 +718,10 @@ struct tvec4 {
 	operator^=(
 		U const& s
 	) {
-		this->x^=T(s);
-		this->y^=T(s);
-		this->z^=T(s);
-		this->w^=T(s);
+		this->x ^= T(s);
+		this->y ^= T(s);
+		this->z ^= T(s);
+		this->w ^= T(s);
 		return *this;
 	}
 	/**
@@ -707,10 +735,10 @@ struct tvec4 {
 	operator^=(
 		tvec4<U> const& v
 	) {
-		this->x^=T(v.x);
-		this->y^=T(v.y);
-		this->z^=T(v.z);
-		this->w^=T(v.w);
+		this->x ^= T(v.x);
+		this->y ^= T(v.y);
+		this->z ^= T(v.z);
+		this->w ^= T(v.w);
 		return *this;
 	}
 	/**
@@ -724,10 +752,10 @@ struct tvec4 {
 	operator<<=(
 		U const& s
 	) {
-		this->x<<=T(s);
-		this->y<<=T(s);
-		this->z<<=T(s);
-		this->w<<=T(s);
+		this->x <<= T(s);
+		this->y <<= T(s);
+		this->z <<= T(s);
+		this->w <<= T(s);
 		return *this;
 	}
 	/**
@@ -741,10 +769,10 @@ struct tvec4 {
 	operator<<=(
 		tvec4<U> const& v
 	) {
-		this->x<<=T(v.x);
-		this->y<<=T(v.y);
-		this->z<<=T(v.z);
-		this->w<<=T(v.w);
+		this->x <<= T(v.x);
+		this->y <<= T(v.y);
+		this->z <<= T(v.z);
+		this->w <<= T(v.w);
 		return *this;
 	}
 	/**
@@ -758,10 +786,10 @@ struct tvec4 {
 	operator>>=(
 		U const& s
 	) {
-		this->x>>=T(s);
-		this->y>>=T(s);
-		this->z>>=T(s);
-		this->w>>=T(s);
+		this->x >>= T(s);
+		this->y >>= T(s);
+		this->z >>= T(s);
+		this->w >>= T(s);
 		return *this;
 	}
 	/**
@@ -775,10 +803,10 @@ struct tvec4 {
 	operator>>=(
 		tvec4<U> const& v
 	) {
-		this->x>>=T(v.x);
-		this->y>>=T(v.y);
-		this->z>>=T(v.z);
-		this->w>>=T(v.w);
+		this->x >>= T(v.x);
+		this->y >>= T(v.y);
+		this->z >>= T(v.z);
+		this->w >>= T(v.w);
 		return *this;
 	}
 /// @}
@@ -797,7 +825,7 @@ struct tvec4 {
 		tvec4<T> const& x,
 		signed
 	) {
-		return tvec4<T>{x.x+T(1), x.y+T(1), x.z+T(1), x.w+T(1)};
+		return tvec4<T>{x.x + T(1), x.y + T(1), x.z + T(1), x.w + T(1)};
 	}
 	/**
 		Vector postfix decrement.
@@ -811,7 +839,7 @@ struct tvec4 {
 		tvec4<T> const& x,
 		signed
 	) {
-		return tvec4<T>{x.x-T(1), x.y-T(1), x.z-T(1), x.w-T(1)};
+		return tvec4<T>{x.x - T(1), x.y - T(1), x.z - T(1), x.w - T(1)};
 	}
 /// @}
 

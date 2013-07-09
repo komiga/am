@@ -36,9 +36,12 @@ namespace linear {
 #if AM_CONFIG_MATRIX_TYPES & AM_FLAG_TYPE_FLOAT
 	/**
 		2x4 floating-point matrix.
-		@sa AM_CONFIG_MATRIX_TYPES AM_CONFIG_FLOAT_PRECISION
+
+		@sa
+			AM_CONFIG_MATRIX_TYPES,
+			AM_CONFIG_FLOAT_PRECISION
 	*/
-	typedef detail::linear::tmat2x4<component_float> mat2x4;
+	using mat2x4 = detail::linear::tmat2x4<component_float>;
 #endif
 
 /** @} */ // end of doc-group mat2x4

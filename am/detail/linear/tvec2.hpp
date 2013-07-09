@@ -47,21 +47,23 @@ AM_DETAIL_TYPE_IS_VECTOR(tvec2);
 	Generic 2-dimensional vector.
 	@tparam T An arithmetic type.
 */
-template<typename T>
+template<
+	typename T
+>
 struct tvec2 {
 	/** @cond INTERNAL */
 	AM_STATIC_ASSERT(
-		true==std::is_arithmetic<T>::value,
+		true == std::is_arithmetic<T>::value,
 		"T must be an arithmetic type"
 	);
 	/** @endcond */
 
 	/** Type of @c *this. */
-	typedef tvec2<T> type;
+	using type = tvec2<T>;
 	/** Type of components. */
-	typedef T value_type;
+	using value_type = T;
 	/** Size/length type. */
-	typedef std::size_t size_type;
+	using size_type = std::size_t;
 
 	/** Dummy enum for constructing uninitialized vectors. */
 	enum ctor_no_init {no_init};
@@ -73,8 +75,8 @@ struct tvec2 {
 
 /** @cond INTERNAL */
 	struct operations {
-	typedef type const& type_cref;
-	typedef value_type const& value_cref;
+	using type_cref = type const&;
+	using value_cref = value_type const&;
 
 	static value_type
 	length(
@@ -129,8 +131,8 @@ struct tvec2 {
 		type_cref n,
 		value_cref eta
 	) {
-		value_type const d=dot(n, i);
-		value_type const k=value_type(1) - eta * eta * (value_type(1) - d * d);
+		value_type const d = dot(n, i);
+		value_type const k = value_type(1) - eta * eta * (value_type(1) - d * d);
 		return k < value_type(0)
 			? type{value_type(0)}
 			: type{eta * i - (eta * d + std::sqrt(k)) * n};
@@ -148,7 +150,8 @@ struct tvec2 {
 	/**
 		Construct uninitialized.
 	*/
-	explicit tvec2(
+	explicit
+	tvec2(
 		ctor_no_init
 	) {}
 
@@ -156,7 +159,8 @@ struct tvec2 {
 		Construct all components to value.
 		@param s Value.
 	*/
-	explicit tvec2(
+	explicit
+	tvec2(
 		value_type const& s
 	) :
 		x{s}, y{s}
@@ -166,8 +170,11 @@ struct tvec2 {
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
-	template<typename U>
-	explicit tvec2(
+	template<
+		typename U
+	>
+	explicit
+	tvec2(
 		U const& s
 	) :
 		x{T(s)}, y{T(s)}
@@ -178,7 +185,8 @@ struct tvec2 {
 		@param c1 X value.
 		@param c2 Y value.
 	*/
-	explicit tvec2(
+	explicit
+	tvec2(
 		value_type const& c1,
 		value_type const& c2
 	) :
@@ -194,7 +202,8 @@ struct tvec2 {
 		typename U,
 		typename V
 	>
-	explicit tvec2(
+	explicit
+	tvec2(
 		U const& c1,
 		V const& c2
 	) :
@@ -215,7 +224,9 @@ struct tvec2 {
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
-	template<typename U>
+	template<
+		typename U
+	>
 	tvec2(
 		tvec2<U> const& v
 	) :
@@ -228,15 +239,21 @@ struct tvec2 {
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
-	template<typename U>
-	explicit tvec2(
+	template<
+		typename U
+	>
+	explicit
+	tvec2(
 		tvec3<U> const& v
 	) :
 		x{T(v.x)}, y{T(v.y)}
 	{}
 	/** @copydoc tvec2(tvec3<U> const&) */
-	template<typename U>
-	explicit tvec2(
+	template<
+		typename U
+	>
+	explicit
+	tvec2(
 		tvec4<U> const& v
 	) :
 		x{T(v.x)}, y{T(v.y)}
@@ -263,7 +280,7 @@ struct tvec2 {
 	operator[](
 		size_type const& i
 	) {
-		assert(size()>i);
+		assert(size() > i);
 		return (&x)[i];
 	}
 	/** @copydoc operator[](size_type const&) */
@@ -271,7 +288,7 @@ struct tvec2 {
 	operator[](
 		size_type const& i
 	) const {
-		assert(size()>i);
+		assert(size() > i);
 		return (&x)[i];
 	}
 /// @}
@@ -289,8 +306,8 @@ struct tvec2 {
 		type const& v
 	) const {
 		return
-			this->x==v.x &&
-			this->y==v.y;
+			this->x == v.x &&
+			this->y == v.y;
 	}
 	/**
 		Non-equivalence operator.
@@ -304,8 +321,8 @@ struct tvec2 {
 		type const& v
 	) const {
 		return
-			this->x!=v.x ||
-			this->y!=v.y;
+			this->x != v.x ||
+			this->y != v.y;
 	}
 /// @}
 
@@ -344,8 +361,8 @@ struct tvec2 {
 	operator=(
 		U const& s
 	) {
-		this->x=T(s);
-		this->y=T(s);
+		this->x = T(s);
+		this->y = T(s);
 		return *this;
 	}
 	/**
@@ -359,8 +376,8 @@ struct tvec2 {
 	operator=(
 		tvec2<U> const& v
 	) {
-		this->x=T(v.x);
-		this->y=T(v.y);
+		this->x = T(v.x);
+		this->y = T(v.y);
 		return *this;
 	}
 /// @}
@@ -377,8 +394,8 @@ struct tvec2 {
 	operator+=(
 		U const& s
 	) {
-		this->x+=T(s);
-		this->y+=T(s);
+		this->x += T(s);
+		this->y += T(s);
 		return *this;
 	}
 	/**
@@ -392,8 +409,8 @@ struct tvec2 {
 	operator+=(
 		tvec2<U> const& v
 	) {
-		this->x+=T(v.x);
-		this->y+=T(v.y);
+		this->x += T(v.x);
+		this->y += T(v.y);
 		return *this;
 	}
 	/**
@@ -407,8 +424,8 @@ struct tvec2 {
 	operator-=(
 		U const& s
 	) {
-		this->x-=T(s);
-		this->y-=T(s);
+		this->x -= T(s);
+		this->y -= T(s);
 		return *this;
 	}
 	/**
@@ -422,8 +439,8 @@ struct tvec2 {
 	operator-=(
 		tvec2<U> const& v
 	) {
-		this->x-=T(v.x);
-		this->y-=T(v.y);
+		this->x -= T(v.x);
+		this->y -= T(v.y);
 		return *this;
 	}
 	/**
@@ -437,8 +454,8 @@ struct tvec2 {
 	operator*=(
 		U const& s
 	) {
-		this->x*=T(s);
-		this->y*=T(s);
+		this->x *= T(s);
+		this->y *= T(s);
 		return *this;
 	}
 	/**
@@ -452,8 +469,8 @@ struct tvec2 {
 	operator*=(
 		tvec2<U> const& v
 	) {
-		this->x*=T(v.x);
-		this->y*=T(v.y);
+		this->x *= T(v.x);
+		this->y *= T(v.y);
 		return *this;
 	}
 	/**
@@ -467,8 +484,8 @@ struct tvec2 {
 	operator/=(
 		U const& s
 	) {
-		this->x/=T(s);
-		this->y/=T(s);
+		this->x /= T(s);
+		this->y /= T(s);
 		return *this;
 	}
 	/**
@@ -482,8 +499,8 @@ struct tvec2 {
 	operator/=(
 		tvec2<U> const& v
 	) {
-		this->x/=T(v.x);
-		this->y/=T(v.y);
+		this->x /= T(v.x);
+		this->y /= T(v.y);
 		return *this;
 	}
 	/**
@@ -497,8 +514,8 @@ struct tvec2 {
 	operator%=(
 		U const& s
 	) {
-		this->x%=T(s);
-		this->y%=T(s);
+		this->x %= T(s);
+		this->y %= T(s);
 		return *this;
 	}
 	/**
@@ -512,8 +529,8 @@ struct tvec2 {
 	operator%=(
 		tvec2<U> const& v
 	) {
-		this->x%=T(v.x);
-		this->y%=T(v.y);
+		this->x %= T(v.x);
+		this->y %= T(v.y);
 		return *this;
 	}
 /// @}
@@ -530,8 +547,8 @@ struct tvec2 {
 	operator&=(
 		U const& s
 	) {
-		this->x&=T(s);
-		this->y&=T(s);
+		this->x &= T(s);
+		this->y &= T(s);
 		return *this;
 	}
 	/**
@@ -545,8 +562,8 @@ struct tvec2 {
 	operator&=(
 		tvec2<U> const& v
 	) {
-		this->x&=T(v.x);
-		this->y&=T(v.y);
+		this->x &= T(v.x);
+		this->y &= T(v.y);
 		return *this;
 	}
 	/**
@@ -560,8 +577,8 @@ struct tvec2 {
 	operator|=(
 		U const& s
 	) {
-		this->x|=T(s);
-		this->y|=T(s);
+		this->x |= T(s);
+		this->y |= T(s);
 		return *this;
 	}
 	/**
@@ -575,8 +592,8 @@ struct tvec2 {
 	operator|=(
 		tvec2<U> const& v
 	) {
-		this->x|=T(v.x);
-		this->y|=T(v.y);
+		this->x |= T(v.x);
+		this->y |= T(v.y);
 		return *this;
 	}
 	/**
@@ -590,8 +607,8 @@ struct tvec2 {
 	operator^=(
 		U const& s
 	) {
-		this->x^=T(s);
-		this->y^=T(s);
+		this->x ^= T(s);
+		this->y ^= T(s);
 		return *this;
 	}
 	/**
@@ -605,8 +622,8 @@ struct tvec2 {
 	operator^=(
 		tvec2<U> const& v
 	) {
-		this->x^=T(v.x);
-		this->y^=T(v.y);
+		this->x ^= T(v.x);
+		this->y ^= T(v.y);
 		return *this;
 	}
 	/**
@@ -620,8 +637,8 @@ struct tvec2 {
 	operator<<=(
 		U const& s
 	) {
-		this->x<<=T(s);
-		this->y<<=T(s);
+		this->x <<= T(s);
+		this->y <<= T(s);
 		return *this;
 	}
 	/**
@@ -635,8 +652,8 @@ struct tvec2 {
 	operator<<=(
 		tvec2<U> const& v
 	) {
-		this->x<<=T(v.x);
-		this->y<<=T(v.y);
+		this->x <<= T(v.x);
+		this->y <<= T(v.y);
 		return *this;
 	}
 	/**
@@ -650,8 +667,8 @@ struct tvec2 {
 	operator>>=(
 		U const& s
 	) {
-		this->x>>=T(s);
-		this->y>>=T(s);
+		this->x >>= T(s);
+		this->y >>= T(s);
 		return *this;
 	}
 	/**
@@ -665,8 +682,8 @@ struct tvec2 {
 	operator>>=(
 		tvec2<U> const& v
 	) {
-		this->x>>=T(v.x);
-		this->y>>=T(v.y);
+		this->x >>= T(v.x);
+		this->y >>= T(v.y);
 		return *this;
 	}
 /// @}
@@ -686,7 +703,7 @@ struct tvec2 {
 		tvec2<T> const& x,
 		signed
 	) {
-		return tvec2<T>{x.x+T(1), x.y+T(1)};
+		return tvec2<T>{x.x + T(1), x.y + T(1)};
 	}
 	/**
 		Vector postfix decrement.
@@ -701,7 +718,7 @@ struct tvec2 {
 		tvec2<T> const& x,
 		signed
 	) {
-		return tvec2<T>{x.x-T(1), x.y-T(1)};
+		return tvec2<T>{x.x - T(1), x.y - T(1)};
 	}
 /// @}
 

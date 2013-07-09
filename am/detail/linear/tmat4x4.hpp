@@ -48,28 +48,30 @@ AM_DETAIL_TYPE_IS_SQUARE_MATRIX(tmat4x4);
 	Generic 4x4 matrix.
 	@tparam T A floating-point type.
 */
-template<typename T>
+template<
+	typename T
+>
 struct tmat4x4 {
 public:
 	/** @cond INTERNAL */
 	AM_STATIC_ASSERT(
-		true==std::is_floating_point<T>::value,
+		true == std::is_floating_point<T>::value,
 		"T must be a floating-point type"
 	);
 	/** @endcond */
 
 	/** Type of @c *this. */
-	typedef tmat4x4<T> type;
+	using type = tmat4x4<T>;
 	/** Type of transpose. */
-	typedef tmat4x4<T> transpose_type;
+	using transpose_type = tmat4x4<T>;
 	/** Type of components. */
-	typedef T value_type;
+	using value_type = T;
 	/** Type of rows. */
-	typedef tvec4<T> row_type;
+	using row_type = tvec4<T>;
 	/** Type of columns. */
-	typedef tvec4<T> col_type;
+	using col_type = tvec4<T>;
 	/** Size/length type. */
-	typedef std::size_t size_type;
+	using size_type = std::size_t;
 
 	/** Dummy enum for constructing uninitialized matrices. */
 	enum ctor_no_init {no_init};
@@ -79,10 +81,10 @@ public:
 
 /** @cond INTERNAL */
 	struct operations {
-	typedef type const& type_cref;
-	typedef value_type const& value_cref;
-	typedef row_type const& row_cref;
-	typedef col_type const& col_cref;
+	using type_cref = type const&;
+	using value_cref = value_type const&;
+	using row_cref = row_type const&;
+	using col_cref = col_type const&;
 
 	static transpose_type
 	transpose(
@@ -121,29 +123,29 @@ public:
 	inverse(
 		type_cref m
 	) {
-		value_type c00=m.data[2].z * m.data[3].w - m.data[3].z * m.data[2].w; // (kp - lo)
-		value_type c02=m.data[1].z * m.data[3].w - m.data[3].z * m.data[1].w; // (jp - ln)
-		value_type c03=m.data[1].z * m.data[2].w - m.data[2].z * m.data[1].w; // (jl - kn)
+		value_type c00 = m.data[2].z * m.data[3].w - m.data[3].z * m.data[2].w; // (kp - lo)
+		value_type c02 = m.data[1].z * m.data[3].w - m.data[3].z * m.data[1].w; // (jp - ln)
+		value_type c03 = m.data[1].z * m.data[2].w - m.data[2].z * m.data[1].w; // (jl - kn)
 
-		value_type c04=m.data[2].y * m.data[3].w - m.data[3].y * m.data[2].w; // (gp - ho)
-		value_type c06=m.data[1].y * m.data[3].w - m.data[3].y * m.data[1].w; // (fp - hn)
-		value_type c07=m.data[1].y * m.data[2].w - m.data[2].y * m.data[1].w; // (fl - gn)
+		value_type c04 = m.data[2].y * m.data[3].w - m.data[3].y * m.data[2].w; // (gp - ho)
+		value_type c06 = m.data[1].y * m.data[3].w - m.data[3].y * m.data[1].w; // (fp - hn)
+		value_type c07 = m.data[1].y * m.data[2].w - m.data[2].y * m.data[1].w; // (fl - gn)
 
-		value_type c08=m.data[2].y * m.data[3].z - m.data[3].y * m.data[2].z; // (gl - hk)
-		value_type c10=m.data[1].y * m.data[3].z - m.data[3].y * m.data[1].z; // (fl - hj)
-		value_type c11=m.data[1].y * m.data[2].z - m.data[2].y * m.data[1].z; // (fk - gj)
+		value_type c08 = m.data[2].y * m.data[3].z - m.data[3].y * m.data[2].z; // (gl - hk)
+		value_type c10 = m.data[1].y * m.data[3].z - m.data[3].y * m.data[1].z; // (fl - hj)
+		value_type c11 = m.data[1].y * m.data[2].z - m.data[2].y * m.data[1].z; // (fk - gj)
 
-		value_type c12=m.data[2].x * m.data[3].w - m.data[3].x * m.data[2].w; // (cp - do)
-		value_type c14=m.data[1].x * m.data[3].w - m.data[3].x * m.data[1].w; // (bp - dn)
-		value_type c15=m.data[1].x * m.data[2].w - m.data[2].x * m.data[1].w; // (bl - cn)
+		value_type c12 = m.data[2].x * m.data[3].w - m.data[3].x * m.data[2].w; // (cp - do)
+		value_type c14 = m.data[1].x * m.data[3].w - m.data[3].x * m.data[1].w; // (bp - dn)
+		value_type c15 = m.data[1].x * m.data[2].w - m.data[2].x * m.data[1].w; // (bl - cn)
 
-		value_type c16=m.data[2].x * m.data[3].z - m.data[3].x * m.data[2].z; // (cl - dk)
-		value_type c18=m.data[1].x * m.data[3].z - m.data[3].x * m.data[1].z; // (bl - dj)
-		value_type c19=m.data[1].x * m.data[2].z - m.data[2].x * m.data[1].z; // (bk - cj)
+		value_type c16 = m.data[2].x * m.data[3].z - m.data[3].x * m.data[2].z; // (cl - dk)
+		value_type c18 = m.data[1].x * m.data[3].z - m.data[3].x * m.data[1].z; // (bl - dj)
+		value_type c19 = m.data[1].x * m.data[2].z - m.data[2].x * m.data[1].z; // (bk - cj)
 
-		value_type c20=m.data[2].x * m.data[3].y - m.data[3].x * m.data[2].y; // (ch - dg)
-		value_type c22=m.data[1].x * m.data[3].y - m.data[3].x * m.data[1].y; // (bh - df)
-		value_type c23=m.data[1].x * m.data[2].y - m.data[2].x * m.data[1].y; // (bg - cf)
+		value_type c20 = m.data[2].x * m.data[3].y - m.data[3].x * m.data[2].y; // (ch - dg)
+		value_type c22 = m.data[1].x * m.data[3].y - m.data[3].x * m.data[1].y; // (bh - df)
+		value_type c23 = m.data[1].x * m.data[2].y - m.data[2].x * m.data[1].y; // (bg - cf)
 
 		tvec4<T> f0{c00, c00, c02, c03};
 		tvec4<T> f1{c04, c04, c06, c07};
@@ -157,15 +159,16 @@ public:
 		tvec4<T> v2{m.data[1].z, m.data[0].z, m.data[0].z, m.data[0].z};
 		tvec4<T> v3{m.data[1].w, m.data[0].w, m.data[0].w, m.data[0].w};
 
-		tvec4<T> const sa{+1,-1,+1,-1};
-		tvec4<T> const sb{-1,+1,-1,+1};
+		tvec4<T> const sa{+1,-1, +1,-1};
+		tvec4<T> const sb{-1,+1, -1,+1};
 		type invm{
 			sa * (v1 * f0 - v2 * f1 + v3 * f2),
 			sb * (v0 * f0 - v2 * f3 + v3 * f4),
 			sa * (v0 * f1 - v1 * f3 + v3 * f5),
-			sb * (v0 * f2 - v1 * f4 + v2 * f5)};
+			sb * (v0 * f2 - v1 * f4 + v2 * f5)
+		};
 
-		value_type const det=row_type::operations::dot(
+		value_type const det = row_type::operations::dot(
 			m.data[0],
 			row_type{
 				invm.data[0].x, invm.data[1].x, invm.data[2].x, invm.data[3].x
@@ -443,7 +446,9 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
-	template<typename U>
+	template<
+		typename U
+	>
 	explicit
 	tmat4x4(
 		U const& s
@@ -567,7 +572,9 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
-	template<typename U>
+	template<
+		typename U
+	>
 	tmat4x4(
 		tmat4x4<U> const& m
 	) : data{
@@ -614,7 +621,7 @@ public:
 	operator[](
 		size_type const& i
 	) {
-		assert(size()>i);
+		assert(size() > i);
 		return data[i];
 	}
 	/** @copydoc operator[](size_type const&) */
@@ -622,7 +629,7 @@ public:
 	operator[](
 		size_type const& i
 	) const {
-		assert(size()>i);
+		assert(size() > i);
 		return data[i];
 	}
 /// @}
@@ -640,10 +647,10 @@ public:
 		type const& m
 	) const {
 		return
-			data[0]==m.data[0] &&
-			data[1]==m.data[1] &&
-			data[2]==m.data[2] &&
-			data[3]==m.data[3];
+			data[0] == m.data[0] &&
+			data[1] == m.data[1] &&
+			data[2] == m.data[2] &&
+			data[3] == m.data[3];
 	}
 	/**
 		Non-equivalence operator.
@@ -657,10 +664,10 @@ public:
 		type const& m
 	) const {
 		return
-			data[0]!=m.data[0] ||
-			data[1]!=m.data[1] ||
-			data[2]!=m.data[2] ||
-			data[3]!=m.data[3];
+			data[0] != m.data[0] ||
+			data[1] != m.data[1] ||
+			data[2] != m.data[2] ||
+			data[3] != m.data[3];
 	}
 /// @}
 
@@ -703,10 +710,10 @@ public:
 	operator=(
 		tmat4x4<U> const& m
 	) {
-		data[0]=m.data[0];
-		data[1]=m.data[1];
-		data[2]=m.data[2];
-		data[3]=m.data[3];
+		data[0] = m.data[0];
+		data[1] = m.data[1];
+		data[2] = m.data[2];
+		data[3] = m.data[3];
 		return *this;
 	}
 /// @}
@@ -723,10 +730,10 @@ public:
 	operator+=(
 		U const& s
 	) {
-		data[0]+=T(s);
-		data[1]+=T(s);
-		data[2]+=T(s);
-		data[3]+=T(s);
+		data[0] += T(s);
+		data[1] += T(s);
+		data[2] += T(s);
+		data[3] += T(s);
 		return *this;
 	}
 	/**
@@ -740,10 +747,10 @@ public:
 	operator+=(
 		tmat4x4<U> const& m
 	) {
-		data[0]+=m.data[0];
-		data[1]+=m.data[1];
-		data[2]+=m.data[2];
-		data[3]+=m.data[3];
+		data[0] += m.data[0];
+		data[1] += m.data[1];
+		data[2] += m.data[2];
+		data[3] += m.data[3];
 		return *this;
 	}
 	/**
@@ -757,10 +764,10 @@ public:
 	operator-=(
 		U const& s
 	) {
-		data[0]-=T(s);
-		data[1]-=T(s);
-		data[2]-=T(s);
-		data[3]-=T(s);
+		data[0] -= T(s);
+		data[1] -= T(s);
+		data[2] -= T(s);
+		data[3] -= T(s);
 		return *this;
 	}
 	/**
@@ -774,10 +781,10 @@ public:
 	operator-=(
 		tmat4x4<U> const& m
 	) {
-		data[0]-=m.data[0];
-		data[1]-=m.data[1];
-		data[2]-=m.data[2];
-		data[3]-=m.data[3];
+		data[0] -= m.data[0];
+		data[1] -= m.data[1];
+		data[2] -= m.data[2];
+		data[3] -= m.data[3];
 		return *this;
 	}
 	/**
@@ -791,10 +798,10 @@ public:
 	operator*=(
 		U const& s
 	) {
-		data[0]*=T(s);
-		data[1]*=T(s);
-		data[2]*=T(s);
-		data[3]*=T(s);
+		data[0] *= T(s);
+		data[1] *= T(s);
+		data[2] *= T(s);
+		data[3] *= T(s);
 		return *this;
 	}
 	/**
@@ -821,10 +828,10 @@ public:
 	operator/=(
 		U const& s
 	) {
-		data[0]/=T(s);
-		data[1]/=T(s);
-		data[2]/=T(s);
-		data[3]/=T(s);
+		data[0] /= T(s);
+		data[1] /= T(s);
+		data[2] /= T(s);
+		data[3] /= T(s);
 		return *this;
 	}
 	/**

@@ -34,25 +34,34 @@ namespace linear {
 #if AM_CONFIG_VECTOR_TYPES&AM_FLAG_TYPE_FLOAT
 	/**
 		1-dimensional floating-point vector.
-		@sa AM_CONFIG_VECTOR_TYPES AM_CONFIG_FLOAT_PRECISION
+
+		@sa
+			AM_CONFIG_VECTOR_TYPES,
+			AM_CONFIG_FLOAT_PRECISION
 	*/
-	typedef detail::linear::tvec1<component_float> vec1;
+	using vec1 = detail::linear::tvec1<component_float>;
 #endif
 
 #if AM_CONFIG_VECTOR_TYPES&AM_FLAG_TYPE_INT
 	/**
 		1-dimensional signed integer vector.
-		@sa AM_CONFIG_VECTOR_TYPES AM_CONFIG_INT_PRECISION
+
+		@sa
+			AM_CONFIG_VECTOR_TYPES,
+			AM_CONFIG_INT_PRECISION
 	*/
-	typedef detail::linear::tvec1<component_int> ivec1;
+	using ivec1 = detail::linear::tvec1<component_int>;
 #endif
 
 #if AM_CONFIG_VECTOR_TYPES&AM_FLAG_TYPE_UINT
 	/**
 		1-dimensional unsigned integer vector.
-		@sa AM_CONFIG_VECTOR_TYPES AM_CONFIG_UINT_PRECISION
+
+		@sa
+			AM_CONFIG_VECTOR_TYPES,
+			AM_CONFIG_UINT_PRECISION
 	*/
-	typedef detail::linear::tvec1<component_uint> uvec1;
+	using uvec1 = detail::linear::tvec1<component_uint>;
 #endif
 
 /** @} */ // end of doc-group vec1

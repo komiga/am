@@ -38,13 +38,17 @@ namespace linear {
 	@tparam ConType A specialized matrix type.
 	@param m Matrix.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline typename ConType::transpose_type
 transpose(
 	ConType const& m
 ) {
-	AM_STATIC_ASSERT(detail::linear::is_matrix<ConType>::value,
-		"ConType must be a matrix");
+	AM_STATIC_ASSERT(
+		detail::linear::is_matrix<ConType>::value,
+		"ConType must be a matrix"
+	);
 	return ConType::operations::transpose(m);
 }
 
@@ -60,13 +64,17 @@ transpose(
 	@tparam ConType A specialized square matrix type.
 	@param m Matrix.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline typename ConType::value_type
 determinant(
 	ConType const& m
 ) {
-	AM_STATIC_ASSERT(detail::linear::is_square_matrix<ConType>::value,
-		"ConType must be a square matrix");
+	AM_STATIC_ASSERT(
+		detail::linear::is_square_matrix<ConType>::value,
+		"ConType must be a square matrix"
+	);
 	return ConType::operations::determinant(m);
 }
 
@@ -85,13 +93,17 @@ determinant(
 	@tparam ConType A specialized square matrix type.
 	@param m Matrix.
 */
-template<class ConType>
+template<
+	class ConType
+>
 inline ConType
 inverse(
 	ConType const& m
 ) {
-	AM_STATIC_ASSERT(detail::linear::is_square_matrix<ConType>::value,
-		"ConType must be a square matrix");
+	AM_STATIC_ASSERT(
+		detail::linear::is_square_matrix<ConType>::value,
+		"ConType must be a square matrix"
+	);
 	return ConType::operations::inverse(m);
 }
 
