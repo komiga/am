@@ -164,7 +164,6 @@ fnv1(
 	inferred from @a str.
 	@param str A string.
 */
-
 template<
 	HashLength L,
 	class StringT,

@@ -101,8 +101,8 @@ void test_murmur() {
 	};
 	#define TEST_MURMUR64B_HASH_SET(data_)\
 		TEST_HASH_SEEDED_SET(data_.data, data_.seed,\
-			am::hash::murmur2_64b,\
-			am::hash::murmur2_64b_str<std::string>);
+			am::hash::murmur2_64b<am::hash::HL64>,\
+			am::hash::murmur2_64b_str<am::hash::HL64, std::string>);
 
 	struct murmur3_hash_data {
 		uint32_t const seed;

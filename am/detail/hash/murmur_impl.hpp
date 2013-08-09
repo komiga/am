@@ -131,12 +131,18 @@ struct murmur2_impl<::am::hash::HashLength::HL64> {
 	}
 };
 
+template<
+	::am::hash::HashLength L
+>
+struct murmur2_64b_impl;
+
 // MurmurHash64B
 #define AM_MURMUR2_64B_CMIX__(hx)\
 	k *= M; k ^= k >> R; k *= M;\
 	hx *= M; hx ^= k
 
-struct murmur2_64b_impl {
+template<>
+struct murmur2_64b_impl<::am::hash::HashLength::HL64> {
 	static AM_CONSTEXPR uint32_t const M = 0x5bd1e995;
 	static AM_CONSTEXPR unsigned const R = 24u;
 

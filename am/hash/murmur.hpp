@@ -61,10 +61,16 @@ namespace hash {
 		" less than 32 bits or greater than 64 bits"	\
 	);
 
+#define AM_HASH_MURMUR_64B_RESTRICT_LENGTH(hash_length)	\
+	AM_STATIC_ASSERT(									\
+		HashLength::HL64 == hash_length,				\
+		"MurmurHash64B only has a 64-bit implementation"\
+	);
+
 #define AM_HASH_MURMUR_V3_RESTRICT_LENGTH(hash_length)	\
 	AM_STATIC_ASSERT(									\
 		HashLength::HL32 == hash_length,				\
-		"Only the 32-bit MurmurHash3 is implemented"	\
+		"MurmurHash3 only has a 32-bit implementation"	\
 	);
 /** @endcond */
 
@@ -135,13 +141,18 @@ murmur2_str(
 	@param size Size in bytes of @a data.
 	@param seed A seed.
 */
-inline uint64_t
+template<
+	HashLength L,
+	class Impl = detail::hash::murmur2_64b_impl<L>
+>
+inline detail::hash::murmur_hash_type<L>
 murmur2_64b(
 	void const* const data,
 	std::size_t const size,
-	uint64_t const seed
+	detail::hash::murmur_hash_type<L> const seed
 ) {
-	return detail::hash::murmur2_64b_impl::calc(
+	AM_HASH_MURMUR_64B_RESTRICT_LENGTH(L);
+	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(data),
 		size,
 		seed
@@ -153,18 +164,24 @@ murmur2_64b(
 	for x86 processors) of a standard string.
 
 	@returns The hash of @a str.
+	@tparam L Hash length.
 	@tparam StringT A standard string type (e.g., @c std::string);
 	inferred from @a str.
 	@param str A string.
 	@param seed A seed.
 */
-template<class StringT>
-inline uint64_t
+template<
+	HashLength L,
+	class StringT,
+	class Impl = detail::hash::murmur2_64b_impl<L>
+>
+inline detail::hash::murmur_hash_type<L>
 murmur2_64b_str(
 	StringT const& str,
-	uint64_t const seed
+	detail::hash::murmur_hash_type<L> const seed
 ) {
-	return detail::hash::murmur2_64b_impl::calc(
+	AM_HASH_MURMUR_64B_RESTRICT_LENGTH(L);
+	return Impl::calc(
 		reinterpret_cast<uint8_t const*>(str.c_str()),
 		str.size() << (sizeof(typename StringT::value_type) >> 1),
 		seed
