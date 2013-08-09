@@ -192,7 +192,7 @@ print_help() {
 
 signed
 main(
-	int argc,
+	signed argc,
 	char* argv[]
 ) {
 	if (4 > argc) {
