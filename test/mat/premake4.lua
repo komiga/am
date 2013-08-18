@@ -1,2 +1,5 @@
-group="mat"
-setup_test("operators", "operators.cpp")
+
+make_tests(
+	"mat", {
+	["operators"] = {nil, nil},
+})

@@ -1,2 +1,5 @@
-group="vec"
-setup_test("operators", "operators.cpp")
+
+make_tests(
+	"vec", {
+	["operators"] = {nil, nil},
+})

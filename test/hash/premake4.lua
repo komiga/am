@@ -1,3 +1,6 @@
-group="hash"
-setup_test("validate", "validate.cpp")
-setup_test("util", "util.cpp")
+
+make_tests(
+	"hash", {
+	["validate"] = {nil, nil},
+	["util"] = {nil, nil},
+})

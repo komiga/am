@@ -1,40 +1,17 @@
 
-newoption {
-	trigger="clang",
-	description="Use Clang in-place of GCC",
-}
+dofile("precore_import.lua")
 
-if _OPTIONS["clang"] then
-	premake.gcc.cc="clang"
-	premake.gcc.cxx="clang++"
-end
+precore.make_config(
+"test-strict", {{
+project = function()
+	configuration {}
+		flags {
+			"FatalWarnings"
+		}
 
-solution("tests")
-	configurations {"debug", "release"}
-	platforms {"x32", "x64"}
-
-group=""
-
-function setup_test(name, src)
-	local outpath="out/"
-	local proj=project(group.."_"..name)
-	proj.language="C++"
-	proj.kind="ConsoleApp"
-	
-	targetname(name)
-	
-	configuration {"debug"}
-		defines {"DEBUG", "_DEBUG"}
-		flags {"ExtraWarnings", "Symbols"}
-	
-	configuration {"release"}
-		defines {"NDEBUG"}
-		flags {"ExtraWarnings", "Optimize"}
-	
 	configuration {"linux"}
 		buildoptions {
 			"-pedantic-errors",
-			"-Werror",
 			"-Wextra",
 
 			"-Wuninitialized",
@@ -50,36 +27,75 @@ function setup_test(name, src)
 
 			"-Wunused"
 		}
+end}})
 
-	configuration {"linux", "not clang"}
-		buildoptions {"-std=c++0x"}
+function make_test(group, name, srcglob, configs)
+	precore.make_project(
+		group .. "_" .. name,
+		"C++", "ConsoleApp",
+		"./", "out/",
+		nil, configs
+	)
 
-	configuration {"linux", "clang"}
-		buildoptions {"-std=c++11"}
-		buildoptions {"-stdlib=libstdc++"}
-		links {"stdc++"}
+	if nil == configs then
+		precore.apply("test-strict")
+	end
+
+	if nil == srcglob then
+		srcglob = name .. ".cpp"
+	end
 
 	configuration {}
-		targetdir(".")
-		objdir(outpath)
+		targetname(name)
 		includedirs {
-			"../.."
+			precore.subst("${ROOT}/")
 		}
 		files {
-			src
+			srcglob
 		}
 end
 
--- categories
+function make_tests(group, tests)
+	for name, test in pairs(tests) do
+		make_test(group, name, test[0], test[1])
+	end
+end
 
-include "general"
-include "vec"
-include "mat"
-include "hash"
+precore.init(
+	{
+		-- Don't have a top-level premake script, so forcing project
+		-- root to top-level
+		ROOT = path.getabsolute("..")
+    },
+	{
+		"opt-clang",
+		"c++11-core",
+		"precore-env-root"
+	}
+)
 
-if _ACTION=="clean" then
-	local prjs=solution().projects
-	for i, prj in ipairs(prjs) do
-		os.rmdir(prj.basedir.."/out")
+-- Test solution
+
+precore.make_solution(
+	"test",
+	{"debug", "release"},
+	{"x64", "x32"},
+	nil, {
+		"precore-generic"
+	}
+)
+
+-- Groups
+
+include("general")
+include("vec")
+include("mat")
+include("hash")
+
+if "clean" == _ACTION then
+	for _, pc_sol in pairs(precore.state.solutions) do
+		for _, pc_proj in pairs(pc_sol.projects) do
+			os.rmdir(path.join(pc_proj.obj.basedir, "out"))
+		end
 	end
 end
