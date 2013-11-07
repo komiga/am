@@ -52,20 +52,20 @@ using highp_uint = uint64_t;
 
 /**
 	Component floating-point type specified by @c AM_CONFIG_FLOAT_PRECISION.
-	@sa
-		AM_CONFIG_FLOAT_PRECISION
+
+	@sa AM_CONFIG_FLOAT_PRECISION
 */
 using component_float = configuration_dependent;
 /**
 	Component signed integer type specified by @c AM_CONFIG_INT_PRECISION.
-	@sa
-		AM_CONFIG_INT_PRECISION
+
+	@sa AM_CONFIG_INT_PRECISION
 */
 using component_int = configuration_dependent;
 /**
 	Component unsigned integer type specified by @c AM_CONFIG_UINT_PRECISION.
-	@sa
-		AM_CONFIG_UINT_PRECISION
+
+	@sa AM_CONFIG_UINT_PRECISION
 */
 using component_uint = configuration_dependent;
 

@@ -35,8 +35,7 @@ namespace linear {
 	/**
 		2-dimensional floating-point vector.
 
-		@sa
-			AM_CONFIG_VECTOR_TYPES,
+		@sa AM_CONFIG_VECTOR_TYPES,
 			AM_CONFIG_FLOAT_PRECISION
 	*/
 	using vec2 = detail::linear::tvec2<component_float>;
@@ -46,8 +45,7 @@ namespace linear {
 	/**
 		2-dimensional signed integer vector.
 
-		@sa
-			AM_CONFIG_VECTOR_TYPES,
+		@sa AM_CONFIG_VECTOR_TYPES,
 			AM_CONFIG_INT_PRECISION
 	*/
 	using ivec2 = detail::linear::tvec2<component_int>;
@@ -57,8 +55,7 @@ namespace linear {
 	/**
 		2-dimensional unsigned integer vector.
 
-		@sa
-			AM_CONFIG_VECTOR_TYPES,
+		@sa AM_CONFIG_VECTOR_TYPES,
 			AM_CONFIG_UINT_PRECISION
 	*/
 	using uvec2 = detail::linear::tvec2<component_uint>;

@@ -48,6 +48,7 @@ AM_DETAIL_TYPE_IS_MATRIX(tmat2x4);
 
 /**
 	Generic 2x4 matrix.
+
 	@tparam T A floating-point type.
 */
 template<
@@ -302,6 +303,7 @@ public:
 
 	/**
 		Construct to main diagonal.
+
 		@param s Value.
 	*/
 	explicit
@@ -313,6 +315,7 @@ public:
 	} {}
 	/**
 		Construct to main diagonal.
+
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
@@ -329,6 +332,7 @@ public:
 
 	/**
 		Construct to values.
+
 		@param x1,y1,z1,w1 First column.
 		@param x2,y2,z2,w2 Second column.
 	*/
@@ -344,6 +348,7 @@ public:
 	} {}
 	/**
 		Construct to values.
+
 		@tparam X1,Y1,Z1,W1, X2,Y2,Z2,W2 An arithmetic type.
 		@param x1,y1,z1,w1 First column.
 		@param x2,y2,z2,w2 Second column.
@@ -363,6 +368,7 @@ public:
 
 	/**
 		Construct to column vectors.
+
 		@param c1 First column.
 		@param c2 Second column.
 	*/
@@ -376,6 +382,7 @@ public:
 	} {}
 	/**
 		Construct to column vectors.
+
 		@tparam C1, C2 An arithmetic type.
 		@param c1 First column.
 		@param c2 Second column.
@@ -395,6 +402,7 @@ public:
 
 	/**
 		Construct to matrix.
+
 		@param m Matrix to copy.
 	*/
 	tmat2x4(
@@ -405,6 +413,7 @@ public:
 	} {}
 	/**
 		Construct to matrix.
+
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
@@ -422,6 +431,7 @@ public:
 /** @name Properties */ /// @{
 	/**
 		Get number of columns.
+
 		@returns @c 2.
 	*/
 	static AM_CONSTEXPR size_type
@@ -430,6 +440,7 @@ public:
 	}
 	/**
 		Get size of column vector.
+
 		@returns @c 4.
 	*/
 	static AM_CONSTEXPR size_type
@@ -438,14 +449,17 @@ public:
 	}
 	/**
 		Get size of row vector.
+
 		@returns @c 2.
 	*/
 	static AM_CONSTEXPR size_type
 	row_size() {
 		return row_type::size();
 	}
+
 	/**
 		Get column at index.
+
 		@note An assert will catch invalid indices;
 		see @c data for completely raw access.
 		@returns The column at @a i.
@@ -471,6 +485,7 @@ public:
 /** @name Comparison operators */ /// @{
 	/**
 		Equivalence operator.
+
 		@returns
 		- @c true if the two matrices are equal,
 		- @c false if they are not.
@@ -484,8 +499,10 @@ public:
 			data[0] == m.data[0] &&
 			data[1] == m.data[1];
 	}
+
 	/**
 		Non-equivalence operator.
+
 		@returns
 		- @c false if the two matrices are equal,
 		- @c true if they are not.
@@ -504,6 +521,7 @@ public:
 /** @name Increment and decrement operators */ /// @{
 	/**
 		Prefix increment.
+
 		@returns @c *this after operation.
 	*/
 	type&
@@ -512,8 +530,10 @@ public:
 		++data[1];
 		return *this;
 	}
+
 	/**
 		Prefix decrement.
+
 		@returns @c *this after operation.
 	*/
 	type&
@@ -527,6 +547,7 @@ public:
 /** @name Assignment operators */ /// @{
 	/**
 		Assign to matrix.
+
 		@returns @c *this after assignment.
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
@@ -545,6 +566,7 @@ public:
 /** @name Arithmetic assignment operators */ /// @{
 	/**
 		Add value to all components.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to add.
@@ -560,6 +582,7 @@ public:
 	}
 	/**
 		Add matrix.
+
 		@returns @c *this after operation.
 		@tparam U A floating-point type.
 		@param m Matrix to add.
@@ -575,6 +598,7 @@ public:
 	}
 	/**
 		Subtract value from all components.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to subtract.
@@ -590,6 +614,7 @@ public:
 	}
 	/**
 		Subtract matrix.
+
 		@returns @c *this after operation.
 		@tparam U A floating-point type.
 		@param m Matrix to subtract.
@@ -603,8 +628,10 @@ public:
 		data[1] -= m.data[1];
 		return *this;
 	}
+
 	/**
 		Multiply by scalar.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Scalar.
@@ -618,8 +645,10 @@ public:
 		data[1] *= T(s);
 		return *this;
 	}
+
 	/**
 		Divide all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to divide by.
@@ -639,6 +668,7 @@ public:
 /** @name mat2x4 increment and decrement operators */ /// @{
 	/**
 		Matrix postfix increment.
+
 		@returns New matrix with @c m+1.
 		@tparam T A floating-point type.
 		@param m Matrix.
@@ -651,8 +681,10 @@ public:
 	) {
 		return tmat2x4<T>::operations::postfix_increment(m);
 	}
+
 	/**
 		Matrix postfix decrement.
+
 		@returns New matrix with @c m-1.
 		@tparam T A floating-point type.
 		@param m Matrix.
@@ -670,6 +702,7 @@ public:
 /** @name mat2x4 unary operators */ /// @{
 	/**
 		Matrix unary plus.
+
 		@returns New matrix with exact value of @a m.
 		@tparam T A floating-point type.
 		@param m Matrix.
@@ -681,8 +714,10 @@ public:
 	) {
 		return tmat2x4<T>{m};
 	}
+
 	/**
 		Matrix unary minus.
+
 		@returns New matrix with @c -m.
 		@tparam T A floating-point type.
 		@param m Matrix.
@@ -699,6 +734,7 @@ public:
 /** @name mat2x4 arithmetic operators */ /// @{
 	/**
 		Matrix right-hand value addition (component-wise).
+
 		@returns New matrix with @a m plus @a s.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -714,6 +750,7 @@ public:
 	}
 	/**
 		Matrix left-hand value addition (component-wise).
+
 		@returns New matrix with @a s plus @a m.
 		@tparam T A floating-point type.
 		@param s Value (left-hand).
@@ -729,6 +766,7 @@ public:
 	}
 	/**
 		Matrix addition.
+
 		@returns New matrix with @a m plus @a n.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -742,8 +780,10 @@ public:
 	) {
 		return tmat2x4<T>::operations::add(m, n);
 	}
+
 	/**
 		Matrix right-hand value subtraction (component-wise).
+
 		@returns New matrix with @a m minus @a s.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -759,6 +799,7 @@ public:
 	}
 	/**
 		Matrix left-hand value subtraction (component-wise).
+
 		@returns New matrix with @a s minus @a m.
 		@tparam T A floating-point type.
 		@param s Value (left-hand).
@@ -774,6 +815,7 @@ public:
 	}
 	/**
 		Matrix subtraction.
+
 		@returns New matrix with @a m minus @a n.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -787,8 +829,10 @@ public:
 	) {
 		return tmat2x4<T>::operations::subtract(m, n);
 	}
+
 	/**
 		Matrix right-hand scalar multiplication (component-wise).
+
 		@returns New matrix with @a m times @a s.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -804,6 +848,7 @@ public:
 	}
 	/**
 		Matrix left-hand scalar multiplication (component-wise).
+
 		@returns New matrix with @a s times @a m.
 		@tparam T A floating-point type.
 		@param s Scalar (left-hand).
@@ -819,6 +864,7 @@ public:
 	}
 	/**
 		Matrix right-hand (row) vector multiplication (proper product).
+
 		@returns New column vector with @a m times @a v.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -835,6 +881,7 @@ public:
 	}
 	/**
 		Matrix left-hand (column) vector multiplication (proper product).
+
 		@returns New row vector with @a v times @a m.
 		@tparam T A floating-point type.
 		@param v Vector (left-hand).
@@ -851,6 +898,7 @@ public:
 	}
 	/**
 		Matrix multiplication (proper product).
+
 		@returns New matrix with @a m times @a n.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -866,6 +914,7 @@ public:
 	}
 	/**
 		Matrix multiplication (proper product).
+
 		@returns New matrix with @a m times @a n.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -881,6 +930,7 @@ public:
 	}
 	/**
 		Matrix multiplication (proper product).
+
 		@returns New matrix with @a m times @a n.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -894,8 +944,10 @@ public:
 	) {
 		return tmat2x4<T>::operations::multiply(m, n);
 	}
+
 	/**
 		Matrix right-hand value division (component-wise).
+
 		@returns New matrix with @a m divided by @a s.
 		@tparam T A floating-point type.
 		@param m Matrix (left-hand).
@@ -911,6 +963,7 @@ public:
 	}
 	/**
 		Matrix left-hand value division (component-wise).
+
 		@returns New matrix with @a s divided by @a m.
 		@tparam T A floating-point type.
 		@param s Value (left-hand).

@@ -30,12 +30,12 @@ namespace linear {
 */
 
 /**
-	Get the transpose a matrix.
+	Transpose a matrix.
 
 	@remarks Defined for all matrix types.
 
-	@returns The transpose of @a m.
 	@tparam ConType A specialized matrix type.
+	@returns The transpose of @a m.
 	@param m Matrix.
 */
 template<
@@ -60,8 +60,8 @@ transpose(
 	- @c mat3x3
 	- @c mat4x4
 
-	@returns The determinant of @a m.
 	@tparam ConType A specialized square matrix type.
+	@returns The determinant of @a m.
 	@param m Matrix.
 */
 template<
@@ -89,8 +89,8 @@ determinant(
 	- @c mat3x3
 	- @c mat4x4
 
-	@returns The inverse of @a m.
 	@tparam ConType A specialized square matrix type.
+	@returns The inverse of @a m.
 	@param m Matrix.
 */
 template<

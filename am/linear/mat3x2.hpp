@@ -37,8 +37,7 @@ namespace linear {
 	/**
 		3x2 floating-point matrix.
 
-		@sa
-			AM_CONFIG_MATRIX_TYPES,
+		@sa AM_CONFIG_MATRIX_TYPES,
 			AM_CONFIG_FLOAT_PRECISION
 	*/
 	using mat3x2 = detail::linear::tmat3x2<component_float>;

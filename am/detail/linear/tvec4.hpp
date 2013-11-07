@@ -45,6 +45,7 @@ AM_DETAIL_TYPE_IS_VECTOR(tvec4);
 
 /**
 	Generic 4-dimensional vector.
+
 	@tparam T An arithmetic type.
 */
 template<
@@ -161,6 +162,7 @@ struct tvec4 {
 
 	/**
 		Construct all components to value.
+
 		@param s Value.
 	*/
 	explicit
@@ -171,6 +173,7 @@ struct tvec4 {
 	{}
 	/**
 		Construct all components to value.
+
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
@@ -186,6 +189,7 @@ struct tvec4 {
 
 	/**
 		Construct to values.
+
 		@param c1 X value.
 		@param c2 Y value.
 		@param c3 Z value.
@@ -202,6 +206,7 @@ struct tvec4 {
 	{}
 	/**
 		Construct to values.
+
 		@tparam U, V, H, L An arithmetic type.
 		@param c1 X value.
 		@param c2 Y value.
@@ -226,6 +231,7 @@ struct tvec4 {
 
 	/**
 		Construct to vector.
+
 		@param v Vector to copy.
 	*/
 	tvec4(
@@ -235,6 +241,7 @@ struct tvec4 {
 	{}
 	/**
 		Construct to vector.
+
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
@@ -248,6 +255,7 @@ struct tvec4 {
 
 	/**
 		Construct to X value and YZW vector.
+
 		@tparam U, V An arithmetic type.
 		@param c1 X value.
 		@param v Y, Z, and W vector.
@@ -264,6 +272,7 @@ struct tvec4 {
 		x{T(c1)}, y{T(v.x)}, z{T(v.y)}, w{T(v.z)} {}
 	/**
 		Construct to XYZ vector and W value.
+
 		@tparam U, V An arithmetic type.
 		@param v X, Y, and Z vector.
 		@param c4 W value.
@@ -281,6 +290,7 @@ struct tvec4 {
 
 	/**
 		Construct to X value, Y value, and ZW vector.
+
 		@tparam U, V, H An arithmetic type.
 		@param c1 X value.
 		@param c2 Y value.
@@ -300,6 +310,7 @@ struct tvec4 {
 		x{T(c1)}, y{T(c2)}, z{T(v.x)}, w{T(v.y)} {}
 	/**
 		Construct to XY vector, Z value, and W value.
+
 		@tparam U, V, H An arithmetic type.
 		@param v X and Y vector.
 		@param c3 Z value.
@@ -319,6 +330,7 @@ struct tvec4 {
 		x{T(v.x)}, y{T(v.y)}, z{T(c3)}, w{T(c4)} {}
 	/**
 		Construct to XY and ZW vectors.
+
 		@tparam U, V An arithmetic type.
 		@param v1 X and Y vector.
 		@param v2 Z and W vector.
@@ -338,16 +350,20 @@ struct tvec4 {
 /** @name Properties */ /// @{
 	/**
 		Get number of components.
+
 		@returns @c 4.
 	*/
 	static AM_CONSTEXPR size_type
 	size() {
 		return size_type(4);
 	}
+
 	/**
 		Get value at index.
+
 		@note An assert will catch invalid indices;
 		see fields for completely raw access.
+
 		@returns The value at @a i.
 		@param i Index to retrieve.
 	*/
@@ -371,6 +387,7 @@ struct tvec4 {
 /** @name Comparison operators */ /// @{
 	/**
 		Equivalence operator.
+
 		@returns @c true if the two vectors are equal, @c false if they are not.
 		@param v Vector to compare with.
 	*/
@@ -384,8 +401,10 @@ struct tvec4 {
 			this->z == v.z &&
 			this->w == v.w;
 	}
+
 	/**
 		Non-equivalence operator.
+
 		@returns @c false if the two vectors are equal, @c true if they are not.
 		@param v Vector to compare with.
 	*/
@@ -404,6 +423,7 @@ struct tvec4 {
 /** @name Increment and decrement operators */ /// @{
 	/**
 		Prefix increment.
+
 		@returns @c *this after operation.
 	*/
 	type&
@@ -414,8 +434,10 @@ struct tvec4 {
 		++this->w;
 		return *this;
 	}
+
 	/**
 		Prefix decrement.
+
 		@returns @c *this after operation.
 	*/
 	type&
@@ -431,6 +453,7 @@ struct tvec4 {
 /** @name Assignment operators */ /// @{
 	/**
 		Assign all components to value.
+
 		@returns @c *this after assignment.
 		@tparam U An arithmetic type.
 		@param s Value.
@@ -448,6 +471,7 @@ struct tvec4 {
 	}
 	/**
 		Assign to vector.
+
 		@returns @c *this after assignment.
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
@@ -468,6 +492,7 @@ struct tvec4 {
 /** @name Arithmetic assignment operators */ /// @{
 	/**
 		Add value to all components.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to add.
@@ -485,6 +510,7 @@ struct tvec4 {
 	}
 	/**
 		Add vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to add.
@@ -500,8 +526,10 @@ struct tvec4 {
 		this->w += T(v.w);
 		return *this;
 	}
+
 	/**
 		Subtract value from all components.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to subtract.
@@ -519,6 +547,7 @@ struct tvec4 {
 	}
 	/**
 		Subtract vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to subtract.
@@ -534,8 +563,10 @@ struct tvec4 {
 		this->w -= T(v.w);
 		return *this;
 	}
+
 	/**
 		Multiply by scalar.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Scalar.
@@ -553,6 +584,7 @@ struct tvec4 {
 	}
 	/**
 		Multiply by vector (direct component product).
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to multiply by.
@@ -568,8 +600,10 @@ struct tvec4 {
 		this->w *= T(v.w);
 		return *this;
 	}
+
 	/**
 		Divide all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to divide by.
@@ -587,6 +621,7 @@ struct tvec4 {
 	}
 	/**
 		Divide by vector (direct component quotient).
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to divide by.
@@ -602,8 +637,10 @@ struct tvec4 {
 		this->w /= T(v.w);
 		return *this;
 	}
+
 	/**
 		Modulo all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Divisor.
@@ -621,6 +658,7 @@ struct tvec4 {
 	}
 	/**
 		Modulo by vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Divisor vector.
@@ -641,6 +679,7 @@ struct tvec4 {
 /** @name Bitwise assignment operators */ /// @{
 	/**
 		Bitwise-AND all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to AND with.
@@ -658,6 +697,7 @@ struct tvec4 {
 	}
 	/**
 		Bitwise-AND vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to AND with.
@@ -673,8 +713,10 @@ struct tvec4 {
 		this->w &= T(v.w);
 		return *this;
 	}
+
 	/**
 		Bitwise-OR all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to OR with.
@@ -692,6 +734,7 @@ struct tvec4 {
 	}
 	/**
 		Bitwise-OR vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to OR with.
@@ -707,8 +750,10 @@ struct tvec4 {
 		this->w |= T(v.w);
 		return *this;
 	}
+
 	/**
 		Bitwise-XOR all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Value to XOR with.
@@ -726,6 +771,7 @@ struct tvec4 {
 	}
 	/**
 		Bitwise-XOR vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Vector to XOR with.
@@ -741,8 +787,10 @@ struct tvec4 {
 		this->w ^= T(v.w);
 		return *this;
 	}
+
 	/**
 		Bitwise left-shift all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Left-shift value amount.
@@ -760,6 +808,7 @@ struct tvec4 {
 	}
 	/**
 		Bitwise left-shift vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Left-shift vector amount.
@@ -775,8 +824,10 @@ struct tvec4 {
 		this->w <<= T(v.w);
 		return *this;
 	}
+
 	/**
 		Bitwise right-shift all components by value.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param s Right-shift value amount.
@@ -794,6 +845,7 @@ struct tvec4 {
 	}
 	/**
 		Bitwise right-shift vector.
+
 		@returns @c *this after operation.
 		@tparam U An arithmetic type.
 		@param v Right-shift vector amount.
@@ -815,6 +867,7 @@ struct tvec4 {
 /** @name vec4 increment and decrement operators */ /// @{
 	/**
 		Vector postfix increment.
+
 		@returns New vector with @c x+1.
 		@tparam T An arithmetic type.
 		@param x Vector.
@@ -827,8 +880,10 @@ struct tvec4 {
 	) {
 		return tvec4<T>{x.x + T(1), x.y + T(1), x.z + T(1), x.w + T(1)};
 	}
+
 	/**
 		Vector postfix decrement.
+
 		@returns New vector with @c x-1.
 		@tparam T An arithmetic type.
 		@param x Vector.
@@ -846,6 +901,7 @@ struct tvec4 {
 /** @name vec4 unary operators */ /// @{
 	/**
 		Vector unary plus.
+
 		@returns New vector with exact value of @a x.
 		@tparam T An arithmetic type.
 		@param x Vector.
@@ -857,8 +913,10 @@ struct tvec4 {
 	) {
 		return tvec4<T>{x.x, x.y, x.z, x.w};
 	}
+
 	/**
 		Vector unary minus.
+
 		@returns New vector with @c -x.
 		@tparam T An arithmetic type.
 		@param x Vector.
@@ -873,8 +931,10 @@ struct tvec4 {
 						-x.z,
 						-x.w};
 	}
+
 	/**
 		Vector unary bitwise-NOT.
+
 		@returns New vector with @c ~x.
 		@tparam T An arithmetic type.
 		@param x Vector.
@@ -894,6 +954,7 @@ struct tvec4 {
 /** @name vec4 arithmetic operators */ /// @{
 	/**
 		Vector right-hand value addition (all components).
+
 		@returns New vector with @a x plus @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -912,6 +973,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value addition (all components).
+
 		@returns New vector with @a x plus @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -930,6 +992,7 @@ struct tvec4 {
 	}
 	/**
 		Vector addition.
+
 		@returns New vector with @a x plus @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -946,8 +1009,10 @@ struct tvec4 {
 						x.z + y.z,
 						x.w + y.w};
 	}
+
 	/**
 		Vector right-hand value subtraction (all components).
+
 		@returns New vector with @a x minus @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -966,6 +1031,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value subtraction (all components).
+
 		@returns New vector with @a x minus @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -984,6 +1050,7 @@ struct tvec4 {
 	}
 	/**
 		Vector subtraction.
+
 		@returns New vector with @a x minus @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1000,8 +1067,10 @@ struct tvec4 {
 						x.z - y.z,
 						x.w - y.w};
 	}
+
 	/**
 		Vector right-hand scalar multiplication (all components).
+
 		@returns New vector with @a x times @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1020,6 +1089,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand scalar multiplication (all components).
+
 		@returns New vector with @a x times @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1038,6 +1108,7 @@ struct tvec4 {
 	}
 	/**
 		Vector multiplication (direct component product).
+
 		@returns New vector with @a x times @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1054,8 +1125,10 @@ struct tvec4 {
 						x.z * y.z,
 						x.w * y.w};
 	}
+
 	/**
 		Vector right-hand value division (all components).
+
 		@returns New vector with @a x divided by @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1074,6 +1147,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value division (all components).
+
 		@returns New vector with @a x divided by @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1092,6 +1166,7 @@ struct tvec4 {
 	}
 	/**
 		Vector division (direct component quotient).
+
 		@returns New vector with @a x divided by @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1108,8 +1183,10 @@ struct tvec4 {
 						x.z / y.z,
 						x.w / y.w};
 	}
+
 	/**
 		Vector right-hand value modulo (all components).
+
 		@returns New vector with @a x modulo @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1128,6 +1205,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value modulo (all components).
+
 		@returns New vector with @a x modulo @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1146,6 +1224,7 @@ struct tvec4 {
 	}
 	/**
 		Vector modulo.
+
 		@returns New vector with @a x modulo @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1167,6 +1246,7 @@ struct tvec4 {
 /** @name vec4 bitwise operators */ /// @{
 	/**
 		Vector right-hand value bitwise-AND (all components).
+
 		@returns New vector with @a x AND @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1185,6 +1265,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value bitwise-AND (all components).
+
 		@returns New vector with @a x AND @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1203,6 +1284,7 @@ struct tvec4 {
 	}
 	/**
 		Vector bitwise-AND.
+
 		@returns New vector with @a x AND @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1219,8 +1301,10 @@ struct tvec4 {
 						x.z & y.z,
 						x.w & y.w};
 	}
+
 	/**
 		Vector right-hand value bitwise-OR (all components).
+
 		@returns New vector with @a x OR @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1239,6 +1323,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value bitwise-OR (all components).
+
 		@returns New vector with @a x OR @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1257,6 +1342,7 @@ struct tvec4 {
 	}
 	/**
 		Vector bitwise-OR.
+
 		@returns New vector with @a x OR @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1273,8 +1359,10 @@ struct tvec4 {
 						x.z | y.z,
 						x.w | y.w};
 	}
+
 	/**
 		Vector right-hand value bitwise-XOR (all components).
+
 		@returns New vector with @a x XOR @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1293,6 +1381,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value bitwise-XOR (all components).
+
 		@returns New vector with @a x XOR @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1311,6 +1400,7 @@ struct tvec4 {
 	}
 	/**
 		Vector bitwise-XOR.
+
 		@returns New vector with @a x XOR @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1327,8 +1417,10 @@ struct tvec4 {
 						x.z ^ y.z,
 						x.w ^ y.w};
 	}
+
 	/**
 		Vector right-hand value bitwise left-shift (all components).
+
 		@returns New vector with @a x left-shift @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1347,6 +1439,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value bitwise left-shift (all components).
+
 		@returns New vector with @a x left-shift @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1365,6 +1458,7 @@ struct tvec4 {
 	}
 	/**
 		Vector bitwise left-shift.
+
 		@returns New vector with @a x left-shift @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1381,8 +1475,10 @@ struct tvec4 {
 						x.z << y.z,
 						x.w << y.w};
 	}
+
 	/**
 		Vector right-hand value bitwise right-shift (all components).
+
 		@returns New vector with @a x right-shift @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).
@@ -1401,6 +1497,7 @@ struct tvec4 {
 	}
 	/**
 		Vector left-hand value bitwise right-shift (all components).
+
 		@returns New vector with @a x right-shift @a y.
 		@tparam T An arithmetic type.
 		@param x Value (left-hand).
@@ -1419,6 +1516,7 @@ struct tvec4 {
 	}
 	/**
 		Vector bitwise right-shift.
+
 		@returns New vector with @a x right-shift @a y.
 		@tparam T An arithmetic type.
 		@param x Vector (left-hand).

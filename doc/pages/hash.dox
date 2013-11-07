@@ -15,7 +15,7 @@ and up), the type is:
 struct {
 	union {
 		uint8_t data[L];
-		uint32_t chunks[L>>2];
+		uint32_t chunks[L >> 2];
 	};
 };
 @endcode
@@ -28,7 +28,7 @@ returning the hash.
 <em>bytes</em> of the raw string data.
 
 @note A majority of the hashing algorithms implemented are in the public domain
-or have their own licenses and/or copyrights (which is indicatedin the
+or have their own licenses and/or copyrights (which is indicated in the
 appropriate files).
 
 */

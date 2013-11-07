@@ -46,8 +46,8 @@ namespace linear {
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns The length of @a v.
 	@tparam ConType Any floating-point vector type.
+	@returns The length of @a v.
 	@param v Vector.
 */
 template<
@@ -66,8 +66,8 @@ length(
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns The distance between @a v and @a r.
 	@tparam ConType A floating-point vector type.
+	@returns The distance between @a v and @a r.
 	@param v First vector.
 	@param r Second vector.
 */
@@ -88,8 +88,8 @@ distance(
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns The dot product of @a v and @a r.
 	@tparam ConType A floating-point vector type.
+	@returns The dot product of @a v and @a r.
 	@param v First vector.
 	@param r Second vector.
 */
@@ -111,8 +111,8 @@ dot(
 	@remarks Defined for all 3-dimensional floating-point vector
 	specializations (of any precision).
 
-	@returns The cross product of @a v and @a r.
 	@tparam T A floating-point arithmetic type.
+	@returns The cross product of @a v and @a r.
 	@param v First vector.
 	@param r Second vector.
 */
@@ -131,8 +131,8 @@ cross(
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns @a v normalized.
 	@tparam ConType A floating-point vector type.
+	@returns @a v normalized.
 	@param v Vector to normalize.
 */
 template<
@@ -151,8 +151,8 @@ normalize(
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns Either @c n or @c -n.
 	@tparam ConType A floating-point vector type.
+	@returns Either @c n or @c -n.
 	@param n Normal vector to orient.
 	@param i Incident vector.
 	@param ng Geometric normal vector.
@@ -177,8 +177,8 @@ faceforward(
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns The reflection direction vector.
 	@tparam ConType A floating-point vector type.
+	@returns The reflection direction vector.
 	@param i Incident vector.
 	@param n Surface normal vector.
 */
@@ -201,8 +201,8 @@ reflect(
 
 	@remarks Defined for all floating-point vector types.
 
-	@returns The refraction direction vector.
 	@tparam ConType A floating-point vector type.
+	@returns The refraction direction vector.
 	@param i Incident vector.
 	@param n Surface normal vector.
 	@param eta Ratio of indices of refraction.
