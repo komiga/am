@@ -1,15 +1,18 @@
 
 ## What is this?
 
-**All the Maths‽ (AM)** is a general-purpose mathematics C++11 header library which supplies:
+**All the Maths‽ (AM)** is a general-purpose mathematics C++11 header library
+which supplies:
 
-* Vectors (yay!) and matrices (also yay!) and all the fancy operations on them that you'd expect from a maths lib
-* Hashing algorithms
-* *(A whole bunch of other stuff)*
+* Vectors (yay!) and matrices (also yay!) and all the fancy operations on them
+  that you'd expect from a maths lib.
+* Hashing algorithms.
+* *(A whole bunch of other stuff.)*
 
 It's, uh, a work-in-progress.
 
-If you want a proper graphics maths lib that works with crappy compilers, please use the lovely [GLM](http://glm.g-truc.net/).
+If you want a proper graphics maths lib that works with crappy compilers,
+please use the lovely [GLM](http://glm.g-truc.net/).
 
 ## *All* the maths, you say?
 
@@ -19,22 +22,29 @@ Hence the interrobang.
 
 Because I can.
 
-## Requirements
+## Building
 
-One only needs a compiler with support for the following C++11 features:
+Being a header library, AM is not compiled directly. However, all
+classes/headers support Clang 3.3+ and libc++ (SVN head). GCC and libstdc++
+are only partially supported (as of 4.7.3) due to issues in ISO compliance
+(see *Defects* below).
 
-* Aggregate initialization
-* Type traits (`<type_traits>` header)
-* Type aliases
-* Lambdas
-* `constexpr`
-* `static_assert()`
+The tests can be compiled using plash's standard project protocol:
+http://komiga.com/pp-cpp
 
-Which essentially means you can't use it with MSVC. Deal with it. **Clang 3.1** or later is recommended. Earliest supporting GCC is version 4.7.
+## Defects
+
+The following features cannot be used in GCC (4.7.3):
+
+1. GCC fails to compile a pointer arithmetic expression in the constexpr
+   implementation for murmur3 (`<am/hash/murmur.hpp>`, implementation at
+   `<am/hash/detail/hash/murmur_impl.hpp>` -- specifically, `calc_c_seq()`).
 
 ## License
 
-**AM** carries the MIT license, which is gracefully plastered below. Some algorithms have separate (MIT-compatible) licenses, copyrights, or are in the public domain. These are indicated in the appropriate sections.
+**AM** carries the MIT license, which is gracefully plastered below. Some
+algorithms have separate (MIT-compatible) licenses, copyrights, or are in the
+public domain. These are indicated in the appropriate sections.
 
 ```
 Copyright (c) 2012-2013 Tim Howard
