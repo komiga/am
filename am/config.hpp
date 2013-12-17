@@ -34,8 +34,7 @@ namespace am {
 	static_assert((expr_), AM_CFG_MSG(msg_))
 #define AM_STATIC_ASSERT(expr_, msg_) \
 	static_assert((expr_), AM_ERR_MSG(msg_))
-//#define AM_STATIC_ERROR(msg_) \
-//	static_assert(false, AM_ERR_MSG(msg_))
+//#define AM_STATIC_ERROR(msg_) static_assert(false, AM_ERR_MSG(msg_))
 #define AM_CONSTEXPR constexpr
 /** @endcond */
 

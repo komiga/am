@@ -78,15 +78,15 @@ struct is_construct_floating_point {
 /** @cond INTERNAL */
 #define AM_DETAIL_TYPE_IS_VECTOR(TYPE)						\
 	template<typename T>									\
-	struct is_vector<TYPE<T> > : public std::true_type {};
+	struct is_vector<TYPE<T> > : public std::true_type {}
 
 #define AM_DETAIL_TYPE_IS_MATRIX(TYPE)						\
 	template<typename T>									\
-	struct is_matrix<TYPE<T> > : public std::true_type {};
+	struct is_matrix<TYPE<T> > : public std::true_type {}
 
 #define AM_DETAIL_TYPE_IS_SQUARE_MATRIX(TYPE)						\
 	template<typename T>											\
-	struct is_square_matrix<TYPE<T> > : public std::true_type {};
+	struct is_square_matrix<TYPE<T> > : public std::true_type {}
 /** @endcond */
 
 } // namespace linear

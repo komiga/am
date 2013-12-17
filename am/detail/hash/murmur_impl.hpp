@@ -33,7 +33,7 @@ struct murmur2_impl;
 
 // MurmurHash2
 template<>
-struct murmur2_impl<::am::hash::HashLength::HL32> {
+struct murmur2_impl< ::am::hash::HashLength::HL32> {
 	static AM_CONSTEXPR uint32_t const M = 0x5bd1e995;
 	static AM_CONSTEXPR unsigned const R = 24;
 
@@ -52,7 +52,7 @@ struct murmur2_impl<::am::hash::HashLength::HL32> {
 
 		// Core
 		for (; end != reinterpret_cast<uint8_t const*>(block); ++block) {
-			k =* block;
+			k = *block;
 			k *= M;
 			k ^= k >> R;
 			k *= M;
@@ -81,7 +81,7 @@ struct murmur2_impl<::am::hash::HashLength::HL32> {
 
 // MurmurHash64A
 template<>
-struct murmur2_impl<::am::hash::HashLength::HL64> {
+struct murmur2_impl< ::am::hash::HashLength::HL64> {
 	static AM_CONSTEXPR uint64_t const M = 0xc6a4a7935bd1e995;
 	static AM_CONSTEXPR unsigned const R = 47;
 
@@ -99,7 +99,7 @@ struct murmur2_impl<::am::hash::HashLength::HL64> {
 		uint64_t k;
 
 		// Core
-		for (; end!=reinterpret_cast<uint8_t const*>(block); ++block) {
+		for (; end != reinterpret_cast<uint8_t const*>(block); ++block) {
 			k = *block;
 			k *= M;
 			k ^= k >> R;
@@ -142,7 +142,7 @@ struct murmur2_64b_impl;
 	hx *= M; hx ^= k
 
 template<>
-struct murmur2_64b_impl<::am::hash::HashLength::HL64> {
+struct murmur2_64b_impl< ::am::hash::HashLength::HL64> {
 	static AM_CONSTEXPR uint32_t const M = 0x5bd1e995;
 	static AM_CONSTEXPR unsigned const R = 24u;
 
@@ -174,7 +174,7 @@ struct murmur2_64b_impl<::am::hash::HashLength::HL64> {
 
 		// Partial block (h1)
 		if (4<=size) {
-			k=*block++;
+			k = *block++;
 			AM_MURMUR2_64B_CMIX__(h1);
 			size-=4;
 		}
@@ -210,7 +210,7 @@ template<
 struct murmur3_impl;
 
 template<>
-struct murmur3_impl<::am::hash::HashLength::HL32> {
+struct murmur3_impl< ::am::hash::HashLength::HL32> {
 	static AM_CONSTEXPR uint32_t const C1 = 0xcc9e2d51u;
 	static AM_CONSTEXPR uint32_t const C2 = 0x1b873593u;
 	static AM_CONSTEXPR uint32_t const C3 = 0xe6546b64u;
@@ -287,7 +287,7 @@ struct ce_impl final {
 		char const* const end,
 		uint32_t const h
 	) noexcept {
-		return (end>iter)
+		return (end > iter)
 			? body(
 				iter + 4u, end,
 				do_block(

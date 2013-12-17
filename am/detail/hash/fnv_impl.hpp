@@ -35,13 +35,13 @@ template<
 struct fnv_internals;
 
 template<>
-struct fnv_internals<::am::hash::HashLength::HL32> {
+struct fnv_internals< ::am::hash::HashLength::HL32> {
 	static AM_CONSTEXPR uint32_t const prime = 0x01000193;
 	static AM_CONSTEXPR uint32_t const offset_basis = 0x811c9dc5;
 };
 
 template<>
-struct fnv_internals<::am::hash::HashLength::HL64> {
+struct fnv_internals< ::am::hash::HashLength::HL64> {
 	static AM_CONSTEXPR uint64_t const prime = 0x00000100000001b3;
 	static AM_CONSTEXPR uint64_t const offset_basis = 0xcbf29ce484222325;
 };
