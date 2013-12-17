@@ -2,20 +2,20 @@
 #ifndef AM_TEST_MAT_COMMON_HPP_
 #define AM_TEST_MAT_COMMON_HPP_
 
-#include <cassert>
+#include "../general/common.hpp"
 
 // Comparison operators
 #define TEST_MAT_COP(mat, op, operand) {\
-	auto const x=mat;\
-	auto const y=operand;\
-	assert(x op y);\
+	auto const x = mat;\
+	auto const y = operand;\
+	fassert(x op y);\
 }
 
 // Assignment operators
 #define TEST_MAT_AOP(mat, op, operand, result) {\
-	auto x=mat;\
-	x op##= operand;\
-	assert(x.operator==(result));\
+	auto x = mat;\
+	x op## = operand;\
+	fassert(x.operator==(result));\
 }
 
 // Construct operators
@@ -24,34 +24,34 @@
 	TEST_MAT_XOP_LHS(mat, op, operand, lhs_result)
 
 #define TEST_MAT_XOP_RHS(mat, op, operand, result) {\
-	auto const x=mat;\
-	auto const y=(x op operand);\
-	assert(y.operator==(result));\
+	auto const x = mat;\
+	auto const y = (x op operand);\
+	fassert(y.operator==(result));\
 }
 
 #define TEST_MAT_XOP_LHS(mat, op, operand, result) {\
-	auto const x=mat;\
-	auto const y=(operand op x);\
-	assert(y.operator==(result));\
+	auto const x = mat;\
+	auto const y = (operand op x);\
+	fassert(y.operator==(result));\
 }
 
 // Unary operators
 #define TEST_MAT_UOP(mat, op, result) {\
-	auto const x=mat;\
-	auto const y=op x;\
-	assert(y.operator==(result));\
+	auto const x = mat;\
+	auto const y = op x;\
+	fassert(y.operator==(result));\
 }
 
 // Prefix operators
 #define TEST_MAT_POP(mat, op, result) {\
-	auto x=mat;\
-	assert((op x).operator==(result));\
+	auto x = mat;\
+	fassert((op x).operator==(result));\
 }
 
 // Suffix/postfix operators
 #define TEST_MAT_SOP(mat, op, result) {\
-	auto x=mat;\
-	assert((x op).operator==(result));\
+	auto x = mat;\
+	fassert((x op).operator==(result));\
 }
 
 // Full tests
@@ -66,9 +66,9 @@
 	m_add, m_add_result,\
 	m_sub, m_sub_result_r, m_sub_result_l\
 ) {\
-	type_ const I=I_;\
+	type_ const I = I_;\
 	type_ const D{};\
-	type_ const mat=mat_;\
+	type_ const mat = mat_;\
 	TEST_MAT_COP(I, ==, D);\
 	TEST_MAT_COP(mat, !=, D);\
 	TEST_MAT_UOP(mat,  +, u_pos_result);\
@@ -135,9 +135,9 @@
 
 // Properties
 #define TEST_MAT_PROP(mat, func, result) {\
-	auto const x=mat;\
-	auto const y=am::linear::func(x);\
-	assert(y==(result));\
+	auto const x = mat;\
+	auto const y = am::linear::func(x);\
+	fassert(y == (result));\
 }
 
 #define TEST_MAT_PROPERTIES(\

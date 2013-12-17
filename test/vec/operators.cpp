@@ -3,6 +3,7 @@
 #include <am/linear/vector.hpp>
 
 #include "./common.hpp"
+
 #include <cstdio>
 
 signed main() {
@@ -64,10 +65,10 @@ signed main() {
 		b{3.0, 2.0, 1.0};
 	am::linear::vec3 r;
 	am::linear::vec3::value_type fr;
-	fr=am::linear::length(a); PRINT_FLOAT(fr, "length");
-	fr=am::linear::distance(a, b); PRINT_FLOAT(fr, "distance");
-	fr=am::linear::dot(a, b); PRINT_FLOAT(fr, "dot");
-	r=am::linear::cross(a, b); PRINT_VEC3(r, "cross");
-	r=am::linear::normalize(a); PRINT_VEC3(r, "normalized");
+	fr = am::linear::length(a); PRINT_FLOAT(fr, "length");
+	fr = am::linear::distance(a, b); PRINT_FLOAT(fr, "distance");
+	fr = am::linear::dot(a, b); PRINT_FLOAT(fr, "dot");
+	r = am::linear::cross(a, b); PRINT_VEC3(r, "cross");
+	r = am::linear::normalize(a); PRINT_VEC3(r, "normalized");
 	return 0;
 }

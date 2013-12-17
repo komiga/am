@@ -2,17 +2,18 @@
 #ifndef AM_TEST_HASH_COMMON_HPP_
 #define AM_TEST_HASH_COMMON_HPP_
 
-#include <cassert>
+#include "../general/common.hpp"
+
 #include <cstring>
 
 #define TEST_HASH_FUNC_CSTR(func, L, input, result) {\
-	auto const x=am::hash::func<am::hash::HashLength::L>(input, std::strlen(input));\
-	assert(x==result);\
+	auto const x = am::hash::func<am::hash::HashLength::L>(input, std::strlen(input));\
+	fassert(x == result);\
 }
 
 #define TEST_HASH_FUNC_STDSTR(func, L, input, result) {\
-	auto const x=am::hash::func<am::hash::HashLength::L>(input);\
-	assert(x==result);\
+	auto const x = am::hash::func<am::hash::HashLength::L>(input);\
+	fassert(x == result);\
 }
 
 template<typename T>
@@ -35,11 +36,11 @@ void TEST_HASH_SET(
 	SF str_hash_func,
 	CF constexpr_hash_func
 ) {
-	for (H const* it=set; nullptr!=it->input; ++it) {
-		std::size_t const size=std::strlen(it->input);
-		assert(it->value==hash_func(it->input, size));
-		assert(it->value==str_hash_func(std::string{it->input}));
-		assert(it->value==constexpr_hash_func(it->input, size));
+	for (H const* it = set; nullptr != it->input; ++it) {
+		std::size_t const size = std::strlen(it->input);
+		fassert(it->value == hash_func(it->input, size));
+		fassert(it->value == str_hash_func(std::string{it->input}));
+		fassert(it->value == constexpr_hash_func(it->input, size));
 	}
 }
 
@@ -55,10 +56,10 @@ void TEST_HASH_SEEDED_SET(
 	DF hash_func,
 	SF str_hash_func
 ) {
-	for (H const* it=set; nullptr!=it->input; ++it) {
-		std::size_t const size=std::strlen(it->input);
-		assert(it->value==hash_func(it->input, size, seed));
-		assert(it->value==str_hash_func(std::string{it->input}, seed));
+	for (H const* it = set; nullptr != it->input; ++it) {
+		std::size_t const size = std::strlen(it->input);
+		fassert(it->value == hash_func(it->input, size, seed));
+		fassert(it->value == str_hash_func(std::string{it->input}, seed));
 	}
 }
 
@@ -76,11 +77,11 @@ void TEST_HASH_SEEDED_SET_CE(
 	SF str_hash_func,
 	CF constexpr_hash_func
 ) {
-	for (H const* it=set; nullptr!=it->input; ++it) {
-		std::size_t const size=std::strlen(it->input);
-		assert(it->value==hash_func(it->input, size, seed));
-		assert(it->value==str_hash_func(std::string{it->input}, seed));
-		assert(it->value==constexpr_hash_func(it->input, size, seed));
+	for (H const* it = set; nullptr != it->input; ++it) {
+		std::size_t const size = std::strlen(it->input);
+		fassert(it->value == hash_func(it->input, size, seed));
+		fassert(it->value == str_hash_func(std::string{it->input}, seed));
+		fassert(it->value == constexpr_hash_func(it->input, size, seed));
 	}
 }
 

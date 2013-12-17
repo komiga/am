@@ -2,7 +2,9 @@
 #include <am/hash/fnv.hpp>
 #include <am/hash/murmur.hpp>
 
+#include "../general/common.hpp"
 #include "./common.hpp"
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -14,10 +16,10 @@
 
 using namespace am::hash::literals;
 
-static AM_CONSTEXPR auto const s_l_fnv1a_32="fnv1a_32"_fnv1a_32;
-static AM_CONSTEXPR auto const s_l_fnv1a_64="fnv1a_64"_fnv1a_64;
-static AM_CONSTEXPR auto const s_l_murmur3_32
-	=am::hash::murmur3_c<am::hash::HL32>("murmur3_32", 10u, 0);
+static AM_CONSTEXPR auto const s_l_fnv1a_32 = "fnv1a_32"_fnv1a_32;
+static AM_CONSTEXPR auto const s_l_fnv1a_64 = "fnv1a_64"_fnv1a_64;
+static AM_CONSTEXPR auto const
+s_l_murmur3_32 = am::hash::murmur3_c<am::hash::HL32>("murmur3_32", 10u, 0);
 
 void test_fnv() {
 	struct fnv_hash_data {
@@ -156,15 +158,15 @@ void test_murmur() {
 
 #define TEST_HASH_COMMON_HASH_LENGTH(L){\
 		am::hash::common_hash_type<am::hash::L> x;\
-		assert(sizeof(x.data)==sizeof(x.chunks));\
+		fassert(sizeof(x.data) == sizeof(x.chunks));\
 	}
 
 signed main() {
 	std::cout
-		<<std::hex<<std::left<<std::setfill('0')
-		<<"fnv1a_32: "<<std::setw(8)<<s_l_fnv1a_32<<'\n'
-		<<"fnv1a_64: "<<std::setw(8)<<s_l_fnv1a_64<<'\n'
-		<<"s_l_murmur3_32: "<<std::setw(8)<<s_l_murmur3_32<<'\n'
+		<< std::hex << std::left << std::setfill('0')
+		<< "fnv1a_32: " << std::setw(8) << s_l_fnv1a_32 << '\n'
+		<< "fnv1a_64: " << std::setw(8) << s_l_fnv1a_64 << '\n'
+		<< "s_l_murmur3_32: " << std::setw(8) << s_l_murmur3_32 << '\n'
 	; std::cout.flush();
 
 	TEST_HASH_COMMON_HASH_LENGTH(HL128);
