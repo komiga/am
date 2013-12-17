@@ -18,8 +18,10 @@ using namespace am::hash::literals;
 
 static AM_CONSTEXPR auto const s_l_fnv1a_32 = "fnv1a_32"_fnv1a_32;
 static AM_CONSTEXPR auto const s_l_fnv1a_64 = "fnv1a_64"_fnv1a_64;
+#if !defined(__GNUC__) || defined(__llvm__) || defined(__clang__)
 static AM_CONSTEXPR auto const
 s_l_murmur3_32 = am::hash::murmur3_c<am::hash::HL32>("murmur3_32", 10u, 0);
+#endif
 
 void test_fnv() {
 	struct fnv_hash_data {
@@ -166,7 +168,9 @@ signed main() {
 		<< std::hex << std::left << std::setfill('0')
 		<< "fnv1a_32: " << std::setw(8) << s_l_fnv1a_32 << '\n'
 		<< "fnv1a_64: " << std::setw(8) << s_l_fnv1a_64 << '\n'
+	#if !defined(__GNUC__) || defined(__llvm__) || defined(__clang__)
 		<< "s_l_murmur3_32: " << std::setw(8) << s_l_murmur3_32 << '\n'
+	#endif
 	; std::cout.flush();
 
 	TEST_HASH_COMMON_HASH_LENGTH(HL128);
