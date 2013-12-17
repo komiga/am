@@ -24,10 +24,9 @@ Because I can.
 
 ## Building
 
-Being a header library, AM is not compiled directly. However, all
-classes/headers support Clang 3.3+ and libc++ (SVN head). GCC and libstdc++
-are only partially supported (as of 4.7.3) due to issues in ISO compliance
-(see *Defects* below).
+Being a header library, AM is not compiled directly. However, all features
+support Clang 3.3+ with libc++ (SVN head). GCC with libstdc++ is only partially
+supported (as of 4.7.3) due to issues in ISO compliance (see *Defects* below).
 
 The tests can be compiled using plash's standard project protocol:
 http://komiga.com/pp-cpp
