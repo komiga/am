@@ -269,6 +269,7 @@ struct tvec1 {
 	operator[](
 		size_type const& i
 	) {
+		(void)i;
 		assert(size() > i);
 		return this->x;
 	}
@@ -277,6 +278,7 @@ struct tvec1 {
 	operator[](
 		size_type const& i
 	) const {
+		(void)i;
 		assert(size() > i);
 		return this->x;
 	}
