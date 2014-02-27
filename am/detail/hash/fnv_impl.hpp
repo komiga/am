@@ -3,7 +3,7 @@
 @brief FNV (implementation).
 
 @author Tim Howard
-@copyright 2012-2013 Tim Howard under the MIT license;
+@copyright 2012-2014 Tim Howard under the MIT license;
 see @ref index or the accompanying LICENSE file for full text.
 Although the AM implementations are under the MIT license,
 the FNV algorithms themselves are in the public domain and
