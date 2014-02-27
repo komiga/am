@@ -46,7 +46,7 @@ algorithms have separate (MIT-compatible) licenses, copyrights, or are in the
 public domain. These are indicated in the appropriate sections.
 
 ```
-Copyright (c) 2012-2014 Tim Howard
+Copyright (c) 2012-2014 Timothy Howard
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
