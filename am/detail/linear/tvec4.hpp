@@ -23,9 +23,9 @@ namespace linear {
 
 // Forward declarations
 /** @cond INTERNAL */
-template<typename T> struct tvec2;
-template<typename T> struct tvec3;
-template<typename T> struct tvec4;
+template<class T> struct tvec2;
+template<class T> struct tvec3;
+template<class T> struct tvec4;
 
 AM_DETAIL_TYPE_IS_VECTOR(tvec4);
 /** @endcond */
@@ -49,7 +49,7 @@ AM_DETAIL_TYPE_IS_VECTOR(tvec4);
 	@tparam T An arithmetic type.
 */
 template<
-	typename T
+	class T
 >
 struct tvec4 {
 	/** @cond INTERNAL */
@@ -178,7 +178,7 @@ struct tvec4 {
 		@param s Value.
 	*/
 	template<
-		typename U
+		class U
 	>
 	explicit
 	tvec4(
@@ -214,10 +214,10 @@ struct tvec4 {
 		@param c4 W value.
 	*/
 	template<
-		typename U,
-		typename V,
-		typename H,
-		typename L
+		class U,
+		class V,
+		class H,
+		class L
 	>
 	explicit
 	tvec4(
@@ -246,7 +246,7 @@ struct tvec4 {
 		@param v Vector to copy.
 	*/
 	template<
-		typename U
+		class U
 	>
 	tvec4(
 		tvec4<U> const& v
@@ -261,8 +261,8 @@ struct tvec4 {
 		@param v Y, Z, and W vector.
 	*/
 	template<
-		typename U,
-		typename V
+		class U,
+		class V
 	>
 	explicit
 	tvec4(
@@ -278,8 +278,8 @@ struct tvec4 {
 		@param c4 W value.
 	*/
 	template<
-		typename U,
-		typename V
+		class U,
+		class V
 	>
 	explicit
 	tvec4(
@@ -297,9 +297,9 @@ struct tvec4 {
 		@param v Z and W vector.
 	*/
 	template<
-		typename U,
-		typename V,
-		typename H
+		class U,
+		class V,
+		class H
 	>
 	explicit
 	tvec4(
@@ -317,9 +317,9 @@ struct tvec4 {
 		@param c4 W value.
 	*/
 	template<
-		typename U,
-		typename V,
-		typename H
+		class U,
+		class V,
+		class H
 	>
 	explicit
 	tvec4(
@@ -336,8 +336,8 @@ struct tvec4 {
 		@param v2 Z and W vector.
 	*/
 	template<
-		typename U,
-		typename V
+		class U,
+		class V
 	>
 	explicit
 	tvec4(
@@ -458,7 +458,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator=(
 		U const& s
@@ -476,7 +476,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to copy.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator=(
 		tvec4<U> const& v
@@ -497,7 +497,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value to add.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator+=(
 		U const& s
@@ -515,7 +515,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to add.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator+=(
 		tvec4<U> const& v
@@ -534,7 +534,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value to subtract.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator-=(
 		U const& s
@@ -552,7 +552,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to subtract.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator-=(
 		tvec4<U> const& v
@@ -571,7 +571,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Scalar.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator*=(
 		U const& s
@@ -589,7 +589,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to multiply by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator*=(
 		tvec4<U> const& v
@@ -608,7 +608,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value to divide by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator/=(
 		U const& s
@@ -626,7 +626,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to divide by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator/=(
 		tvec4<U> const& v
@@ -645,7 +645,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Divisor.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator%=(
 		U const& s
@@ -663,7 +663,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Divisor vector.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator%=(
 		tvec4<U> const& v
@@ -684,7 +684,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value to AND with.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator&=(
 		U const& s
@@ -702,7 +702,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to AND with.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator&=(
 		tvec4<U> const& v
@@ -721,7 +721,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value to OR with.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator|=(
 		U const& s
@@ -739,7 +739,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to OR with.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator|=(
 		tvec4<U> const& v
@@ -758,7 +758,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Value to XOR with.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator^=(
 		U const& s
@@ -776,7 +776,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Vector to XOR with.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator^=(
 		tvec4<U> const& v
@@ -795,7 +795,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Left-shift value amount.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator<<=(
 		U const& s
@@ -813,7 +813,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Left-shift vector amount.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator<<=(
 		tvec4<U> const& v
@@ -832,7 +832,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param s Right-shift value amount.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator>>=(
 		U const& s
@@ -850,7 +850,7 @@ struct tvec4 {
 		@tparam U An arithmetic type.
 		@param v Right-shift vector amount.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator>>=(
 		tvec4<U> const& v
@@ -872,7 +872,7 @@ struct tvec4 {
 		@tparam T An arithmetic type.
 		@param x Vector.
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator++(
 		tvec4<T> const& x,
@@ -888,7 +888,7 @@ struct tvec4 {
 		@tparam T An arithmetic type.
 		@param x Vector.
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator--(
 		tvec4<T> const& x,
@@ -906,7 +906,7 @@ struct tvec4 {
 		@tparam T An arithmetic type.
 		@param x Vector.
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator+(
 		tvec4<T> const& x
@@ -921,7 +921,7 @@ struct tvec4 {
 		@tparam T An arithmetic type.
 		@param x Vector.
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator-(
 		tvec4<T> const& x
@@ -939,7 +939,7 @@ struct tvec4 {
 		@tparam T An arithmetic type.
 		@param x Vector.
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator~(
 		tvec4<T> const& x
@@ -960,7 +960,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator+(
 		tvec4<T> const& x,
@@ -979,7 +979,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator+(
 		T const& x,
@@ -998,7 +998,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator+(
 		tvec4<T> const& x,
@@ -1018,7 +1018,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator-(
 		tvec4<T> const& x,
@@ -1037,7 +1037,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator-(
 		T const& x,
@@ -1056,7 +1056,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator-(
 		tvec4<T> const& x,
@@ -1076,7 +1076,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator*(
 		tvec4<T> const& x,
@@ -1095,7 +1095,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator*(
 		T const& x,
@@ -1114,7 +1114,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator*(
 		tvec4<T> const& x,
@@ -1134,7 +1134,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator/(
 		tvec4<T> const& x,
@@ -1153,7 +1153,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator/(
 		T const& x,
@@ -1172,7 +1172,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator/(
 		tvec4<T> const& x,
@@ -1192,7 +1192,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator%(
 		tvec4<T> const& x,
@@ -1211,7 +1211,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator%(
 		T const& x,
@@ -1230,7 +1230,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator%(
 		tvec4<T> const& x,
@@ -1252,7 +1252,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator&(
 		tvec4<T> const& x,
@@ -1271,7 +1271,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator&(
 		T const& x,
@@ -1290,7 +1290,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator&(
 		tvec4<T> const& x,
@@ -1310,7 +1310,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator|(
 		tvec4<T> const& x,
@@ -1329,7 +1329,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator|(
 		T const& x,
@@ -1348,7 +1348,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator|(
 		tvec4<T> const& x,
@@ -1368,7 +1368,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator^(
 		tvec4<T> const& x,
@@ -1387,7 +1387,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator^(
 		T const& x,
@@ -1406,7 +1406,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator^(
 		tvec4<T> const& x,
@@ -1426,7 +1426,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator<<(
 		tvec4<T> const& x,
@@ -1445,7 +1445,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator<<(
 		T const& x,
@@ -1464,7 +1464,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator<<(
 		tvec4<T> const& x,
@@ -1484,7 +1484,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator>>(
 		tvec4<T> const& x,
@@ -1503,7 +1503,7 @@ struct tvec4 {
 		@param x Value (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator>>(
 		T const& x,
@@ -1522,7 +1522,7 @@ struct tvec4 {
 		@param x Vector (left-hand).
 		@param y Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tvec4<T>
 	operator>>(
 		tvec4<T> const& x,

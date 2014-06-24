@@ -116,7 +116,7 @@ dot(
 	@param v First vector.
 	@param r Second vector.
 */
-template<typename T>
+template<class T>
 inline detail::linear::tvec3<T>
 cross(
 	detail::linear::tvec3<T> const& v,

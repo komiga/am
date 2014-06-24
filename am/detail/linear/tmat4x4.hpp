@@ -22,10 +22,10 @@ namespace linear {
 
 // Forward declarations
 /** @cond INTERNAL */
-template<typename T> struct tvec4;
-template<typename T> struct tmat2x4;
-template<typename T> struct tmat3x4;
-template<typename T> struct tmat4x4;
+template<class T> struct tvec4;
+template<class T> struct tmat2x4;
+template<class T> struct tmat3x4;
+template<class T> struct tmat4x4;
 
 AM_DETAIL_TYPE_IS_MATRIX(tmat4x4);
 AM_DETAIL_TYPE_IS_SQUARE_MATRIX(tmat4x4);
@@ -50,7 +50,7 @@ AM_DETAIL_TYPE_IS_SQUARE_MATRIX(tmat4x4);
 	@tparam T A floating-point type.
 */
 template<
-	typename T
+	class T
 >
 struct tmat4x4 {
 public:
@@ -450,7 +450,7 @@ public:
 		@param s Value.
 	*/
 	template<
-		typename U
+		class U
 	>
 	explicit
 	tmat4x4(
@@ -497,10 +497,10 @@ public:
 		@param x4,y4,z4,w4 Fourth column.
 	*/
 	template<
-		typename X1, typename Y1, typename Z1, typename W1,
-		typename X2, typename Y2, typename Z2, typename W2,
-		typename X3, typename Y3, typename Z3, typename W3,
-		typename X4, typename Y4, typename Z4, typename W4>
+		class X1, class Y1, class Z1, class W1,
+		class X2, class Y2, class Z2, class W2,
+		class X3, class Y3, class Z3, class W3,
+		class X4, class Y4, class Z4, class W4>
 	explicit
 	tmat4x4(
 		X1 const& x1, Y1 const& y1, Z1 const& z1, W1 const& w1,
@@ -544,10 +544,10 @@ public:
 		@param c4 Fourth column.
 	*/
 	template<
-		typename C1,
-		typename C2,
-		typename C3,
-		typename C4
+		class C1,
+		class C2,
+		class C3,
+		class C4
 	>
 	explicit
 	tmat4x4(
@@ -582,7 +582,7 @@ public:
 		@param m Matrix to copy.
 	*/
 	template<
-		typename U
+		class U
 	>
 	tmat4x4(
 		tmat4x4<U> const& m
@@ -727,7 +727,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator=(
 		tmat4x4<U> const& m
@@ -748,7 +748,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value to add.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator+=(
 		U const& s
@@ -766,7 +766,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to add.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator+=(
 		tmat4x4<U> const& m
@@ -785,7 +785,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value to subtract.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator-=(
 		U const& s
@@ -803,7 +803,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to subtract.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator-=(
 		tmat4x4<U> const& m
@@ -822,7 +822,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Scalar.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator*=(
 		U const& s
@@ -840,7 +840,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to multiply by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator*=(
 		tmat4x4<U> const& m
@@ -855,7 +855,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value to divide by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator/=(
 		U const& s
@@ -873,7 +873,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to divide by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator/=(
 		tmat4x4<U> const& m
@@ -891,7 +891,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator++(
 		tmat4x4<T> const& m,
@@ -907,7 +907,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator--(
 		tmat4x4<T> const& m,
@@ -925,7 +925,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator+(
 		tmat4x4<T> const& m
@@ -940,7 +940,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator-(
 		tmat4x4<T> const& m
@@ -958,7 +958,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator+(
 		tmat4x4<T> const& m,
@@ -974,7 +974,7 @@ public:
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator+(
 		T const& s,
@@ -990,7 +990,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator+(
 		tmat4x4<T> const& m,
@@ -1007,7 +1007,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator-(
 		tmat4x4<T> const& m,
@@ -1023,7 +1023,7 @@ public:
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator-(
 		T const& s,
@@ -1039,7 +1039,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator-(
 		tmat4x4<T> const& m,
@@ -1055,7 +1055,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Scalar (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator*(
 		tmat4x4<T> const& m,
@@ -1071,7 +1071,7 @@ public:
 		@param s Scalar (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator*(
 		T const& s,
@@ -1087,7 +1087,7 @@ public:
 		@param m Matrix (left-hand).
 		@param v Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat4x4<T>::col_type
 	operator*(
 		tmat4x4<T> const& m,
@@ -1103,7 +1103,7 @@ public:
 		@param v Vector (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat4x4<T>::row_type
 	operator*(
 		typename tmat4x4<T>::col_type const& v,
@@ -1119,7 +1119,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat2x4<T>
 	operator*(tmat4x4<T> const& m,
 		tmat2x4<T> const& n
@@ -1134,7 +1134,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x4<T>
 	operator*(tmat4x4<T> const& m,
 		tmat3x4<T> const& n
@@ -1149,7 +1149,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator*(
 		tmat4x4<T> const& m,
@@ -1166,7 +1166,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator/(
 		tmat4x4<T> const& m,
@@ -1183,7 +1183,7 @@ public:
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator/(
 		T const& s,
@@ -1199,7 +1199,7 @@ public:
 		@param m Matrix (left-hand).
 		@param v Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat4x4<T>::col_type
 	operator/(
 		tmat4x4<T> const& m,
@@ -1215,7 +1215,7 @@ public:
 		@param v Vector (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat4x4<T>::row_type
 	operator/(
 		typename tmat4x4<T>::col_type const& v,
@@ -1231,7 +1231,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x4<T>
 	operator/(
 		tmat4x4<T> const& m,

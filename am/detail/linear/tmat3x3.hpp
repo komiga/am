@@ -22,10 +22,10 @@ namespace linear {
 
 // Forward declarations
 /** @cond INTERNAL */
-template<typename T> struct tvec3;
-template<typename T> struct tmat2x3;
-template<typename T> struct tmat3x3;
-template<typename T> struct tmat4x3;
+template<class T> struct tvec3;
+template<class T> struct tmat2x3;
+template<class T> struct tmat3x3;
+template<class T> struct tmat4x3;
 
 AM_DETAIL_TYPE_IS_MATRIX(tmat3x3);
 AM_DETAIL_TYPE_IS_SQUARE_MATRIX(tmat3x3);
@@ -49,7 +49,7 @@ AM_DETAIL_TYPE_IS_SQUARE_MATRIX(tmat3x3);
 
 	@tparam T A floating-point type.
 */
-template<typename T>
+template<class T>
 struct tmat3x3 {
 public:
 	/** @cond INTERNAL */
@@ -383,7 +383,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value.
 	*/
-	template<typename U>
+	template<class U>
 	explicit
 	tmat3x3(
 		U const& s
@@ -419,9 +419,9 @@ public:
 		@param x3,y3,z3 Third column.
 	*/
 	template<
-		typename X1, typename Y1, typename Z1,
-		typename X2, typename Y2, typename Z2,
-		typename X3, typename Y3, typename Z3
+		class X1, class Y1, class Z1,
+		class X2, class Y2, class Z2,
+		class X3, class Y3, class Z3
 	>
 	explicit
 	tmat3x3(
@@ -460,9 +460,9 @@ public:
 		@param c3 Third column.
 	*/
 	template<
-		typename C1,
-		typename C2,
-		typename C3
+		class C1,
+		class C2,
+		class C3
 	>
 	explicit
 	tmat3x3(
@@ -493,7 +493,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
-	template<typename U>
+	template<class U>
 	tmat3x3(
 		tmat3x3<U> const& m
 	) : data{
@@ -631,7 +631,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to copy.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator=(
 		tmat3x3<U> const& m
@@ -651,7 +651,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value to add.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator+=(
 		U const& s
@@ -668,7 +668,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to add.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator+=(
 		tmat3x3<U> const& m
@@ -686,7 +686,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value to subtract.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator-=(
 		U const& s
@@ -703,7 +703,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to subtract.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator-=(
 		tmat3x3<U> const& m
@@ -721,7 +721,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Scalar.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator*=(
 		U const& s
@@ -738,7 +738,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to multiply by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator*=(
 		tmat3x3<U> const& m
@@ -753,7 +753,7 @@ public:
 		@tparam U An arithmetic type.
 		@param s Value to divide by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator/=(
 		U const& s
@@ -770,7 +770,7 @@ public:
 		@tparam U A floating-point type.
 		@param m Matrix to divide by.
 	*/
-	template<typename U>
+	template<class U>
 	type&
 	operator/=(
 		tmat3x3<U> const& m
@@ -788,7 +788,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator++(
 		tmat3x3<T> const& m,
@@ -804,7 +804,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator--(
 		tmat3x3<T> const& m,
@@ -822,7 +822,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator+(
 		tmat3x3<T> const& m
@@ -837,7 +837,7 @@ public:
 		@tparam T A floating-point type.
 		@param m Matrix.
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator-(
 		tmat3x3<T> const& m
@@ -855,7 +855,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator+(
 		tmat3x3<T> const& m,
@@ -871,7 +871,7 @@ public:
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator+(
 		T const& s,
@@ -887,7 +887,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator+(
 		tmat3x3<T> const& m,
@@ -904,7 +904,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator-(
 		tmat3x3<T> const& m,
@@ -920,7 +920,7 @@ public:
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator-(
 		T const& s,
@@ -936,7 +936,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator-(
 		tmat3x3<T> const& m,
@@ -953,7 +953,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Scalar (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator*(
 		tmat3x3<T> const& m,
@@ -969,7 +969,7 @@ public:
 		@param s Scalar (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator*(
 		T const& s,
@@ -985,7 +985,7 @@ public:
 		@param m Matrix (left-hand).
 		@param v Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat3x3<T>::col_type
 	operator*(
 		tmat3x3<T> const& m,
@@ -1001,7 +1001,7 @@ public:
 		@param v Vector (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat3x3<T>::row_type
 	operator*(
 		typename tmat3x3<T>::col_type const& v,
@@ -1017,7 +1017,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat2x3<T>
 	operator*(
 		tmat3x3<T> const& m,
@@ -1033,7 +1033,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator*(
 		tmat3x3<T> const& m,
@@ -1049,7 +1049,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat4x3<T>
 	operator*(
 		tmat3x3<T> const& m,
@@ -1066,7 +1066,7 @@ public:
 		@param m Matrix (left-hand).
 		@param s Value (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator/(
 		tmat3x3<T> const& m,
@@ -1082,7 +1082,7 @@ public:
 		@param s Value (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator/(
 		T const& s,
@@ -1098,7 +1098,7 @@ public:
 		@param m Matrix (left-hand).
 		@param v Vector (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat3x3<T>::col_type
 	operator/(
 		tmat3x3<T> const& m,
@@ -1114,7 +1114,7 @@ public:
 		@param v Vector (left-hand).
 		@param m Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline typename tmat3x3<T>::row_type
 	operator/(
 		typename tmat3x3<T>::col_type const& v,
@@ -1130,7 +1130,7 @@ public:
 		@param m Matrix (left-hand).
 		@param n Matrix (right-hand).
 	*/
-	template<typename T>
+	template<class T>
 	inline tmat3x3<T>
 	operator/(
 		tmat3x3<T> const& m,

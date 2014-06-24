@@ -24,7 +24,7 @@ namespace linear {
 	@tparam T Any type.
 */
 template<
-	typename T
+	class T
 >
 struct is_vector
 	: public std::false_type
@@ -36,7 +36,7 @@ struct is_vector
 	@tparam T Any type.
 */
 template<
-	typename T
+	class T
 >
 struct is_matrix
 	: public std::false_type
@@ -48,7 +48,7 @@ struct is_matrix
 	@tparam T Any type.
 */
 template<
-	typename T
+	class T
 >
 struct is_square_matrix
 	: public std::false_type
@@ -76,17 +76,20 @@ struct is_construct_floating_point {
 };
 
 /** @cond INTERNAL */
-#define AM_DETAIL_TYPE_IS_VECTOR(TYPE)						\
-	template<typename T>									\
-	struct is_vector<TYPE<T> > : public std::true_type {}
+#define AM_DETAIL_TYPE_IS_VECTOR(TYPE)								\
+	template<class T>												\
+	struct is_vector<TYPE<T> > : public std::true_type				\
+	{} /**/
 
-#define AM_DETAIL_TYPE_IS_MATRIX(TYPE)						\
-	template<typename T>									\
-	struct is_matrix<TYPE<T> > : public std::true_type {}
+#define AM_DETAIL_TYPE_IS_MATRIX(TYPE)								\
+	template<class T>												\
+	struct is_matrix<TYPE<T> > : public std::true_type				\
+	{} /**/
 
 #define AM_DETAIL_TYPE_IS_SQUARE_MATRIX(TYPE)						\
-	template<typename T>											\
-	struct is_square_matrix<TYPE<T> > : public std::true_type {}
+	template<class T>												\
+	struct is_square_matrix<TYPE<T> > : public std::true_type		\
+	{} /**/
 /** @endcond */
 
 } // namespace linear
