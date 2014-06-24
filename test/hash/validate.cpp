@@ -16,10 +16,10 @@
 
 using namespace am::hash::literals;
 
-static AM_CONSTEXPR auto const s_l_fnv1a_32 = "fnv1a_32"_fnv1a_32;
-static AM_CONSTEXPR auto const s_l_fnv1a_64 = "fnv1a_64"_fnv1a_64;
+static constexpr auto const s_l_fnv1a_32 = "fnv1a_32"_fnv1a_32;
+static constexpr auto const s_l_fnv1a_64 = "fnv1a_64"_fnv1a_64;
 #if !defined(__GNUC__) || defined(__llvm__) || defined(__clang__)
-static AM_CONSTEXPR auto const
+static constexpr auto const
 s_l_murmur3_32 = am::hash::murmur3_c<am::hash::HL32>("murmur3_32", 10u, 0);
 #endif
 

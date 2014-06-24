@@ -319,7 +319,7 @@ struct tvec3 {
 
 		@returns @c 3.
 	*/
-	static AM_CONSTEXPR size_type
+	static constexpr size_type
 	size() {
 		return size_type(3);
 	}

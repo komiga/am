@@ -36,22 +36,22 @@ struct fnv_internals;
 
 template<>
 struct fnv_internals< ::am::hash::HashLength::HL32> {
-	static AM_CONSTEXPR uint32_t const prime = 0x01000193;
-	static AM_CONSTEXPR uint32_t const offset_basis = 0x811c9dc5;
+	static constexpr uint32_t const prime = 0x01000193;
+	static constexpr uint32_t const offset_basis = 0x811c9dc5;
 };
 
 template<>
 struct fnv_internals< ::am::hash::HashLength::HL64> {
-	static AM_CONSTEXPR uint64_t const prime = 0x00000100000001b3;
-	static AM_CONSTEXPR uint64_t const offset_basis = 0xcbf29ce484222325;
+	static constexpr uint64_t const prime = 0x00000100000001b3;
+	static constexpr uint64_t const offset_basis = 0xcbf29ce484222325;
 };
 
 template<
 	::am::hash::HashLength L
 >
 struct fnv0_internals {
-	static AM_CONSTEXPR fnv_hash_type<L> const prime = fnv_internals<L>::prime;
-	static AM_CONSTEXPR fnv_hash_type<L> const offset_basis = 0x00;
+	static constexpr fnv_hash_type<L> const prime = fnv_internals<L>::prime;
+	static constexpr fnv_hash_type<L> const offset_basis = 0x00;
 };
 
 } // anonymous namespace
@@ -79,7 +79,7 @@ struct fnv0_impl {
 		return x;
 	}
 
-	static AM_CONSTEXPR hash_type
+	static constexpr hash_type
 	calc_c_seq(
 		char const* const data,
 		std::size_t const size,
@@ -120,7 +120,7 @@ struct fnv1_impl {
 		return x;
 	}
 
-	static AM_CONSTEXPR hash_type
+	static constexpr hash_type
 	calc_c_seq(
 		char const* const data,
 		std::size_t const size,
@@ -161,7 +161,7 @@ struct fnv1a_impl {
 		return x;
 	}
 
-	static AM_CONSTEXPR hash_type
+	static constexpr hash_type
 	calc_c_seq(
 		char const* const data,
 		std::size_t const size,
@@ -182,7 +182,7 @@ struct fnv1a_impl {
 template<
 	class Impl
 >
-static AM_CONSTEXPR typename Impl::hash_type
+static constexpr typename Impl::hash_type
 calc_c_adaptor(
 	char const* const data,
 	std::size_t const size

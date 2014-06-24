@@ -469,7 +469,7 @@ public:
 
 		@returns @c 3.
 	*/
-	static AM_CONSTEXPR size_type
+	static constexpr size_type
 	size() {
 		return size_type(3);
 	}
@@ -478,7 +478,7 @@ public:
 
 		@returns @c 4.
 	*/
-	static AM_CONSTEXPR size_type
+	static constexpr size_type
 	col_size() {
 		return col_type::size();
 	}
@@ -487,7 +487,7 @@ public:
 
 		@returns @c 3.
 	*/
-	static AM_CONSTEXPR size_type
+	static constexpr size_type
 	row_size() {
 		return row_type::size();
 	}

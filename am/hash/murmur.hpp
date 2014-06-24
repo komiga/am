@@ -256,7 +256,7 @@ template<
 	HashLength L,
 	class Impl = detail::hash::murmur3_impl<L>
 >
-inline AM_CONSTEXPR detail::hash::murmur_hash_type<L>
+inline constexpr detail::hash::murmur_hash_type<L>
 murmur3_c(
 	char const* const data,
 	std::size_t const size,

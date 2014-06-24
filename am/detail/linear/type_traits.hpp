@@ -69,7 +69,7 @@ template<
 >
 struct is_construct_floating_point {
 	/** Whether the linear construct is floating-point. */
-	static AM_CONSTEXPR bool
+	static constexpr bool
 	value = std::is_floating_point<
 		typename ConType::value_type
 	>::value;

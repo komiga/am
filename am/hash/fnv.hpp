@@ -119,7 +119,7 @@ template<
 	HashLength L,
 	class Impl = detail::hash::fnv0_impl<L>
 >
-inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
+inline constexpr detail::hash::fnv_hash_type<L>
 fnv0_c(
 	char const* const data,
 	std::size_t const size
@@ -192,7 +192,7 @@ template<
 	HashLength L,
 	class Impl = detail::hash::fnv1_impl<L>
 >
-inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
+inline constexpr detail::hash::fnv_hash_type<L>
 fnv1_c(
 	char const* const data,
 	std::size_t const size
@@ -265,7 +265,7 @@ template<
 	HashLength L,
 	class Impl = detail::hash::fnv1a_impl<L>
 >
-inline AM_CONSTEXPR detail::hash::fnv_hash_type<L>
+inline constexpr detail::hash::fnv_hash_type<L>
 fnv1a_c(
 	char const* const data,
 	std::size_t const size
@@ -299,7 +299,7 @@ namespace literals {
 	@param data C-string.
 	@param size Size in bytes of @a data.
 */
-inline AM_CONSTEXPR detail::hash::fnv_hash_type<HashLength::HL32>
+inline constexpr detail::hash::fnv_hash_type<HashLength::HL32>
 operator"" _fnv1a_32(
 	char const* const data,
 	std::size_t const size
@@ -314,7 +314,7 @@ operator"" _fnv1a_32(
 	@param data C-string.
 	@param size Size in bytes of @a data.
 */
-inline AM_CONSTEXPR detail::hash::fnv_hash_type<HashLength::HL64>
+inline constexpr detail::hash::fnv_hash_type<HashLength::HL64>
 operator"" _fnv1a_64(
 	char const* const data,
 	std::size_t const size

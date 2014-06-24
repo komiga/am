@@ -275,7 +275,7 @@ struct tvec2 {
 
 		@returns @c 2.
 	*/
-	static AM_CONSTEXPR size_type
+	static constexpr size_type
 	size() {
 		return size_type(2);
 	}

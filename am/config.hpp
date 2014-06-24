@@ -35,7 +35,6 @@ namespace am {
 #define AM_STATIC_ASSERT(expr_, msg_) \
 	static_assert((expr_), AM_ERR_MSG(msg_))
 //#define AM_STATIC_ERROR(msg_) static_assert(false, AM_ERR_MSG(msg_))
-#define AM_CONSTEXPR constexpr
 /** @endcond */
 
 /**
@@ -133,7 +132,7 @@ namespace am {
 #define AM_FLAG_TYPE_UINT	1 << 2
 /** All types. */
 #define AM_FLAG_TYPE_ALL	\
-	(AM_FLAG_TYPE_FLOAT|AM_FLAG_TYPE_INT|AM_FLAG_TYPE_UINT)
+	(AM_FLAG_TYPE_FLOAT | AM_FLAG_TYPE_INT | AM_FLAG_TYPE_UINT)
 
 #ifdef DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 
