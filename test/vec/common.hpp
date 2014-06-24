@@ -1,6 +1,5 @@
 
-#ifndef AM_TEST_VEC_COMMON_HPP_
-#define AM_TEST_VEC_COMMON_HPP_
+#pragma once
 
 #include "../general/common.hpp"
 
@@ -94,4 +93,3 @@
 	fassert((x op).operator==(decltype(x){result}));\
 }
 
-#endif // AM_TEST_VEC_COMMON_HPP_

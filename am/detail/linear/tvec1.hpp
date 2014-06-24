@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_DETAIL_LINEAR_TVEC1_HPP_
-#define AM_DETAIL_LINEAR_TVEC1_HPP_
+#pragma once
 
 #include "../../config.hpp"
 #include "./type_traits.hpp"
@@ -1305,5 +1304,3 @@ struct tvec1 {
 } // namespace linear
 } // namespace detail
 } // namespace am
-
-#endif // AM_DETAIL_LINEAR_TVEC1_HPP_

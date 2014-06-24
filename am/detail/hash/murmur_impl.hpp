@@ -10,8 +10,7 @@ the Murmur algorithms themselves are in the public domain
 and no copyright is claimed on them.
 */
 
-#ifndef AM_DETAIL_HASH_MURMUR_IMPL_HPP_
-#define AM_DETAIL_HASH_MURMUR_IMPL_HPP_
+#pragma once
 
 #include "../../config.hpp"
 
@@ -379,5 +378,3 @@ struct ce_impl final {
 } // namespace hash
 } // namespace detail
 } // namespace am
-
-#endif // AM_DETAIL_HASH_MURMUR_IMPL_HPP_

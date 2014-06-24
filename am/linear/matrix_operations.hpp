@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_LINEAR_MATRIX_OPERATIONS_HPP_
-#define AM_LINEAR_MATRIX_OPERATIONS_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "../detail/linear/type_traits.hpp"
@@ -113,5 +112,3 @@ inverse(
 
 } // namespace am
 } // namespace linear
-
-#endif // AM_LINEAR_MATRIX_OPERATIONS_HPP_

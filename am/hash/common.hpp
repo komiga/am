@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_HASH_COMMON_HPP_
-#define AM_HASH_COMMON_HPP_
+#pragma once
 
 #include "../config.hpp"
 
@@ -76,5 +75,3 @@ using common_hash_type = typename common_hash_type_impl<L>::type;
 
 } // namespace hash
 } // namespace am
-
-#endif // AM_HASH_COMMON_HPP_

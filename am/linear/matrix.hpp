@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_LINEAR_MATRIX_HPP_
-#define AM_LINEAR_MATRIX_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "./vector.hpp"
@@ -24,5 +23,3 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "./matrix_operations.hpp"
 
 namespace am {} // namespace am
-
-#endif // AM_LINEAR_MATRIX_HPP_

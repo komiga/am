@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_DETAIL_LINEAR_TMAT2X2_HPP_
-#define AM_DETAIL_LINEAR_TMAT2X2_HPP_
+#pragma once
 
 #include "../../config.hpp"
 #include "./type_traits.hpp"
@@ -1073,5 +1072,3 @@ public:
 } // namespace linear
 } // namespace detail
 } // namespace am
-
-#endif // AM_DETAIL_LINEAR_TMAT2X2_HPP_

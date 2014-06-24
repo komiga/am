@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_LINEAR_VECTOR_OPERATIONS_HPP_
-#define AM_LINEAR_VECTOR_OPERATIONS_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "../detail/linear/type_traits.hpp"
@@ -230,5 +229,3 @@ refract(
 
 } // namespace linear
 } // namespace am
-
-#endif // AM_LINEAR_VECTOR_OPERATIONS_HPP_

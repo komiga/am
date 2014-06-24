@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_LINEAR_VEC2_HPP_
-#define AM_LINEAR_VEC2_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "../arithmetic_types.hpp"
@@ -67,5 +66,3 @@ namespace linear {
 
 } // namespace am
 } // namespace linear
-
-#endif // AM_LINEAR_VEC2_HPP_

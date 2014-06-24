@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_CONFIG_HPP_
-#define AM_CONFIG_HPP_
+#pragma once
 
 #include <cstdint>
 
@@ -204,5 +203,3 @@ namespace am {
 /** @} */ // end of doc-group config
 
 } // namespace am
-
-#endif // AM_CONFIG_HPP_

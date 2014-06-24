@@ -1,6 +1,5 @@
 
-#ifndef AM_TEST_GENERAL_COMMON_HPP_
-#define AM_TEST_GENERAL_COMMON_HPP_
+#pragma once
 
 #include <cstdlib>
 #include <cstdio>
@@ -16,4 +15,3 @@
 	)											\
 )
 
-#endif // AM_TEST_GENERAL_COMMON_HPP_

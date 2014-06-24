@@ -1,6 +1,5 @@
 
-#ifndef AM_TEST_HASH_COMMON_HPP_
-#define AM_TEST_HASH_COMMON_HPP_
+#pragma once
 
 #include "../general/common.hpp"
 
@@ -85,4 +84,3 @@ void TEST_HASH_SEEDED_SET_CE(
 	}
 }
 
-#endif // AM_TEST_HASH_COMMON_HPP_

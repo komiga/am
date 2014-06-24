@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_LINEAR_VECTOR_HPP_
-#define AM_LINEAR_VECTOR_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "./vec1.hpp"
@@ -18,5 +17,3 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "./vector_operations.hpp"
 
 namespace am {} // namespace am
-
-#endif // AM_LINEAR_VECTOR_HPP_

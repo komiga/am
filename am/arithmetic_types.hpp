@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_ARITHMETIC_TYPES_HPP_
-#define AM_ARITHMETIC_TYPES_HPP_
+#pragma once
 
 #include "./config.hpp"
 
@@ -100,5 +99,3 @@ using component_uint = configuration_dependent;
 /** @} */ // end of doc-group arithmetic_types
 
 } // namespace am
-
-#endif // AM_ARITHMETIC_TYPES_HPP_

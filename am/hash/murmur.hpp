@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_HASH_MURMUR_HPP_
-#define AM_HASH_MURMUR_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "./common.hpp"
@@ -275,5 +274,3 @@ murmur3_c(
 
 } // namespace hash
 } // namespace am
-
-#endif // AM_HASH_MURMUR_HPP_

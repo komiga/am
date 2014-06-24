@@ -7,8 +7,7 @@
 see @ref index or the accompanying LICENSE file for full text.
 */
 
-#ifndef AM_HASH_FNV_HPP_
-#define AM_HASH_FNV_HPP_
+#pragma once
 
 #include "../config.hpp"
 #include "./common.hpp"
@@ -328,5 +327,3 @@ operator"" _fnv1a_64(
 } // namespace literals
 } // namespace hash
 } // namespace am
-
-#endif // AM_HASH_FNV_HPP_
