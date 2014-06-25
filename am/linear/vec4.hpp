@@ -12,7 +12,10 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "../config.hpp"
 #include "../arithmetic_types.hpp"
 #include "../detail/linear/tvec4.hpp"
-#include "./vector_operations.hpp"
+
+#ifdef AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+	#include "../detail/linear/tvec4_interface.hpp"
+#endif
 
 namespace am {
 namespace linear {

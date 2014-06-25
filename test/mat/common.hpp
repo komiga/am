@@ -14,7 +14,7 @@
 #define TEST_MAT_AOP(mat, op, operand, result) {\
 	auto x = mat;\
 	x op## = operand;\
-	fassert(x.operator==(result));\
+	fassert(x == (result));\
 }
 
 // Construct operators
@@ -25,32 +25,32 @@
 #define TEST_MAT_XOP_RHS(mat, op, operand, result) {\
 	auto const x = mat;\
 	auto const y = (x op operand);\
-	fassert(y.operator==(result));\
+	fassert(y == (result));\
 }
 
 #define TEST_MAT_XOP_LHS(mat, op, operand, result) {\
 	auto const x = mat;\
 	auto const y = (operand op x);\
-	fassert(y.operator==(result));\
+	fassert(y == (result));\
 }
 
 // Unary operators
 #define TEST_MAT_UOP(mat, op, result) {\
 	auto const x = mat;\
 	auto const y = op x;\
-	fassert(y.operator==(result));\
+	fassert(y == (result));\
 }
 
 // Prefix operators
 #define TEST_MAT_POP(mat, op, result) {\
 	auto x = mat;\
-	fassert((op x).operator==(result));\
+	fassert((op x) == (result));\
 }
 
 // Suffix/postfix operators
 #define TEST_MAT_SOP(mat, op, result) {\
 	auto x = mat;\
-	fassert((x op).operator==(result));\
+	fassert((x op) == (result));\
 }
 
 // Full tests

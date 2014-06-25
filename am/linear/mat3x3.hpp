@@ -11,9 +11,12 @@ see @ref index or the accompanying LICENSE file for full text.
 
 #include "../config.hpp"
 #include "../arithmetic_types.hpp"
-#include "../detail/linear/tvec3.hpp"
 #include "../detail/linear/tmat3x3.hpp"
-#include "./matrix_operations.hpp"
+#include "./vec3.hpp"
+
+#ifdef AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+	#include "../detail/linear/tmat3x3_interface.hpp"
+#endif
 
 namespace am {
 namespace linear {

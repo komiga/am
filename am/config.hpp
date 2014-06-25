@@ -17,7 +17,8 @@ namespace am {
 	@defgroup config Configuration
 	@details
 	Configuration defines:
-	
+
+	- %AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
 	- %AM_CONFIG_FLOAT_PRECISION
 	- %AM_CONFIG_INT_PRECISION
 	- %AM_CONFIG_UINT_PRECISION
@@ -35,6 +36,17 @@ namespace am {
 	static_assert((expr_), AM_ERR_MSG(msg_))
 //#define AM_STATIC_ERROR(msg_) static_assert(false, AM_ERR_MSG(msg_))
 /** @endcond */
+
+#ifdef DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
+	/**
+		Whether linear type headers should implicitly include
+		their corresponding interface headers when they are not
+		needed by the header.
+
+		This is not defined by default.
+	*/
+	#define AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+#endif
 
 /**
 	@name Arithmetic type precision

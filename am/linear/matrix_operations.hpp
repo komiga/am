@@ -11,6 +11,7 @@ see @ref index or the accompanying LICENSE file for full text.
 
 #include "../config.hpp"
 #include "../detail/linear/type_traits.hpp"
+#include "./matrix_interface.hpp"
 
 namespace am {
 namespace linear {

@@ -26,7 +26,7 @@
 #define TEST_VEC_AOP(vec, op, operand, result) {\
 	auto x = vec;\
 	x op## = operand;\
-	fassert(x.operator==(decltype(x){result}));\
+	fassert(x == (decltype(x){result}));\
 }
 
 // Construct operators
@@ -47,13 +47,13 @@
 #define TEST_VEC_XOP_RHS(vec, op, operand, result) {\
 	auto const x = vec;\
 	auto const y = (x op operand);\
-	fassert(y.operator==(decltype(x){result}));\
+	fassert(y == (decltype(x){result}));\
 }
 
 #define TEST_VEC_XOP_LHS(vec, op, operand, result) {\
 	auto const x = vec;\
 	auto const y = (operand op x);\
-	fassert(y.operator==(decltype(x){result}));\
+	fassert(y == (decltype(x){result}));\
 }
 
 // Unary operators
@@ -66,7 +66,7 @@
 #define TEST_VEC_UOP(vec, op, result) {\
 	auto const x = vec;\
 	auto const y = op x;\
-	fassert(y.operator==(decltype(x){result}));\
+	fassert(y == (decltype(x){result}));\
 }
 
 // Prefix operators
@@ -78,7 +78,7 @@
 
 #define TEST_VEC_POP(vec, op, result) {\
 	auto x = vec;\
-	fassert((op x).operator==(decltype(x){result}));\
+	fassert((op x) == (decltype(x){result}));\
 }
 
 // Suffix/postfix operators
@@ -90,6 +90,6 @@
 
 #define TEST_VEC_SOP(vec, op, result) {\
 	auto x = vec;\
-	fassert((x op).operator==(decltype(x){result}));\
+	fassert((x op) == (decltype(x){result}));\
 }
 
