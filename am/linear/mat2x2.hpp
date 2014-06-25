@@ -14,7 +14,7 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "../detail/linear/tmat2x2.hpp"
 #include "./vec2.hpp"
 
-#ifdef AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+#ifdef AM_CONFIG_IMPLICIT_LINEAR_INTERFACE
 	#include "../detail/linear/tmat2x2_interface.hpp"
 #endif
 

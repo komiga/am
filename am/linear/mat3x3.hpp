@@ -14,7 +14,7 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "../detail/linear/tmat3x3.hpp"
 #include "./vec3.hpp"
 
-#ifdef AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+#ifdef AM_CONFIG_IMPLICIT_LINEAR_INTERFACE
 	#include "../detail/linear/tmat3x3_interface.hpp"
 #endif
 

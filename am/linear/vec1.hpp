@@ -13,7 +13,7 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "../arithmetic_types.hpp"
 #include "../detail/linear/tvec1.hpp"
 
-#ifdef AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+#ifdef AM_CONFIG_IMPLICIT_LINEAR_INTERFACE
 	#include "../detail/linear/tvec1_interface.hpp"
 #endif
 

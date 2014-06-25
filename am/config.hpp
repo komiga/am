@@ -11,6 +11,8 @@ see @ref index or the accompanying LICENSE file for full text.
 
 #include <cstdint>
 
+#include "./config_values.hpp"
+
 namespace am {
 
 /**
@@ -18,7 +20,7 @@ namespace am {
 	@details
 	Configuration defines:
 
-	- %AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+	- %AM_CONFIG_IMPLICIT_LINEAR_INTERFACE
 	- %AM_CONFIG_FLOAT_PRECISION
 	- %AM_CONFIG_INT_PRECISION
 	- %AM_CONFIG_UINT_PRECISION
@@ -37,6 +39,11 @@ namespace am {
 //#define AM_STATIC_ERROR(msg_) static_assert(false, AM_ERR_MSG(msg_))
 /** @endcond */
 
+/**
+	@name Linear configuration
+	@{
+*/
+
 #ifdef DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 	/**
 		Whether linear type headers should implicitly include
@@ -45,20 +52,8 @@ namespace am {
 
 		This is not defined by default.
 	*/
-	#define AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+	#define AM_CONFIG_IMPLICIT_LINEAR_INTERFACE
 #endif
-
-/**
-	@name Arithmetic type precision
-	@{
-*/
-
-/** Low arithmetic type precision. */
-#define AM_PRECISION_LOW	1
-/** Medium arithmetic type precision. */
-#define AM_PRECISION_MEDIUM	2
-/** High arithmetic type precision. */
-#define AM_PRECISION_HIGH	3
 
 #ifdef DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 
@@ -126,25 +121,6 @@ namespace am {
 
 #endif // DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 
-/** @} */ // end of name-group Arithmetic type precision
-
-/**
-	@name Type declarations
-	@{
-*/
-
-/** No types. */
-#define AM_FLAG_TYPE_NONE	0
-/** Floating-point type. */
-#define AM_FLAG_TYPE_FLOAT	1 << 0
-/** Signed integer type. */
-#define AM_FLAG_TYPE_INT	1 << 1
-/** Unsigned integer type. */
-#define AM_FLAG_TYPE_UINT	1 << 2
-/** All types. */
-#define AM_FLAG_TYPE_ALL	\
-	(AM_FLAG_TYPE_FLOAT | AM_FLAG_TYPE_INT | AM_FLAG_TYPE_UINT)
-
 #ifdef DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 
 /**
@@ -211,7 +187,7 @@ namespace am {
 
 #endif // DOXYGEN_CONSISTS_SOLELY_OF_UNICORNS_AND_CONFETTI
 
-/** @} */ // end of name-group Type declarations
+/** @} */ // end of name-group Linear configuration
 /** @} */ // end of doc-group config
 
 } // namespace am

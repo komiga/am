@@ -14,7 +14,7 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "../detail/linear/tmat4x4.hpp"
 #include "./vec4.hpp"
 
-#ifdef AM_CONFIG_LINEAR_IMPLICIT_INTERFACE
+#ifdef AM_CONFIG_IMPLICIT_LINEAR_INTERFACE
 	#include "../detail/linear/tmat4x4_interface.hpp"
 #endif
 

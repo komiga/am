@@ -19,12 +19,12 @@ namespace am {
 
 	Integer types are defined to strictly-sized 16-, 32-,
 	and 64-bit arithmetic types (respective to: low, medium, high).
+
 	Medium- and high-precision floating-point types are defined to
 	system single- and double-precision types, respectively (which
 	usually correspond to IEEE-754 32- and 64-bit floating-point
-	types, respectively).
-
-	Note that no low-precision floating-point type is provided.
+	types, respectively). No low-precision floating-point type is
+	provided.
 	@{
 */
 
