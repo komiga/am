@@ -160,4 +160,3 @@
 		TEST_MAT_PROP(inv_mat, determinant, inv_mat_det);\
 		TEST_MAT_PROP(inv_mat, inverse, inv_result);\
 	}
-

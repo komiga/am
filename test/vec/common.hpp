@@ -92,4 +92,3 @@
 	auto x = vec;\
 	fassert((x op) == (decltype(x){result}));\
 }
-

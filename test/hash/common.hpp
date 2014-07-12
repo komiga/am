@@ -83,4 +83,3 @@ void TEST_HASH_SEEDED_SET_CE(
 		fassert(it->value == constexpr_hash_func(it->input, size, seed));
 	}
 }
-
