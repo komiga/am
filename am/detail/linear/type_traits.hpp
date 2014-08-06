@@ -57,20 +57,20 @@ struct is_square_matrix
 	Whether the components in a linear construct are floating-point
 	arithmetic types.
 
-	@warning This assumes ConType is a linear construct such as a
+	@warning This assumes Cons is a linear construct such as a
 	@ref matrix "matrix" or a @ref vector "vector" (i.e., a type that
 	has a @c value_type member type alias).
 
-	@tparam ConType A specialized linear construct.
+	@tparam Cons A specialized linear construct.
 */
 template<
-	class ConType
+	class Cons
 >
 struct is_construct_floating_point {
 	/** Whether the linear construct is floating-point. */
 	static constexpr bool
 	value = std::is_floating_point<
-		typename ConType::value_type
+		typename Cons::value_type
 	>::value;
 };
 

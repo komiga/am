@@ -34,22 +34,22 @@ namespace linear {
 
 	@remarks Defined for all matrix types.
 
-	@tparam ConType A specialized matrix type.
+	@tparam Cons A specialized matrix type.
 	@returns The transpose of @a m.
 	@param m Matrix.
 */
 template<
-	class ConType
+	class Cons
 >
-inline typename ConType::transpose_type
+inline typename Cons::transpose_type
 transpose(
-	ConType const& m
+	Cons const& m
 ) {
 	AM_STATIC_ASSERT(
-		detail::linear::is_matrix<ConType>::value,
-		"ConType must be a matrix"
+		detail::linear::is_matrix<Cons>::value,
+		"Cons must be a matrix"
 	);
-	return ConType::operations::transpose(m);
+	return Cons::operations::transpose(m);
 }
 
 /**
@@ -60,22 +60,22 @@ transpose(
 	- @c mat3x3
 	- @c mat4x4
 
-	@tparam ConType A specialized square matrix type.
+	@tparam Cons A specialized square matrix type.
 	@returns The determinant of @a m.
 	@param m Matrix.
 */
 template<
-	class ConType
+	class Cons
 >
-inline typename ConType::value_type
+inline typename Cons::value_type
 determinant(
-	ConType const& m
+	Cons const& m
 ) {
 	AM_STATIC_ASSERT(
-		detail::linear::is_square_matrix<ConType>::value,
-		"ConType must be a square matrix"
+		detail::linear::is_square_matrix<Cons>::value,
+		"Cons must be a square matrix"
 	);
-	return ConType::operations::determinant(m);
+	return Cons::operations::determinant(m);
 }
 
 /**
@@ -89,22 +89,22 @@ determinant(
 	- @c mat3x3
 	- @c mat4x4
 
-	@tparam ConType A specialized square matrix type.
+	@tparam Cons A specialized square matrix type.
 	@returns The inverse of @a m.
 	@param m Matrix.
 */
 template<
-	class ConType
+	class Cons
 >
-inline ConType
+inline Cons
 inverse(
-	ConType const& m
+	Cons const& m
 ) {
 	AM_STATIC_ASSERT(
-		detail::linear::is_square_matrix<ConType>::value,
-		"ConType must be a square matrix"
+		detail::linear::is_square_matrix<Cons>::value,
+		"Cons must be a square matrix"
 	);
-	return ConType::operations::inverse(m);
+	return Cons::operations::inverse(m);
 }
 
 /** @} */ // end of doc-group matrix_ops

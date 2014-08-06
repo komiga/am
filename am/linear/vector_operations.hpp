@@ -30,14 +30,14 @@ namespace linear {
 */
 
 /** @cond INTERNAL */
-#define AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType)						\
+#define AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons)							\
 	AM_STATIC_ASSERT(													\
-		detail::linear::is_vector<ConType>::value,						\
-		"ConType must be a vector"										\
+		detail::linear::is_vector<Cons>::value,							\
+		"Cons must be a vector"											\
 	);																	\
 	AM_STATIC_ASSERT(													\
-		detail::linear::is_construct_floating_point<ConType>::value,	\
-		"ConType must be floating-point"								\
+		detail::linear::is_construct_floating_point<Cons>::value,		\
+		"Cons must be floating-point"									\
 	);
 /** @endcond */
 
@@ -46,19 +46,19 @@ namespace linear {
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType Any floating-point vector type.
+	@tparam Cons Any floating-point vector type.
 	@returns The length of @a v.
 	@param v Vector.
 */
 template<
-	class ConType
+	class Cons
 >
-inline typename ConType::value_type
+inline typename Cons::value_type
 length(
-	ConType const& v
+	Cons const& v
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::length(v);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::length(v);
 }
 
 /**
@@ -66,21 +66,21 @@ length(
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType A floating-point vector type.
+	@tparam Cons A floating-point vector type.
 	@returns The distance between @a v and @a r.
 	@param v First vector.
 	@param r Second vector.
 */
 template<
-	class ConType
+	class Cons
 >
-inline typename ConType::value_type
+inline typename Cons::value_type
 distance(
-	ConType const& v,
-	ConType const& r
+	Cons const& v,
+	Cons const& r
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::distance(v, r);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::distance(v, r);
 }
 
 /**
@@ -88,21 +88,21 @@ distance(
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType A floating-point vector type.
+	@tparam Cons A floating-point vector type.
 	@returns The dot product of @a v and @a r.
 	@param v First vector.
 	@param r Second vector.
 */
 template<
-	class ConType
+	class Cons
 >
-inline typename ConType::value_type
+inline typename Cons::value_type
 dot(
-	ConType const& v,
-	ConType const& r
+	Cons const& v,
+	Cons const& r
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::dot(v, r);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::dot(v, r);
 }
 
 /**
@@ -131,19 +131,19 @@ cross(
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType A floating-point vector type.
+	@tparam Cons A floating-point vector type.
 	@returns @a v normalized.
 	@param v Vector to normalize.
 */
 template<
-	class ConType
+	class Cons
 >
-inline ConType
+inline Cons
 normalize(
-	ConType const& v
+	Cons const& v
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::normalize(v);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::normalize(v);
 }
 
 /**
@@ -151,23 +151,23 @@ normalize(
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType A floating-point vector type.
+	@tparam Cons A floating-point vector type.
 	@returns Either @c n or @c -n.
 	@param n Normal vector to orient.
 	@param i Incident vector.
 	@param ng Geometric normal vector.
 */
 template<
-	class ConType
+	class Cons
 >
-inline ConType
+inline Cons
 faceforward(
-	ConType const& n,
-	ConType const& i,
-	ConType const& ng
+	Cons const& n,
+	Cons const& i,
+	Cons const& ng
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::faceforward(n, i, ng);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::faceforward(n, i, ng);
 }
 
 /**
@@ -177,21 +177,21 @@ faceforward(
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType A floating-point vector type.
+	@tparam Cons A floating-point vector type.
 	@returns The reflection direction vector.
 	@param i Incident vector.
 	@param n Surface normal vector.
 */
 template<
-	class ConType
+	class Cons
 >
-inline ConType
+inline Cons
 reflect(
-	ConType const& i,
-	ConType const& n
+	Cons const& i,
+	Cons const& n
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::reflect(i, n);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::reflect(i, n);
 }
 
 /**
@@ -201,23 +201,23 @@ reflect(
 
 	@remarks Defined for all floating-point vector types.
 
-	@tparam ConType A floating-point vector type.
+	@tparam Cons A floating-point vector type.
 	@returns The refraction direction vector.
 	@param i Incident vector.
 	@param n Surface normal vector.
 	@param eta Ratio of indices of refraction.
 */
 template<
-	class ConType
+	class Cons
 >
-inline ConType
+inline Cons
 refract(
-	ConType const& i,
-	ConType const& n,
-	typename ConType::value_type const& eta
+	Cons const& i,
+	Cons const& n,
+	typename Cons::value_type const& eta
 ) {
-	AM_VEC_OP_REQUIRE_FLOATING_POINT(ConType);
-	return ConType::operations::refract(i, n, eta);
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return Cons::operations::refract(i, n, eta);
 }
 
 /** @cond INTERNAL */
