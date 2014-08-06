@@ -90,5 +90,6 @@
 
 #define TEST_VEC_SOP(vec, op, result) {\
 	auto x = vec;\
+	fassert((x op) == (vec));\
 	fassert((x op) == (decltype(x){result}));\
 }

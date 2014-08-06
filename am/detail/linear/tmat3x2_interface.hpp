@@ -52,25 +52,6 @@ struct tmat3x2<T>::operations {
 	}
 
 	static type
-	postfix_increment(
-		type_cref m
-	) {
-		return type{
-			m.data[0]++,
-			m.data[1]++,
-			m.data[2]++};
-	}
-	static type
-	postfix_decrement(
-		type_cref m
-	) {
-		return type{
-			m.data[0]--,
-			m.data[1]--,
-			m.data[2]--};
-	}
-
-	static type
 	unary_negative(
 		type_cref m
 	) {
@@ -406,29 +387,33 @@ struct tmat3x2<T>::operations {
 	/**
 		Matrix postfix increment.
 
-		@returns New matrix with @c m+1.
+		@returns @a m before operation.
 	*/
 	template<class T>
 	inline tmat3x2<T>
 	operator++(
-		tmat3x2<T> const& m,
+		tmat3x2<T>& m,
 		signed
 	) {
-		return tmat3x2<T>::operations::postfix_increment(m);
+		tmat3x2<T> c{m};
+		++m;
+		return c;
 	}
 
 	/**
 		Matrix postfix decrement.
 
-		@returns New matrix with @c m-1.
+		@returns @a m before operation.
 	*/
 	template<class T>
 	inline tmat3x2<T>
 	operator--(
-		tmat3x2<T> const& m,
+		tmat3x2<T>& m,
 		signed
 	) {
-		return tmat3x2<T>::operations::postfix_decrement(m);
+		tmat3x2<T> c{m};
+		--m;
+		return c;
 	}
 /// @}
 

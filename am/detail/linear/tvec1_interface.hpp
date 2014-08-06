@@ -461,29 +461,33 @@ struct tvec1<T>::operations {
 	/**
 		Vector postfix increment.
 
-		@returns New vector with @c x+1.
+		@returns @a x before operation.
 	*/
 	template<class T>
 	inline tvec1<T>
 	operator++(
-		tvec1<T> const& x,
+		tvec1<T>& x,
 		signed
 	) {
-		return tvec1<T>{x.x + T(1)};
+		tvec1<T> c{x};
+		++x;
+		return c;
 	}
 
 	/**
 		Vector postfix decrement.
 
-		@returns New vector with @c x-1.
+		@returns @a x before operation.
 	*/
 	template<class T>
 	inline tvec1<T>
 	operator--(
-		tvec1<T> const& x,
+		tvec1<T>& x,
 		signed
 	) {
-		return tvec1<T>{x.x - T(1)};
+		tvec1<T> c{x};
+		--x;
+		return c;
 	}
 /// @}
 

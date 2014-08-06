@@ -50,7 +50,8 @@
 // Suffix/postfix operators
 #define TEST_MAT_SOP(mat, op, result) {\
 	auto x = mat;\
-	fassert((x op) == (result));\
+	fassert((x op) == (mat));\
+	fassert((x) == (result));\
 }
 
 // Full tests
