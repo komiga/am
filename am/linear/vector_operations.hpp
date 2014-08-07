@@ -12,6 +12,7 @@ see @ref index or the accompanying LICENSE file for full text.
 #include "../config.hpp"
 #include "../detail/linear/type_traits.hpp"
 #include "./vector_interface.hpp"
+#include "./interpolation.hpp"
 
 namespace am {
 namespace linear {
@@ -218,6 +219,27 @@ refract(
 ) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
 	return Cons::operations::refract(i, n, eta);
+}
+
+/**
+	Linearly interpolate between two vectors.
+
+	@tparam Cons A floating-point vector type.
+	@returns Interpolant.
+	@param x,y Values.
+	@param a Interpolation weight.
+*/
+template<
+	class Cons
+>
+inline Cons
+mix(
+	Cons const& x,
+	Cons const& y,
+	detail::linear::value_type<Cons> const& a
+) {
+	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
+	return linear::lerp(x, y, a);
 }
 
 /** @cond INTERNAL */
