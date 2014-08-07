@@ -74,6 +74,45 @@ struct is_construct_floating_point {
 	>::value;
 };
 
+namespace {
+
+template<
+	class Cons,
+	class = void
+>
+struct value_type_impl;
+
+template<class Cons>
+struct value_type_impl<
+	Cons,
+	typename std::enable_if<
+		linear::is_vector<Cons>::value ||
+		linear::is_matrix<Cons>::value
+	>::type
+> {
+	using type = typename Cons::value_type;
+};
+
+template<class Cons>
+struct value_type_impl<
+	Cons,
+	typename std::enable_if<std::is_arithmetic<Cons>::value>::type
+> {
+	using type = Cons;
+};
+
+} // anonymous namespace
+
+/**
+	Value type of a linear construct or scalar.
+
+	@tparam Cons An arithmetic type or specialized linear construct.
+*/
+template<
+	class Cons
+>
+using value_type = typename value_type_impl<Cons>::type;
+
 /** @cond INTERNAL */
 #define AM_DETAIL_TYPE_IS_VECTOR(TYPE)								\
 	template<class T>												\

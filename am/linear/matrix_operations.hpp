@@ -67,7 +67,7 @@ transpose(
 template<
 	class Cons
 >
-inline typename Cons::value_type
+inline detail::linear::value_type<Cons>
 determinant(
 	Cons const& m
 ) {

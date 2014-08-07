@@ -53,7 +53,7 @@ namespace linear {
 template<
 	class Cons
 >
-inline typename Cons::value_type
+inline detail::linear::value_type<Cons>
 length(
 	Cons const& v
 ) {
@@ -74,7 +74,7 @@ length(
 template<
 	class Cons
 >
-inline typename Cons::value_type
+inline detail::linear::value_type<Cons>
 distance(
 	Cons const& v,
 	Cons const& r
@@ -96,7 +96,7 @@ distance(
 template<
 	class Cons
 >
-inline typename Cons::value_type
+inline detail::linear::value_type<Cons>
 dot(
 	Cons const& v,
 	Cons const& r
@@ -214,7 +214,7 @@ inline Cons
 refract(
 	Cons const& i,
 	Cons const& n,
-	typename Cons::value_type const& eta
+	detail::linear::value_type<Cons> const& eta
 ) {
 	AM_VEC_OP_REQUIRE_FLOATING_POINT(Cons);
 	return Cons::operations::refract(i, n, eta);
