@@ -1,6 +1,7 @@
 
 #include <am/config.hpp>
 #include <am/linear/vector.hpp>
+#include <am/linear/interpolation.hpp>
 
 #include "./common.hpp"
 
@@ -61,8 +62,11 @@ signed main() {
 		std::printf(name ": %f\n", f);
 
 	am::linear::vec3 const
-		a{1.0, 2.0, 3.0},
-		b{3.0, 2.0, 1.0};
+		a{1.0f, 2.0f, 3.0f},
+		b{3.0f, 2.0f, 1.0f},
+		c{1.0f, 2.0f, 4.0f},
+		zero{0.0f, 0.0f, 0.0f}
+	;
 	am::linear::vec3 r;
 	am::linear::vec3::value_type fr;
 	fr = am::linear::length(a); PRINT_FLOAT(fr, "length");
@@ -70,5 +74,16 @@ signed main() {
 	fr = am::linear::dot(a, b); PRINT_FLOAT(fr, "dot");
 	r = am::linear::cross(a, b); PRINT_VEC3(r, "cross");
 	r = am::linear::normalize(a); PRINT_VEC3(r, "normalized");
+	r = am::linear::lerp(zero, c, 0.00f); PRINT_VEC3(r, "lerp 0.00f");
+	r = am::linear::lerp(zero, c, 0.25f); PRINT_VEC3(r, "lerp 0.25f");
+	r = am::linear::lerp(zero, c, 0.50f); PRINT_VEC3(r, "lerp 0.50f");
+	r = am::linear::lerp(zero, c, 0.75f); PRINT_VEC3(r, "lerp 0.75f");
+	r = am::linear::lerp(zero, c, 1.00f); PRINT_VEC3(r, "lerp 1.00f");
+
+	r = am::linear::bezier_cubic(zero, zero, c, c, 0.00f); PRINT_VEC3(r, "bezier 0.00f");
+	r = am::linear::bezier_cubic(zero, zero, c, c, 0.25f); PRINT_VEC3(r, "bezier 0.25f");
+	r = am::linear::bezier_cubic(zero, zero, c, c, 0.50f); PRINT_VEC3(r, "bezier 0.50f");
+	r = am::linear::bezier_cubic(zero, zero, c, c, 0.75f); PRINT_VEC3(r, "bezier 0.75f");
+	r = am::linear::bezier_cubic(zero, zero, c, c, 1.00f); PRINT_VEC3(r, "bezier 1.00f");
 	return 0;
 }
