@@ -161,11 +161,8 @@ struct tvec3 {
 
 		@param v Vector to copy.
 	*/
-	tvec3(
-		type const& v
-	) :
-		x{v.x}, y{v.y}, z{v.z}
-	{}
+	tvec3(type const& v) = default;
+
 	/**
 		Construct to vector.
 
@@ -291,6 +288,16 @@ struct tvec3 {
 		this->z = T(s);
 		return *this;
 	}
+
+	/**
+		Assign to vector.
+
+		@returns @c *this after assignment.
+		@param v Vector to copy.
+	*/
+	type&
+	operator=(type const& v) = default;
+
 	/**
 		Assign to vector.
 

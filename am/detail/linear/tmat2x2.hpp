@@ -201,12 +201,8 @@ public:
 
 		@param m Matrix to copy.
 	*/
-	tmat2x2(
-		type const& m
-	) : data{
-		m.data[0],
-		m.data[1]
-	} {}
+	tmat2x2(type const& m) = default;
+
 	/**
 		Construct to matrix.
 
@@ -279,6 +275,15 @@ public:
 /// @}
 
 /** @name Assignment operators */ /// @{
+	/**
+		Assign to matrix.
+
+		@returns @c *this after assignment.
+		@param m Matrix to copy.
+	*/
+	type&
+	operator=(type const& m) = default;
+
 	/**
 		Assign to matrix.
 

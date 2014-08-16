@@ -239,14 +239,8 @@ public:
 
 		@param m Matrix to copy.
 	*/
-	tmat4x4(
-		type const& m
-	) : data{
-		m.data[0],
-		m.data[1],
-		m.data[2],
-		m.data[3]
-	} {}
+	tmat4x4(type const& m) = default;
+
 	/**
 		Construct to matrix.
 
@@ -322,6 +316,15 @@ public:
 /// @}
 
 /** @name Assignment operators */ /// @{
+	/**
+		Assign to matrix.
+
+		@returns @c *this after assignment.
+		@param m Matrix to copy.
+	*/
+	type&
+	operator=(type const& m) = default;
+
 	/**
 		Assign to matrix.
 

@@ -155,11 +155,8 @@ struct tvec2 {
 
 		@param v Vector to copy.
 	*/
-	tvec2(
-		type const& v
-	) :
-		x{v.x}, y{v.y}
-	{}
+	tvec2(type const& v) = default;
+
 	/**
 		Construct to vector.
 
@@ -258,6 +255,16 @@ struct tvec2 {
 		this->y = T(s);
 		return *this;
 	}
+
+	/**
+		Assign to vector.
+
+		@returns @c *this after assignment.
+		@param v Vector to copy.
+	*/
+	type&
+	operator=(type const& v) = default;
+
 	/**
 		Assign to vector.
 
