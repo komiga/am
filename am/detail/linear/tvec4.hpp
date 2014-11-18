@@ -314,42 +314,6 @@ struct tvec4 {
 	}
 /// @}
 
-/** @name Comparison operators */ /// @{
-	/**
-		Equivalence operator.
-
-		@returns @c true if the two vectors are equal, @c false if they are not.
-		@param v Vector to compare with.
-	*/
-	bool
-	operator==(
-		type const& v
-	) const {
-		return
-			this->x == v.x &&
-			this->y == v.y &&
-			this->z == v.z &&
-			this->w == v.w;
-	}
-
-	/**
-		Non-equivalence operator.
-
-		@returns @c false if the two vectors are equal, @c true if they are not.
-		@param v Vector to compare with.
-	*/
-	bool
-	operator!=(
-		type const& v
-	) const {
-		return
-			this->x != v.x ||
-			this->y != v.y ||
-			this->z != v.z ||
-			this->w != v.w;
-	}
-/// @}
-
 /** @name Assignment operators */ /// @{
 	/**
 		Assign all components to value.

@@ -103,6 +103,48 @@ struct tvec4<T>::operations {
 }; // struct tvec4<T>::operations
 /** @endcond */ // INTERNAL
 
+/** @name vec4 comparison operators */ /// @{
+	/**
+		Equivalence operator.
+
+		@returns
+		- @c true if the two vectors are equal,
+		- @c false if they are not.
+	*/
+	template<class T>
+	inline bool
+	operator==(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
+		return
+			x.x == y.x &&
+			x.y == y.y &&
+			x.z == y.z &&
+			x.w == y.w;
+	}
+
+	/**
+		Non-equivalence operator.
+
+		@returns
+		- @c false if the two vectors are equal,
+		- @c true if they are not.
+	*/
+	template<class T>
+	inline bool
+	operator!=(
+		tvec4<T> const& x,
+		tvec4<T> const& y
+	) {
+		return
+			x.x != y.x ||
+			x.y != y.y ||
+			x.z != y.z ||
+			x.w != y.w;
+	}
+/// @}
+
 /** @name vec4 arithmetic assignment operators */ /// @{
 	/**
 		Add value to all components.
