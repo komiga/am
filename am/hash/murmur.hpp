@@ -55,8 +55,7 @@ namespace hash {
 	MurmurHash2 & MurmurHash64A hash implementation.
 
 	@note Uses MurmurHash2 for 32-bit hash length and MurmurHash64A
-	(MurmurHash2 64-bit version for x64 processors) for 64-bit hash
-	length.
+	(64-bit MurmurHash2 for x64 processors) for 64-bit hash length.
 */
 template<HashLength L>
 using murmur2 = detail::hash::murmur2_impl<L>;
@@ -64,7 +63,7 @@ using murmur2 = detail::hash::murmur2_impl<L>;
 /**
 	MurmurHash64B hash implementation.
 
-	@note Alternate MurmurHash2 64-bit version for x86 processors.
+	@note Alternate 64-bit MurmurHash2 for x86 processors.
 */
 using murmur2_64b = detail::hash::murmur2_64b_impl<am::hash::HashLength::HL64>;
 

@@ -318,6 +318,11 @@ template<
 >
 struct generic_combiner;
 
+/**
+	Generic hash combiner (unseeded).
+
+	@tparam Impl Hash implementation.
+*/
 template<class Impl>
 struct generic_combiner<Impl, false>
 	: base_combiner<Impl>
@@ -357,6 +362,11 @@ struct generic_combiner<Impl, false>
 	}
 };
 
+/**
+	Generic hash combiner (seeded).
+
+	@tparam Impl Hash implementation.
+*/
 template<class Impl>
 struct generic_combiner<Impl, true>
 	: base_combiner<Impl>
