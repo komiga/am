@@ -47,234 +47,41 @@ namespace hash {
 	@{
 */
 
-/** @cond INTERNAL */
-#define AM_HASH_FNV_RESTRICT_LENGTH(hash_length)		\
-	AM_STATIC_ASSERT(									\
-		HashLength::HL32 <= hash_length &&				\
-		HashLength::HL64 >= hash_length,				\
-		"FNV is not implemented for hash lengths"		\
-		" less than 32 bits or greater than 64 bits"	\
-	);
-/** @endcond */
+/**
+	FNV-0 hash implementation.
+*/
+template<HashLength L>
+using fnv0 = detail::hash::fnv0_impl<L>;
 
 /**
-	Calculate the FNV-0 hash of a sequence of bytes.
-
-	@returns The FNV-0 hash of the given data.
-	@tparam L Hash length.
-	@param data A sequence of bytes.
-	@param size Size in bytes of @a data.
+	FNV-1 hash implementation.
 */
-template<
-	HashLength L,
-	class Impl = detail::hash::fnv0_impl<L>
->
-inline detail::hash::fnv_hash_type<L>
-fnv0(
-	void const* const data,
-	std::size_t const size
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return Impl::calc(
-		reinterpret_cast<uint8_t const*>(data),
-		size
-	);
-}
+template<HashLength L>
+using fnv1 = detail::hash::fnv1_impl<L>;
 
 /**
-	Calculate the FNV-0 hash of a standard string.
-
-	@returns The FNV-0 hash of @a str.
-	@tparam L Hash length.
-	@tparam StringT A standard string type (e.g., @c std::string);
-	inferred from @a str.
-	@param str A string.
+	FNV-1a hash implementation.
 */
-template<
-	HashLength L,
-	class StringT,
-	class Impl = detail::hash::fnv0_impl<L>
->
-inline detail::hash::fnv_hash_type<L>
-fnv0_str(
-	StringT const& str
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return Impl::calc(
-		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size() << (sizeof(typename StringT::value_type) >> 1)
-	);
-}
+template<HashLength L>
+using fnv1a = detail::hash::fnv1a_impl<L>;
 
 /**
-	Calculate the FNV-0 hash of a C-string (constexpr).
-
-	@returns The FNV-0 hash of the given string.
-	@tparam L Hash length.
-	@param data C-string.
-	@param size Size in bytes of @a data.
+	FNV-0 hash combiner.
 */
-template<
-	HashLength L,
-	class Impl = detail::hash::fnv0_impl<L>
->
-inline constexpr detail::hash::fnv_hash_type<L>
-fnv0_c(
-	char const* const data,
-	std::size_t const size
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return detail::hash::calc_c_adaptor<Impl>(
-		data,
-		size
-	);
-}
+template<HashLength L>
+using fnv0_combiner = hash::generic_combiner<hash::fnv0<L>>;
 
 /**
-	Calculate the FNV-1 hash of a sequence of bytes.
-
-	@returns The FNV-1 hash of the given data.
-	@tparam L Hash length.
-	@param data A sequence of bytes.
-	@param size Size in bytes of @a data.
+	FNV-1 hash combiner.
 */
-template<
-	HashLength L,
-	class Impl = detail::hash::fnv1_impl<L>
->
-inline detail::hash::fnv_hash_type<L>
-fnv1(
-	void const* const data,
-	std::size_t const size
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return Impl::calc(
-		reinterpret_cast<uint8_t const*>(data),
-		size
-	);
-}
+template<HashLength L>
+using fnv1_combiner = hash::generic_combiner<hash::fnv1<L>>;
 
 /**
-	Calculate the FNV-1 hash of a standard string.
-
-	@returns The FNV-1 hash of @a str.
-	@tparam L Hash length.
-	@tparam StringT A standard string type (e.g., @c std::string);
-	inferred from @a str.
-	@param str A string.
+	FNV-1a hash combiner.
 */
-template<
-	HashLength L,
-	class StringT,
-	class Impl = detail::hash::fnv1_impl<L>
->
-inline detail::hash::fnv_hash_type<L>
-fnv1_str(
-	StringT const& str
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return Impl::calc(
-		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size() << (sizeof(typename StringT::value_type) >> 1)
-	);
-}
-
-/**
-	Calculate the FNV-1 hash of a C-string (constexpr).
-
-	@returns The FNV-1 hash of the given string.
-	@tparam L Hash length.
-	@param data C-string.
-	@param size Size in bytes of @a data.
-*/
-template<
-	HashLength L,
-	class Impl = detail::hash::fnv1_impl<L>
->
-inline constexpr detail::hash::fnv_hash_type<L>
-fnv1_c(
-	char const* const data,
-	std::size_t const size
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return detail::hash::calc_c_adaptor<Impl>(
-		data,
-		size
-	);
-}
-
-/**
-	Calculate the FNV-1a hash of a sequence of bytes.
-
-	@returns The FNV-1a hash of the given data.
-	@tparam L Hash length.
-	@param data A sequence of bytes.
-	@param size Size in bytes of @a data.
-*/
-template<
-	HashLength L,
-	class Impl = detail::hash::fnv1a_impl<L>
->
-inline detail::hash::fnv_hash_type<L>
-fnv1a(
-	void const* const data,
-	std::size_t const size
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return Impl::calc(
-		reinterpret_cast<uint8_t const*>(data),
-		size
-	);
-}
-
-/**
-	Calculate the FNV-1a hash of a standard string.
-
-	@returns The FNV-1a hash of @a str.
-	@tparam L Hash length.
-	@tparam StringT A standard string type (e.g., @c std::string);
-	inferred from @a str.
-	@param str A string.
-*/
-template<
-	HashLength L,
-	class StringT,
-	class Impl = detail::hash::fnv1a_impl<L>
->
-inline detail::hash::fnv_hash_type<L>
-fnv1a_str(
-	StringT const& str
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return Impl::calc(
-		reinterpret_cast<uint8_t const*>(str.c_str()),
-		str.size() << (sizeof(typename StringT::value_type) >> 1)
-	);
-}
-
-/**
-	Calculate the FNV-1a hash of a C-string (constexpr).
-
-	@returns The FNV-1a hash of the given string.
-	@tparam L Hash length.
-	@param data C-string.
-	@param size Size in bytes of @a data.
-*/
-template<
-	HashLength L,
-	class Impl = detail::hash::fnv1a_impl<L>
->
-inline constexpr detail::hash::fnv_hash_type<L>
-fnv1a_c(
-	char const* const data,
-	std::size_t const size
-) {
-	AM_HASH_FNV_RESTRICT_LENGTH(L);
-	return detail::hash::calc_c_adaptor<Impl>(
-		data,
-		size
-	);
-}
+template<HashLength L>
+using fnv1a_combiner = hash::generic_combiner<hash::fnv1a<L>>;
 
 /** @} */ // end of doc-group fnv
 /** @} */ // end of doc-group hash
@@ -298,12 +105,12 @@ namespace literals {
 	@param data C-string.
 	@param size Size in bytes of @a data.
 */
-inline constexpr detail::hash::fnv_hash_type<HashLength::HL32>
+inline constexpr typename hash::fnv1a<HashLength::HL32>::hash_type
 operator"" _fnv1a_32(
 	char const* const data,
 	std::size_t const size
 ) {
-	return fnv1a_c<HashLength::HL32>(data, size);
+	return hash::calc_ce<hash::fnv1a<HashLength::HL32>>(data, size);
 }
 
 /**
@@ -313,12 +120,12 @@ operator"" _fnv1a_32(
 	@param data C-string.
 	@param size Size in bytes of @a data.
 */
-inline constexpr detail::hash::fnv_hash_type<HashLength::HL64>
+inline constexpr typename hash::fnv1a<HashLength::HL64>::hash_type
 operator"" _fnv1a_64(
 	char const* const data,
 	std::size_t const size
 ) {
-	return fnv1a_c<HashLength::HL64>(data, size);
+	return hash::calc_ce<hash::fnv1a<HashLength::HL64>>(data, size);
 }
 
 /** @} */ // end of doc-group literals

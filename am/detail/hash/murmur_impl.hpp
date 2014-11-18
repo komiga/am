@@ -13,12 +13,33 @@ and no copyright is claimed on them.
 #pragma once
 
 #include "../../config.hpp"
+#include "../../hash/common.hpp"
 
 namespace am {
 namespace detail {
 namespace hash {
 
 /** @cond INTERNAL */
+
+#define AM_HASH_MURMUR_V2_RESTRICT_LENGTH(hash_length)	\
+	AM_STATIC_ASSERT(									\
+		::am::hash::HashLength::HL32 <= hash_length &&	\
+		::am::hash::HashLength::HL64 >= hash_length,	\
+		"MurmurHash2 cannot produce hash lengths"		\
+		" less than 32 bits or greater than 64 bits"	\
+	)
+
+#define AM_HASH_MURMUR_64B_RESTRICT_LENGTH(hash_length)	\
+	AM_STATIC_ASSERT(									\
+		::am::hash::HashLength::HL64 == hash_length,	\
+		"MurmurHash64B only has a 64-bit implementation"\
+	)
+
+#define AM_HASH_MURMUR_V3_RESTRICT_LENGTH(hash_length)	\
+	AM_STATIC_ASSERT(									\
+		::am::hash::HashLength::HL32 == hash_length,	\
+		"MurmurHash3 only has a 32-bit implementation"	\
+	)
 
 template<
 	::am::hash::HashLength L
@@ -33,6 +54,10 @@ struct murmur2_impl;
 // MurmurHash2
 template<>
 struct murmur2_impl< ::am::hash::HashLength::HL32> {
+	static constexpr auto const hash_length = ::am::hash::HashLength::HL32;
+	using hash_type = murmur_hash_type<hash_length>;
+	using seed_type = hash_type;
+
 	static constexpr uint32_t const M = 0x5bd1e995;
 	static constexpr unsigned const R = 24;
 
@@ -44,7 +69,7 @@ struct murmur2_impl< ::am::hash::HashLength::HL32> {
 	) {
 		// Rounded data size; essentially (size>>2)<<2
 		std::size_t const aligned_size = size & ~0x03;
-		uint8_t const* const end = data+aligned_size;
+		uint8_t const* const end = data + aligned_size;
 		uint32_t const* block = reinterpret_cast<uint32_t const*>(data);
 		uint32_t h = seed ^ size;
 		uint32_t k;
@@ -81,6 +106,10 @@ struct murmur2_impl< ::am::hash::HashLength::HL32> {
 // MurmurHash64A
 template<>
 struct murmur2_impl< ::am::hash::HashLength::HL64> {
+	static constexpr auto const hash_length = ::am::hash::HashLength::HL64;
+	using hash_type = murmur_hash_type<hash_length>;
+	using seed_type = hash_type;
+
 	static constexpr uint64_t const M = 0xc6a4a7935bd1e995;
 	static constexpr unsigned const R = 47;
 
@@ -142,6 +171,10 @@ struct murmur2_64b_impl;
 
 template<>
 struct murmur2_64b_impl< ::am::hash::HashLength::HL64> {
+	static constexpr auto const hash_length = ::am::hash::HashLength::HL64;
+	using hash_type = murmur_hash_type<hash_length>;
+	using seed_type = hash_type;
+
 	static constexpr uint32_t const M = 0x5bd1e995;
 	static constexpr unsigned const R = 24u;
 
@@ -210,6 +243,10 @@ struct murmur3_impl;
 
 template<>
 struct murmur3_impl< ::am::hash::HashLength::HL32> {
+	static constexpr auto const hash_length = ::am::hash::HashLength::HL32;
+	using hash_type = murmur_hash_type<hash_length>;
+	using seed_type = hash_type;
+
 	static constexpr uint32_t const C1 = 0xcc9e2d51u;
 	static constexpr uint32_t const C2 = 0x1b873593u;
 	static constexpr uint32_t const C3 = 0xe6546b64u;
@@ -232,11 +269,12 @@ struct murmur3_impl< ::am::hash::HashLength::HL32> {
 		uint32_t const seed
 	) noexcept {
 		// Number of 32-bit blocks
-		std::size_t const nblocks = size >> 2;
+		auto const nblocks = size >> 2;
 		// Rounded data size; essentially (size >> 2) << 2
-		std::size_t const aligned_size = size & ~0x03;
-		uint32_t const* const
-			blocks = reinterpret_cast<uint32_t const*>(data + aligned_size);
+		auto const aligned_size = size & ~0x03;
+		uint32_t const* const blocks = reinterpret_cast<uint32_t const*>(
+			data + aligned_size
+		);
 		uint32_t h = seed;
 		uint32_t k;
 
@@ -352,7 +390,7 @@ struct ce_impl final {
 }; // struct ce_impl
 
 	inline static constexpr uint32_t
-	calc_c_seq(
+	calc_ce_seq(
 		char const* const data,
 		uint32_t const size,
 		uint32_t const seed
@@ -377,4 +415,24 @@ struct ce_impl final {
 
 } // namespace hash
 } // namespace detail
+
+/** @cond INTERNAL */
+namespace hash {
+
+template<HashLength L>
+struct impl_is_seeded<detail::hash::murmur2_impl<L>> {
+	static constexpr bool const value = true;
+};
+template<HashLength L>
+struct impl_is_seeded<detail::hash::murmur2_64b_impl<L>> {
+	static constexpr bool const value = true;
+};
+template<HashLength L>
+struct impl_is_seeded<detail::hash::murmur3_impl<L>> {
+	static constexpr bool const value = true;
+};
+
+} // namespace hash
+/** @endcond */ // INTERNAL
+
 } // namespace am

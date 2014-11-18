@@ -13,14 +13,21 @@ no copyright is claimed on them.
 #pragma once
 
 #include "../../config.hpp"
-
-#include <algorithm>
+#include "../../hash/common.hpp"
 
 namespace am {
 namespace detail {
 namespace hash {
 
 /** @cond INTERNAL */
+
+#define AM_HASH_FNV_RESTRICT_LENGTH(hash_length)		\
+	AM_STATIC_ASSERT(									\
+		::am::hash::HashLength::HL32 <= hash_length &&	\
+		::am::hash::HashLength::HL64 >= hash_length,	\
+		"FNV is not implemented for hash lengths"		\
+		" less than 32 bits or greater than 64 bits"	\
+	)
 
 template<
 	::am::hash::HashLength L
@@ -50,43 +57,93 @@ template<
 >
 struct fnv0_internals {
 	static constexpr fnv_hash_type<L> const prime = fnv_internals<L>::prime;
-	static constexpr fnv_hash_type<L> const offset_basis = 0x00;
+	static constexpr fnv_hash_type<L> const offset_basis = 0;
+};
+
+template<
+	::am::hash::HashLength L
+>
+struct fnv_state {
+	fnv_hash_type<L> value;
 };
 
 } // anonymous namespace
 
 template<
+	::am::hash::HashLength L,
+	class Internals,
+	class Impl
+>
+struct fnv_shared_impl {
+	AM_HASH_FNV_RESTRICT_LENGTH(L);
+
+	using internals = Internals;
+	using hash_type = fnv_hash_type<L>;
+	using state_type = fnv_state<L>;
+
+	static void
+	state_init(state_type& s) {
+		s.value = internals::offset_basis;
+	}
+
+	static hash_type
+	state_value(state_type const& s) {
+		return s.value;
+	}
+
+	static inline hash_type
+	calc(
+		uint8_t const* const data,
+		std::size_t const size
+	) {
+		state_type s;
+		state_init(s);
+		Impl::state_add(s, data, size);
+		return state_value(s);
+	}
+
+	static constexpr hash_type
+	calc_ce_seq(
+		char const* const data,
+		std::size_t const size
+	) {
+		return Impl::calc_ce_seq(data, size, 0, internals::offset_basis);
+	}
+};
+
+template<
 	::am::hash::HashLength L
 >
-struct fnv0_impl {
+struct fnv0_impl
+	: fnv_shared_impl<L, fnv0_internals<L>, fnv0_impl<L>>
+{
+	static constexpr auto const hash_length = L;
 	using internals = fnv0_internals<L>;
 	using hash_type = fnv_hash_type<L>;
+	using state_type = fnv_state<L>;
+	using fnv_shared_impl<L, internals, fnv0_impl<L>>::calc_ce_seq;
 
-	static hash_type
-	calc(
+	static void
+	state_add(
+		state_type& s,
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		hash_type x = internals::offset_basis;
-		std::for_each(
-			data, data + size,
-			[&x](uint8_t const byte) {
-				x *= internals::prime;
-				x ^= byte;
-			}
-		);
-		return x;
+		for (std::size_t i = 0; i < size; ++i) {
+			s.value *= internals::prime;
+			s.value ^= data[i];
+		}
 	}
 
 	static constexpr hash_type
-	calc_c_seq(
+	calc_ce_seq(
 		char const* const data,
 		std::size_t const size,
 		std::size_t const index,
 		hash_type const value
 	) {
 		return (index < size)
-			? calc_c_seq(
+			? calc_ce_seq(
 				data, size,
 				index + 1u,
 				(value * internals::prime) ^ data[index]
@@ -99,35 +156,36 @@ struct fnv0_impl {
 template<
 	::am::hash::HashLength L
 >
-struct fnv1_impl {
+struct fnv1_impl
+	: fnv_shared_impl<L, fnv_internals<L>, fnv1_impl<L>>
+{
+	static constexpr auto const hash_length = L;
 	using internals = fnv_internals<L>;
 	using hash_type = fnv_hash_type<L>;
+	using state_type = fnv_state<L>;
+	using fnv_shared_impl<L, internals, fnv1_impl<L>>::calc_ce_seq;
 
-	static hash_type
-	calc(
+	static void
+	state_add(
+		state_type& s,
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		hash_type x = internals::offset_basis;
-		std::for_each(
-			data, data + size,
-			[&x](uint8_t const byte) {
-				x *= internals::prime;
-				x ^= byte;
-			}
-		);
-		return x;
+		for (std::size_t i = 0; i < size; ++i) {
+			s.value *= internals::prime;
+			s.value ^= data[i];
+		}
 	}
 
 	static constexpr hash_type
-	calc_c_seq(
+	calc_ce_seq(
 		char const* const data,
 		std::size_t const size,
 		std::size_t const index,
 		hash_type const value
 	) {
 		return (index < size)
-			? calc_c_seq(
+			? calc_ce_seq(
 				data, size,
 				index + 1u,
 				(value * internals::prime) ^ data[index]
@@ -140,35 +198,36 @@ struct fnv1_impl {
 template<
 	::am::hash::HashLength L
 >
-struct fnv1a_impl {
+struct fnv1a_impl
+	: fnv_shared_impl<L, fnv_internals<L>, fnv1a_impl<L>>
+{
+	static constexpr auto const hash_length = L;
 	using internals = fnv_internals<L>;
 	using hash_type = fnv_hash_type<L>;
+	using state_type = fnv_state<L>;
+	using fnv_shared_impl<L, internals, fnv1a_impl<L>>::calc_ce_seq;
 
-	static hash_type
-	calc(
+	static void
+	state_add(
+		state_type& s,
 		uint8_t const* const data,
 		std::size_t const size
 	) {
-		hash_type x = internals::offset_basis;
-		std::for_each(
-			data, data+size,
-			[&x](uint8_t const byte) {
-				x ^= byte;
-				x *= internals::prime;
-			}
-		);
-		return x;
+		for (std::size_t i = 0; i < size; ++i) {
+			s.value ^= data[i];
+			s.value *= internals::prime;
+		}
 	}
 
 	static constexpr hash_type
-	calc_c_seq(
+	calc_ce_seq(
 		char const* const data,
 		std::size_t const size,
 		std::size_t const index,
 		hash_type const value
 	) {
 		return (index < size)
-			? calc_c_seq(
+			? calc_ce_seq(
 				data, size,
 				index + 1u,
 				(value ^ data[index]) * internals::prime
@@ -178,24 +237,28 @@ struct fnv1a_impl {
 	}
 };
 
-template<
-	class Impl
->
-static constexpr typename Impl::hash_type
-calc_c_adaptor(
-	char const* const data,
-	std::size_t const size
-) {
-	return Impl::calc_c_seq(
-		data,
-		size,
-		0u,
-		Impl::internals::offset_basis
-	);
-}
-
 /** @endcond */ // INTERNAL
 
 } // namespace hash
 } // namespace detail
+
+/** @cond INTERNAL */
+namespace hash {
+
+template<HashLength L>
+struct impl_is_stateful<detail::hash::fnv0_impl<L>> {
+	static constexpr bool const value = true;
+};
+template<HashLength L>
+struct impl_is_stateful<detail::hash::fnv1_impl<L>> {
+	static constexpr bool const value = true;
+};
+template<HashLength L>
+struct impl_is_stateful<detail::hash::fnv1a_impl<L>> {
+	static constexpr bool const value = true;
+};
+
+} // namespace hash
+/** @endcond */ // INTERNAL
+
 } // namespace am
