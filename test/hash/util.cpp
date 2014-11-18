@@ -42,77 +42,25 @@ am::hash::common_hash_type<L>
 	std::string const&
 );
 
-template<
-	am::hash::HashLength L,
-	hash_func_type<L>& F
->
+template<class Impl>
 void
-hash_generic(
+outputter(
 	std::string const& str,
 	am::hash::common_hash_type<am::hash::HL64> const
 ) {
-	output<L>(F(str));
+	output<Impl::hash_length>(am::hash::calc_string<Impl>(str));
 }
 
-#define FUNC_GENERIC(name__, length__)				\
-	hash_generic<									\
-		am::hash::HashLength:: length__,			\
-		am::hash:: name__ ## _str<					\
-			am::hash::HashLength:: length__,		\
-			std::string								\
-		>											\
-	>
-
-template<
-	am::hash::HashLength L
->
-using seeded_hash_func_type =
-am::hash::common_hash_type<L>
-(&)(
-	std::string const&,
-	am::hash::common_hash_type<L> const
-);
-
-template<
-	am::hash::HashLength L,
-	seeded_hash_func_type<L>& F
->
+template<class Impl>
 void
-hash_seeded(
+outputter_seeded(
 	std::string const& str,
 	am::hash::common_hash_type<am::hash::HL64> const seed
 ) {
-	output<L>(F(
-		str,
-		static_cast<am::hash::common_hash_type<L>>(seed)
+	output<Impl::hash_length>(am::hash::calc_string<Impl>(
+		str, static_cast<typename Impl::hash_type>(seed)
 	));
 }
-
-#define FUNC_SEEDED(name__, length__) 			\
-	hash_seeded<								\
-		am::hash::HashLength:: length__,		\
-		am::hash:: name__ ## _str<				\
-			am::hash::HashLength:: length__,	\
-			std::string							\
-		>										\
-	>
-
-// Clang was exploding when FUNC_GENERIC and FUNC_SEEDED were used
-// in s_algorithms, so... this stuff
-
-auto const& fnv0_1 = FUNC_GENERIC(fnv0, HL32);
-auto const& fnv0_2 = FUNC_GENERIC(fnv0, HL64);
-
-auto const& fnv1_1 = FUNC_GENERIC(fnv1, HL32);
-auto const& fnv1_2 = FUNC_GENERIC(fnv1, HL64);
-
-auto const& fnv1a_1 = FUNC_GENERIC(fnv1a, HL32);
-auto const& fnv1a_2 = FUNC_GENERIC(fnv1a, HL64);
-
-auto const& murmur2_1 = FUNC_SEEDED(murmur2, HL32);
-auto const& murmur2_2 = FUNC_SEEDED(murmur2, HL64);
-auto const& murmur2_64b = FUNC_SEEDED(murmur2_64b, HL64);
-auto const& murmur3 = FUNC_SEEDED(murmur3, HL32);
 
 using algorithm_map_type
 = std::map<
@@ -138,27 +86,27 @@ struct AlgorithmConfig final {
 static algorithm_map_type const
 s_algorithms{{
 	{"fnv0", {
-		&fnv0_1,
-		&fnv0_2
+		&outputter<am::hash::fnv0<am::hash::HL32>>,
+		&outputter<am::hash::fnv0<am::hash::HL64>>
 	}},
 	{"fnv1", {
-		&fnv1_1,
-		&fnv1_2
+		&outputter<am::hash::fnv1<am::hash::HL32>>,
+		&outputter<am::hash::fnv1<am::hash::HL64>>
 	}},
 	{"fnv1a", {
-		&fnv1a_1,
-		&fnv1a_2
+		&outputter<am::hash::fnv1a<am::hash::HL32>>,
+		&outputter<am::hash::fnv1a<am::hash::HL64>>
 	}},
 
 	{"murmur2", {
-		&murmur2_1,
-		&murmur2_2
+		&outputter_seeded<am::hash::murmur2<am::hash::HL32>>,
+		&outputter_seeded<am::hash::murmur2<am::hash::HL64>>
 	}},
 	{"murmur64b", {
-		&murmur2_64b
+		&outputter_seeded<am::hash::murmur2_64b>
 	}},
 	{"murmur3", {
-		&murmur3
+		&outputter_seeded<am::hash::murmur3>
 	}}
 }};
 

@@ -20,7 +20,9 @@ static constexpr auto const s_l_fnv1a_32 = "fnv1a_32"_fnv1a_32;
 static constexpr auto const s_l_fnv1a_64 = "fnv1a_64"_fnv1a_64;
 #if !defined(__GNUC__) || defined(__llvm__) || defined(__clang__)
 static constexpr auto const
-s_l_murmur3_32 = am::hash::murmur3_c<am::hash::HL32>("murmur3_32", 10u, 0);
+s_l_murmur3_32 = am::hash::calc_ce<am::hash::murmur3>(
+	"murmur3_32", 10u, 0
+);
 #endif
 
 void test_fnv() {
@@ -28,15 +30,15 @@ void test_fnv() {
 		hash_data<uint32_t> const data_32[5];
 		hash_data<uint64_t> const data_64[5];
 	};
-	#define TEST_FNV_HASH_SET(data_, func_pred_)\
+	#define TEST_FNV_HASH_SET(data_, impl)\
 		TEST_HASH_SET(data_.data_32,\
-			am::hash::func_pred_<am::hash::HL32>,\
-			am::hash::func_pred_ ## _str<am::hash::HL32, std::string>,\
-			am::hash::func_pred_ ## _c<am::hash::HL32>);\
+			am::hash::calc<am::hash:: impl<am::hash::HL32>>,\
+			am::hash::calc_string<am::hash:: impl<am::hash::HL32>, std::string>,\
+			am::hash::calc_ce<am::hash:: impl<am::hash::HL32>>);\
 		TEST_HASH_SET(data_.data_64,\
-			am::hash::func_pred_<am::hash::HL64>,\
-			am::hash::func_pred_ ## _str<am::hash::HL64, std::string>,\
-			am::hash::func_pred_ ## _c<am::hash::HL64>);
+			am::hash::calc<am::hash:: impl<am::hash::HL64>>,\
+			am::hash::calc_string<am::hash:: impl<am::hash::HL64>, std::string>,\
+			am::hash::calc_ce<am::hash:: impl<am::hash::HL64>>);
 
 	// FNV-0
 	static fnv_hash_data const s_testdata_fnv0{{
@@ -93,11 +95,11 @@ void test_murmur() {
 	};
 	#define TEST_MURMUR2_HASH_SET(data_)\
 		TEST_HASH_SEEDED_SET(data_.data_32, data_.seed_32,\
-			am::hash::murmur2<am::hash::HL32>,\
-			am::hash::murmur2_str<am::hash::HL32, std::string>);\
+			am::hash::calc<am::hash::murmur2<am::hash::HL32>>,\
+			am::hash::calc_string<am::hash::murmur2<am::hash::HL32>, std::string>);\
 		TEST_HASH_SEEDED_SET(data_.data_64, data_.seed_64,\
-			am::hash::murmur2<am::hash::HL64>,\
-			am::hash::murmur2_str<am::hash::HL64, std::string>);
+			am::hash::calc<am::hash::murmur2<am::hash::HL64>>,\
+			am::hash::calc_string<am::hash::murmur2<am::hash::HL64>, std::string>);
 
 	struct murmur64b_hash_data {
 		uint64_t const seed;
@@ -105,8 +107,8 @@ void test_murmur() {
 	};
 	#define TEST_MURMUR64B_HASH_SET(data_)\
 		TEST_HASH_SEEDED_SET(data_.data, data_.seed,\
-			am::hash::murmur2_64b<am::hash::HL64>,\
-			am::hash::murmur2_64b_str<am::hash::HL64, std::string>);
+			am::hash::calc<am::hash::murmur2_64b>,\
+			am::hash::calc_string<am::hash::murmur2_64b, std::string>);
 
 	struct murmur3_hash_data {
 		uint32_t const seed;
@@ -114,9 +116,9 @@ void test_murmur() {
 	};
 	#define TEST_MURMUR3_HASH_SET(data_)\
 		TEST_HASH_SEEDED_SET_CE(data_.data_32, data_.seed,\
-			am::hash::murmur3<am::hash::HL32>,\
-			am::hash::murmur3_str<am::hash::HL32, std::string>,\
-			am::hash::murmur3_c<am::hash::HL32>);
+			am::hash::calc<am::hash::murmur3>,\
+			am::hash::calc_string<am::hash::murmur3, std::string>,\
+			am::hash::calc_ce<am::hash::murmur3>);
 
 	// MurmurHash2 and MurmurHash64A
 	static murmur2_hash_data const s_testdata_murmur2{

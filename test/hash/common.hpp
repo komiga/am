@@ -4,20 +4,21 @@
 #include "../general/common.hpp"
 
 #include <cstring>
+#include <string>
 
-#define TEST_HASH_FUNC_CSTR(func, L, input, result) {\
-	auto const x = am::hash::func<am::hash::HashLength::L>(input, std::strlen(input));\
+#define TEST_HASH_FUNC_CSTR(func, impl, input, result) {\
+	auto const x = am::hash::func<impl>(input, std::strlen(input));\
 	fassert(x == result);\
 }
 
-#define TEST_HASH_FUNC_STDSTR(func, L, input, result) {\
-	auto const x = am::hash::func<am::hash::HashLength::L>(input);\
+#define TEST_HASH_FUNC_STDSTR(func, impl, input, result) {\
+	auto const x = am::hash::func<impl>(input);\
 	fassert(x == result);\
 }
 
 template<typename T>
 struct hash_data {
-	typedef T value_type;
+	using value_type = T;
 
 	value_type const value;
 	char const* const input;
