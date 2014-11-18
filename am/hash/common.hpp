@@ -304,6 +304,16 @@ struct base_combiner {
 	value() const noexcept {
 		return impl_type::state_value(state);
 	}
+
+	/**
+		Get the accumulated data size.
+
+		@returns The accumulated data size.
+	*/
+	unsigned
+	size() const noexcept {
+		return impl_type::state_size(state);
+	}
 };
 
 /**

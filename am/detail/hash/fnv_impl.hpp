@@ -65,6 +65,7 @@ template<
 >
 struct fnv_state {
 	fnv_hash_type<L> value;
+	unsigned size;
 };
 
 } // anonymous namespace
@@ -84,11 +85,17 @@ struct fnv_shared_impl {
 	static void
 	state_init(state_type& s) {
 		s.value = internals::offset_basis;
+		s.size = 0;
 	}
 
 	static hash_type
 	state_value(state_type const& s) {
 		return s.value;
+	}
+
+	static unsigned
+	state_size(state_type const& s) {
+		return s.size;
 	}
 
 	static inline hash_type
@@ -133,6 +140,7 @@ struct fnv0_impl
 			s.value *= internals::prime;
 			s.value ^= data[i];
 		}
+		s.size += size;
 	}
 
 	static constexpr hash_type
@@ -175,6 +183,7 @@ struct fnv1_impl
 			s.value *= internals::prime;
 			s.value ^= data[i];
 		}
+		s.size += size;
 	}
 
 	static constexpr hash_type
@@ -217,6 +226,7 @@ struct fnv1a_impl
 			s.value ^= data[i];
 			s.value *= internals::prime;
 		}
+		s.size += size;
 	}
 
 	static constexpr hash_type
