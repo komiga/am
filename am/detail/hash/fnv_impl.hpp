@@ -94,7 +94,7 @@ struct fnv_shared_impl {
 	static inline hash_type
 	calc(
 		uint8_t const* const data,
-		std::size_t const size
+		unsigned const size
 	) {
 		state_type s;
 		state_init(s);
@@ -105,7 +105,7 @@ struct fnv_shared_impl {
 	static constexpr hash_type
 	calc_ce_seq(
 		char const* const data,
-		std::size_t const size
+		unsigned const size
 	) {
 		return Impl::calc_ce_seq(data, size, 0, internals::offset_basis);
 	}
@@ -127,9 +127,9 @@ struct fnv0_impl
 	state_add(
 		state_type& s,
 		uint8_t const* const data,
-		std::size_t const size
+		unsigned const size
 	) {
-		for (std::size_t i = 0; i < size; ++i) {
+		for (unsigned i = 0; i < size; ++i) {
 			s.value *= internals::prime;
 			s.value ^= data[i];
 		}
@@ -138,8 +138,8 @@ struct fnv0_impl
 	static constexpr hash_type
 	calc_ce_seq(
 		char const* const data,
-		std::size_t const size,
-		std::size_t const index,
+		unsigned const size,
+		unsigned const index,
 		hash_type const value
 	) {
 		return (index < size)
@@ -169,9 +169,9 @@ struct fnv1_impl
 	state_add(
 		state_type& s,
 		uint8_t const* const data,
-		std::size_t const size
+		unsigned const size
 	) {
-		for (std::size_t i = 0; i < size; ++i) {
+		for (unsigned i = 0; i < size; ++i) {
 			s.value *= internals::prime;
 			s.value ^= data[i];
 		}
@@ -180,8 +180,8 @@ struct fnv1_impl
 	static constexpr hash_type
 	calc_ce_seq(
 		char const* const data,
-		std::size_t const size,
-		std::size_t const index,
+		unsigned const size,
+		unsigned const index,
 		hash_type const value
 	) {
 		return (index < size)
@@ -211,9 +211,9 @@ struct fnv1a_impl
 	state_add(
 		state_type& s,
 		uint8_t const* const data,
-		std::size_t const size
+		unsigned const size
 	) {
-		for (std::size_t i = 0; i < size; ++i) {
+		for (unsigned i = 0; i < size; ++i) {
 			s.value ^= data[i];
 			s.value *= internals::prime;
 		}
@@ -222,8 +222,8 @@ struct fnv1a_impl
 	static constexpr hash_type
 	calc_ce_seq(
 		char const* const data,
-		std::size_t const size,
-		std::size_t const index,
+		unsigned const size,
+		unsigned const index,
 		hash_type const value
 	) {
 		return (index < size)

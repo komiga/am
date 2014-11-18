@@ -64,11 +64,11 @@ struct murmur2_impl< ::am::hash::HashLength::HL32> {
 	static uint32_t
 	calc(
 		uint8_t const* const data,
-		std::size_t const size,
+		unsigned const size,
 		uint32_t const seed
 	) {
 		// Rounded data size; essentially (size>>2)<<2
-		std::size_t const aligned_size = size & ~0x03;
+		unsigned const aligned_size = size & ~0x03;
 		uint8_t const* const end = data + aligned_size;
 		uint32_t const* block = reinterpret_cast<uint32_t const*>(data);
 		uint32_t h = seed ^ size;
@@ -116,11 +116,11 @@ struct murmur2_impl< ::am::hash::HashLength::HL64> {
 	static uint64_t
 	calc(
 		uint8_t const* const data,
-		std::size_t const size,
+		unsigned const size,
 		uint64_t const seed
 	) {
 		// Rounded data size; essentially (size>>3)<<3
-		std::size_t const aligned_size = size & ~0x07;
+		unsigned const aligned_size = size & ~0x07;
 		uint8_t const* const end = data + aligned_size;
 		uint64_t const* block = reinterpret_cast<uint64_t const*>(data);
 		uint64_t h = seed ^ (size * M);
@@ -181,7 +181,7 @@ struct murmur2_64b_impl< ::am::hash::HashLength::HL64> {
 	static uint64_t
 	calc(
 		uint8_t const* const data,
-		std::size_t size,
+		unsigned size,
 		uint64_t const seed
 	) {
 		uint32_t const* block = reinterpret_cast<uint32_t const*>(data);
@@ -265,7 +265,7 @@ struct murmur3_impl< ::am::hash::HashLength::HL32> {
 	static uint32_t
 	calc(
 		uint8_t const* const data,
-		std::size_t const size,
+		unsigned const size,
 		uint32_t const seed
 	) noexcept {
 		// Number of 32-bit blocks
@@ -348,7 +348,7 @@ struct ce_impl final {
 	inline static constexpr uint32_t
 	tail(
 		char const* const tail,
-		uint32_t const size,
+		unsigned const size,
 		uint32_t const h
 	) noexcept {
 		return (0 == (size & 0x03))
@@ -376,7 +376,7 @@ struct ce_impl final {
 	inline static constexpr uint32_t
 	avalanche(
 		uint32_t h,
-		uint32_t const size
+		unsigned const size
 	) noexcept {
 		return a1(h ^ size);
 	}
@@ -392,7 +392,7 @@ struct ce_impl final {
 	inline static constexpr uint32_t
 	calc_ce_seq(
 		char const* const data,
-		uint32_t const size,
+		unsigned const size,
 		uint32_t const seed
 	) noexcept {
 		return

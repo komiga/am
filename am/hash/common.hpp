@@ -11,7 +11,6 @@ see @ref index or the accompanying LICENSE file for full text.
 
 #include "../config.hpp"
 
-#include <cstddef>
 #include <type_traits>
 
 namespace am {
@@ -105,7 +104,7 @@ template<
 inline typename Impl::hash_type
 calc(
 	char const* const data,
-	std::size_t const size
+	unsigned const size
 ) {
 	return Impl::calc(reinterpret_cast<uint8_t const*>(data), size);
 }
@@ -149,7 +148,7 @@ template<
 static constexpr typename Impl::hash_type
 calc_ce(
 	char const* const data,
-	std::size_t const size
+	unsigned const size
 ) {
 	return Impl::calc_ce_seq(data, size);
 }
@@ -170,7 +169,7 @@ template<
 inline typename Impl::hash_type
 calc(
 	char const* const data,
-	std::size_t const size,
+	unsigned const size,
 	typename Impl::seed_type const seed
 ) {
 	return Impl::calc(reinterpret_cast<uint8_t const*>(data), size, seed);
@@ -219,7 +218,7 @@ template<
 static constexpr typename Impl::hash_type
 calc_ce(
 	char const* const data,
-	std::size_t const size,
+	unsigned const size,
 	typename Impl::seed_type const seed
 ) {
 	return Impl::calc_ce_seq(data, size, seed);
@@ -264,7 +263,7 @@ struct base_combiner {
 	void
 	add(
 		char const* data,
-		std::size_t const size
+		unsigned const size
 	) noexcept {
 		impl_type::state_add(
 			state,
