@@ -2,12 +2,4 @@
 Makefile
 *.make
 out/
-
-general/headers
-
-hash/util
-hash/validate
-
-mat/operators
-
-vec/operators
+*.elf
