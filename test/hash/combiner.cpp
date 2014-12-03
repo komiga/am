@@ -36,7 +36,10 @@ inline bool test_combiner(
 	auto const value_combined = combiner.value();
 	auto const value_linear = am::hash::calc_string<Impl>(joined);
 	output<Impl>(value_combined, value_linear);
-	return value_combined == value_linear;
+	return
+		value_combined == value_linear &&
+		combiner.size() == joined.size()
+	;
 }
 
 /*template<class Impl>
