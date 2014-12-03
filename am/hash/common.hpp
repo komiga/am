@@ -145,7 +145,7 @@ template<
 	class Impl,
 	class = typename std::enable_if<!impl_is_seeded<Impl>::value>::type
 >
-static constexpr typename Impl::hash_type
+inline constexpr typename Impl::hash_type
 calc_ce(
 	char const* const data,
 	unsigned const size
@@ -215,7 +215,7 @@ template<
 	class Impl,
 	class = typename std::enable_if<impl_is_seeded<Impl>::value>::type
 >
-static constexpr typename Impl::hash_type
+inline constexpr typename Impl::hash_type
 calc_ce(
 	char const* const data,
 	unsigned const size,
