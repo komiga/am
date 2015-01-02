@@ -37,7 +37,8 @@
 			"file_exclude_patterns":
 			[
 				"Makefile",
-				"*.make"
+				"*.make",
+				"*.elf"
 			]
 		}
 	],
