@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tvec4_interface.hpp
+@file
 @brief 4-dimensional vector (interface).
 
 @author Timothy Howard

@@ -1,5 +1,5 @@
 /**
-@file linear/vector_interface.hpp
+@file
 @brief Include vector types and interfaces.
 
 @author Timothy Howard

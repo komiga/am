@@ -1,5 +1,5 @@
 /**
-@file hash/murmur.hpp
+@file
 @brief Murmur.
 
 @author Timothy Howard

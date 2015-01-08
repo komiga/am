@@ -1,5 +1,5 @@
 /**
-@file linear/mat2x4.hpp
+@file
 @brief 2x4 matrix.
 
 @author Timothy Howard

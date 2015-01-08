@@ -1,5 +1,5 @@
 /**
-@file linear/matrix_types.hpp
+@file
 @brief Include matrix types.
 
 @author Timothy Howard

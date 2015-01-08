@@ -1,5 +1,5 @@
 /**
-@file linear/matrix_operations.hpp
+@file
 @brief Matrix operations.
 
 @author Timothy Howard

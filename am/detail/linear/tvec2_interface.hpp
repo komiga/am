@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tvec2_interface.hpp
+@file
 @brief 2-dimensional vector (interface).
 
 @author Timothy Howard

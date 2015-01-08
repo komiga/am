@@ -1,5 +1,5 @@
 /**
-@file linear/interpolation.hpp
+@file
 @brief Interpolation functions.
 
 @author Timothy Howard

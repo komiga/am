@@ -1,5 +1,5 @@
 /**
-@file hash/common.hpp
+@file
 @brief Common hashy things.
 
 @author Timothy Howard

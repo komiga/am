@@ -1,5 +1,5 @@
 /**
-@file linear/vector_types.hpp
+@file
 @brief Include vector types.
 
 @author Timothy Howard

@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tvec3_interface.hpp
+@file
 @brief 3-dimensional vector (interface).
 
 @author Timothy Howard

@@ -1,5 +1,5 @@
 /**
-@file linear/vec4.hpp
+@file
 @brief 4-dimensional vector.
 
 @author Timothy Howard

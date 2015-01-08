@@ -1,5 +1,5 @@
 /**
-@file linear/mat3x2.hpp
+@file
 @brief 3x2 matrix.
 
 @author Timothy Howard

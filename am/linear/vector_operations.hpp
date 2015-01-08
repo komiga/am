@@ -1,5 +1,5 @@
 /**
-@file linear/vector_operations.hpp
+@file
 @brief Vector operations.
 
 @author Timothy Howard

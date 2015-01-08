@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tmat3x2_interface.hpp
+@file
 @brief 3x2 matrix (interface).
 
 @author Timothy Howard

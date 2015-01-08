@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tvec3.hpp
+@file
 @brief 3-dimensional vector.
 
 @author Timothy Howard

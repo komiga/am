@@ -1,5 +1,5 @@
 /**
-@file detail/hash/fnv_impl.hpp
+@file
 @brief FNV (implementation).
 
 @author Timothy Howard

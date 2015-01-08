@@ -1,5 +1,5 @@
 /**
-@file linear/vector.hpp
+@file
 @brief Include vector types, interfaces, and operations.
 
 @author Timothy Howard

@@ -1,5 +1,5 @@
 /**
-@file config_values.hpp
+@file
 @brief Configuration values.
 
 @author Timothy Howard

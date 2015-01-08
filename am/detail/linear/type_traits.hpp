@@ -1,5 +1,5 @@
 /**
-@file detail/linear/type_traits.hpp
+@file
 @brief Type traits.
 
 @author Timothy Howard

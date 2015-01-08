@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tmat2x4_interface.hpp
+@file
 @brief 2x4 matrix (interface).
 
 @author Timothy Howard

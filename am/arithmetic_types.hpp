@@ -1,5 +1,5 @@
 /**
-@file arithmetic_types.hpp
+@file
 @brief Arithmetic types.
 
 @author Timothy Howard

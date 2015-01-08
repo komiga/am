@@ -1,5 +1,5 @@
 /**
-@file detail/linear/tvec2.hpp
+@file
 @brief 2-dimensional vector.
 
 @author Timothy Howard

@@ -1,5 +1,5 @@
 /**
-@file linear/matrix.hpp
+@file
 @brief Include matrix types, interfaces, and operations.
 
 @author Timothy Howard

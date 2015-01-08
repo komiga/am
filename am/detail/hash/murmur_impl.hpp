@@ -1,5 +1,5 @@
 /**
-@file detail/hash/murmur_impl.hpp
+@file
 @brief Murmur (implementation).
 
 @author Timothy Howard
