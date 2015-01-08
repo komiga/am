@@ -1,10 +1,8 @@
 /**
+@copyright MIT license; see @ref index or the accompanying LICENSE file.
+
 @file
 @brief 2x3 matrix (interface).
-
-@author Timothy Howard
-@copyright 2012-2014 Timothy Howard under the MIT license;
-see @ref index or the accompanying LICENSE file for full text.
 */
 
 #pragma once

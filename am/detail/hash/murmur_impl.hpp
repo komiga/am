@@ -1,10 +1,8 @@
 /**
+@copyright MIT license; see @ref index or the accompanying LICENSE file.
+
 @file
 @brief Murmur (implementation).
-
-@author Timothy Howard
-@copyright 2012-2014 Timothy Howard under the MIT license;
-see @ref index or the accompanying LICENSE file for full text.
 Although the AM implementations are under the MIT license,
 the Murmur algorithms themselves are in the public domain
 and no copyright is claimed on them.
