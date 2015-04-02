@@ -1,9 +1,9 @@
 
 dofile("precore_import.lua")
+local S, G, P = precore.helpers()
 
-precore.make_config(
-"test-strict", {{
-project = function()
+precore.make_config("am.test-strict", nil, {
+{project = function()
 	configuration {}
 		flags {
 			"FatalWarnings"
@@ -38,18 +38,18 @@ function make_test(group, name, srcglob, configs)
 		nil, configs
 	)
 
-	if nil == configs then
-		precore.apply("test-strict")
+	if configs == nil then
+		precore.apply("am.test-strict")
 	end
 
-	if nil == srcglob then
+	if srcglob == nil then
 		srcglob = name .. ".cpp"
 	end
 
 	configuration {}
 		targetname(name)
 		includedirs {
-			precore.subst("${ROOT}/")
+			S"${ROOT}/",
 		}
 		files {
 			srcglob
@@ -72,9 +72,9 @@ precore.init(
 		ROOT = path.getabsolute("..")
     },
 	{
-		"opt-clang",
-		"c++11-core",
-		"precore-env-root"
+		"precore.clang-opts",
+		"precore.c++11-core",
+		"precore.env-common",
 	}
 )
 
@@ -85,15 +85,15 @@ precore.make_solution(
 	{"debug", "release"},
 	{"x64", "x32"},
 	nil, {
-		"precore-generic"
+		"precore.generic",
 	}
 )
 
 -- Groups
 
-include("general")
-include("vec")
-include("mat")
-include("hash")
+precore.import("general")
+precore.import("vec")
+precore.import("mat")
+precore.import("hash")
 
 precore.action_clean("out")
