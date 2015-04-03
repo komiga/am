@@ -5,9 +5,7 @@ precore.make_config_scoped("am.env", {
 	once = true,
 }, {
 {global = function()
-	precore.env_global({
-		AM_ROOT = os.getcwd(),
-	}, true)
+	precore.define_group("AM", os.getcwd())
 end}})
 
 precore.make_config("am.strict", nil, {
