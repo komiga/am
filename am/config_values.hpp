@@ -28,11 +28,11 @@ namespace am {
 /** No types. */
 #define AM_FLAG_TYPE_NONE	0
 /** Floating-point type. */
-#define AM_FLAG_TYPE_FLOAT	1 << 0
+#define AM_FLAG_TYPE_FLOAT	(1 << 0)
 /** Signed integer type. */
-#define AM_FLAG_TYPE_INT	1 << 1
+#define AM_FLAG_TYPE_INT	(1 << 1)
 /** Unsigned integer type. */
-#define AM_FLAG_TYPE_UINT	1 << 2
+#define AM_FLAG_TYPE_UINT	(1 << 2)
 /** All types. */
 #define AM_FLAG_TYPE_ALL	\
 	(AM_FLAG_TYPE_FLOAT | AM_FLAG_TYPE_INT | AM_FLAG_TYPE_UINT)

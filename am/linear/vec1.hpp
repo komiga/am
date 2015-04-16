@@ -31,7 +31,7 @@ namespace linear {
 	@{
 */
 
-#if AM_CONFIG_VECTOR_TYPES & AM_FLAG_TYPE_FLOAT
+#if (AM_CONFIG_VECTOR_TYPES) & AM_FLAG_TYPE_FLOAT
 	/**
 		1-dimensional floating-point vector.
 
@@ -41,7 +41,7 @@ namespace linear {
 	using vec1 = detail::linear::tvec1<component_float>;
 #endif
 
-#if AM_CONFIG_VECTOR_TYPES & AM_FLAG_TYPE_INT
+#if (AM_CONFIG_VECTOR_TYPES) & AM_FLAG_TYPE_INT
 	/**
 		1-dimensional signed integer vector.
 
@@ -51,7 +51,7 @@ namespace linear {
 	using ivec1 = detail::linear::tvec1<component_int>;
 #endif
 
-#if AM_CONFIG_VECTOR_TYPES & AM_FLAG_TYPE_UINT
+#if (AM_CONFIG_VECTOR_TYPES) & AM_FLAG_TYPE_UINT
 	/**
 		1-dimensional unsigned integer vector.
 

@@ -31,7 +31,7 @@ namespace linear {
 	@{
 */
 
-#if AM_CONFIG_VECTOR_TYPES & AM_FLAG_TYPE_FLOAT
+#if (AM_CONFIG_VECTOR_TYPES) & AM_FLAG_TYPE_FLOAT
 	/**
 		4-dimensional floating-point vector.
 
@@ -41,7 +41,7 @@ namespace linear {
 	using vec4 = detail::linear::tvec4<component_float>;
 #endif
 
-#if AM_CONFIG_VECTOR_TYPES & AM_FLAG_TYPE_INT
+#if (AM_CONFIG_VECTOR_TYPES) & AM_FLAG_TYPE_INT
 	/**
 		4-dimensional signed integer vector.
 
@@ -51,7 +51,7 @@ namespace linear {
 	using ivec4 = detail::linear::tvec4<component_int>;
 #endif
 
-#if AM_CONFIG_VECTOR_TYPES & AM_FLAG_TYPE_UINT
+#if (AM_CONFIG_VECTOR_TYPES) & AM_FLAG_TYPE_UINT
 	/**
 		4-dimensional unsigned integer vector.
 

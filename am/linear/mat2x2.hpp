@@ -32,7 +32,7 @@ namespace linear {
 	@{
 */
 
-#if AM_CONFIG_MATRIX_TYPES & AM_FLAG_TYPE_FLOAT
+#if (AM_CONFIG_MATRIX_TYPES) & AM_FLAG_TYPE_FLOAT
 	/**
 		2x2 floating-point matrix.
 

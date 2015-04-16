@@ -169,7 +169,7 @@ namespace am {
 	#define AM_CONFIG_VECTOR_TYPES AM_FLAG_TYPE_ALL
 #else
 	AM_CONFIG_ASSERT(
-		0 == (AM_CONFIG_VECTOR_TYPES & ~(AM_FLAG_TYPE_ALL)),
+		0 == ((AM_CONFIG_VECTOR_TYPES) & ~(AM_FLAG_TYPE_ALL)),
 		"AM_CONFIG_VECTOR_TYPES has invalid flags set"
 	);
 #endif
@@ -178,7 +178,7 @@ namespace am {
 	#define AM_CONFIG_MATRIX_TYPES AM_FLAG_TYPE_FLOAT
 #else
 	AM_CONFIG_ASSERT(
-		0 == (AM_CONFIG_MATRIX_TYPES & ~(AM_FLAG_TYPE_FLOAT)),
+		0 == ((AM_CONFIG_MATRIX_TYPES) & ~(AM_FLAG_TYPE_FLOAT)),
 		"AM_CONFIG_MATRIX_TYPES has invalid flags set"
 	);
 #endif
