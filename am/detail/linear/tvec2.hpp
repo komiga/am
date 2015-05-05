@@ -70,8 +70,16 @@ struct tvec2 {
 /** @endcond */ // INTERNAL
 
 /** @name Fields */ /// @{
-	value_type x; /**< X value. */
-	value_type y; /**< Y value. */
+	/** X value. */
+	union {
+		value_type x;
+		value_type width;
+	};
+	/** Y value. */
+	union {
+		value_type y;
+		value_type height;
+	};
 /// @}
 
 /** @name Constructors */ /// @{
