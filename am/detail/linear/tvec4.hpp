@@ -70,10 +70,28 @@ struct tvec4 {
 /** @endcond */ // INTERNAL
 
 /** @name Fields */ /// @{
-	value_type x; /**< X value. */
-	value_type y; /**< Y value. */
-	value_type z; /**< Z value. */
-	value_type w; /**< W value. */
+	/** X value. */
+	union {
+		value_type x;
+		value_type x1;
+	};
+	/** Y value. */
+	union {
+		value_type y;
+		value_type y1;
+	};
+	/** Z value. */
+	union {
+		value_type z;
+		value_type x2;
+		value_type width;
+	};
+	/** W value. */
+	union {
+		value_type w;
+		value_type y2;
+		value_type height;
+	};
 /// @}
 
 /** @name Constructors */ /// @{
