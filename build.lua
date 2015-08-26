@@ -40,7 +40,7 @@ precore.make_config("am.dep", nil, {
 {project = function()
 	configuration {}
 		includedirs {
-			S"${AM_ROOT}/",
+			G"${AM_ROOT}/",
 		}
 end}})
 
